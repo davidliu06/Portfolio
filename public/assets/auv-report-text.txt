@@ -1,0 +1,764 @@
+--- PAGE 1 ---
+Examining Water Pollution in Dana Point Ocean 
+David Liu 
+E80 Team 27, Section 2, May 8th, 2026 
+Abstract— This paper outlines the design, deployment, and 
+analysis of an autonomous underwater vehicle aimed at 
+investigating the levels of water pollution at Dana Point as a 
+result of human activity and increasing carbon emissions. This 
+project utilizes a combination of 4 sensors, pH, temperature, 
+turbidity, and pressure, to autonomously collect data and 
+quantify levels of water pollution at Dana Point. The project is 
+motivated by the concern that increasing carbon emissions and 
+pollution from human activity are causing a substantial increase 
+in carbon dioxide concentration in the atmosphere. To maintain 
+equilibrium, the ocean begins absorbing carbon dioxide as well, 
+leading to ocean acidification and lowering the overall pH of the 
+ocean. The main takeaway from this project is that the 
+temperature and pH of the ocean at Dana Point did not change 
+significantly across depths between 0 and 2 meters, while 
+turbidity increased as the robot went further down towards the 
+ocean floor. This suggests that, within the surface 2-meter layer 
+of water, water pollution indicators remained relatively low, but 
+around the ocean floor, due to the settling of sediment, there is a 
+larger presence of solid sediment and a greater suspended 
+particulate matter concentration. This is relevant in the scope of 
+engineering because autonomous vehicles can be deployed to 
+monitor environmental factors and pollution, which provides 
+critical data for ocean conservation efforts. 
+ 
+I.​ INTRODUCTION 
+Carbon emissions are becoming an increasingly urgent 
+issue, with human industrial activity continuing to rise. As 
+carbon emissions in the atmosphere increase, the ocean begins 
+absorbing excess carbon dioxide in the form of carbonic acid, 
+contributing to a process called ocean acidification. Ocean 
+acidification is the lowering of the pH of ocean water, which 
+is mainly caused by carbon dioxide from the atmosphere. It 
+lowers the presence of carbonate ions in ocean water, making 
+it harder for organisms to maintain shells and coral skeletons 
+[1]. Water pollution is detrimental to oceanic life as well as the 
+general ecosystem; this setback is not separable from humans, 
+since contaminated water and food threaten public health with 
+disease transmissions. Therefore, it is becoming more and 
+more important to monitor pollution levels in water and 
+understand how pollution affects the state of the water. 
+Autonomous underwater vehicles (AUVs) allow for quick, 
+affordable, and scalable data collection and analysis of water 
+conditions. The efficiency of AUVs comes from their ability 
+to move without major assistance from a human controller. 
+AUVs only require instructions to carry out, and they can be 
+deployed at any time. This allows for repeatability in data 
+collection, which is very helpful for research projects [2].  
+The AUV developed in this project incorporates the pH, 
+temperature, turbidity, and pressure sensors. The temperature 
+sensor measured variations in temperature with varying depth. 
+Warmer water could indicate more pollution, since it holds 
+less oxygen, encourages the growth of bacteria, increases the 
+toxicity of pollutants, and speeds up chemical reactions that 
+promote algae blooms [3]. The pH sensor measures the acidity 
+of the water, where greater acidity can signify the formation of 
+carbonic acid from atmospheric carbon dioxide and an 
+increase in ocean acidification. The turbidity sensor measures 
+the cloudiness of the water, which can be related to the 
+concentration of sediment and pollution within the water. By 
+seeing how acidic, how cloudy, and how warm the water is 
+with varying depths, the robot will be able to detect how 
+pollution is related to the depth of ocean water, specifically 
+the water at Dana Point. 
+The goals of this project are to design and integrate sensor 
+circuits that can be read on a Teensy 4.0 under the oceanic 
+conditions at Dana Point, to deploy the robot safely and 
+successfully at Dana Point, and to analyze retrieved data by 
+comparing measured to expected values. 
+This paper will outline the sensors incorporated in the AUV 
+made by the team, introduce the design of the AUV, present 
+the deployment data taken in the Dana Point site, analyze the 
+broader implications of the deployment results, and discuss 
+potential sources of error that may have caused any 
+inconsistencies. 
+II.​ SENSOR DESIGN 
+As stated, the robot has a pressure sensor, a temperature 
+sensor, a turbidity sensor, and a pH sensor. The circuits 
+incorporating these sensors into the robot are designed to have 
+maximum output voltage range while still being within the 
+Teensy 4.0 ADC range between 0 V and 3.3 V. This way, the 
+data received by the robot would have good resolution while 
+keeping the voltage outputs within the Teensy’s bounds. 
+A.​ Pressure Sensor 
+The robot is designed to traverse a depth of 2 meters. To do 
+this, an MPX5700 pressure sensor is used since it can 
+accurately measure the depth underwater [4]. The MPX5700 
+produces a linear analog voltage output directly proportional 
+to pressure and has a low output impedance, making it suitable 
+for underwater depth measurements. The circuit, as shown in 
+Figure 1, uses an inverting offset op amp to fit the predicted 
+voltage range from the pressure sensor onto the range of the 
+Teensy, which is from 0 V to 3.3 V. To calculate all the 
+resistor values of the circuit required to fit this range, Equation 
+(1) is used. The choice of RF and Rn1 resulted in a gain of 10. 
+1 
+
+--- PAGE 2 ---
+ 
+ 
+Fig. 1  Pressure Sensor Circuit Design 
+ 
+ 
+​
+​
+(1) 
+(1 +
+𝑅𝐹
+𝑅𝑛1 )(
+𝑅𝑔
+𝑅𝑔+𝑅𝑝1 )𝑉𝑐𝑐−
+𝑅𝐹
+𝑅𝑛1 𝑉𝑛1 = 𝑉𝑜𝑢𝑡
+​
+ ​
+(2) 
+𝐺𝑎𝑖𝑛=
+𝑉𝑜𝑢𝑡
+𝑉𝑖𝑛=−
+𝑅𝐹
+𝑅𝑛1
+ 
+The pressure sensor was calibrated using a tube combined 
+with a meter stick, as well as a 1-meter deep tube filled with 
+fresh water. After collecting the sensor’s output voltage points 
+at 11 different depths, a linear graph is produced with an 
+equation relating Voltage to Depth, as seen in Figure 2. The 
+linear fit is very strong for this sensor, as shown by an 
+R-squared value approximately equal to 1. 
+ 
+Fresh water has a density 3% less than salt water, meaning 
+that at a given depth, the pressure reading would be slightly 
+more for salt water than for fresh water [5]. Although there is 
+a slight difference in pressure reading from the calibration 
+procedure to the deployment conditions at Dana Point, since 
+the robot only travels to around 2 meter depth, this difference 
+is negligible enough to still treat the fresh water calibration 
+curve as valid. 
+ 
+ 
+Fig. 2  Voltage vs Depth Calibration Curve for Fresh Water 
+ 
+B.​ Temperature Sensor 
+The robot is designed to be able to read temperatures 
+between 14 and 24 degrees Celsius. To do this, it uses an 
+MCP9701A linear temperature sensor since it is easy to read 
+and interpret, and is reliable [6]. The MCP9701A produces a 
+linear analog voltage output that is directly proportional to 
+temperature and has a low output impedance of 20 Ω, 
+ensuring that it is stable and accurate. The circuit, as shown in 
+Figure 3, uses an inverting offset op amp to fit the predicted 
+voltage range from the pressure sensor onto the range of the 
+Teensy (0 V to 3.3 V). To calculate all the resistor values 
+required to fit the range, Equation (1) is used.  
+ 
+Fig. 3  Temperature Sensor Circuit Design 
+ 
+The temperature sensor was calibrated using a thermometer 
+and 9 cups of water with different temperatures ranging from 
+14°C to 24°C, giving a linear graph with an equation relating 
+Voltage to Temperature, as seen in Figure 4. The linear fit for 
+this sensor is also very strong, with an R-squared value of 
+0.999. 
+ 
+ 
+Fig. 4  Voltage vs Temperature Calibration Curve 
+ 
+C.​ Turbidity Sensor 
+To measure turbidity, 2 IR photodiodes (935 nm - OP950 
+DK 3654-1085-ND) and an IR LED (IR1503) were used 
+[7][8]. The photodiodes output a current that is directly 
+proportional to the intensity of the IR light received. 
+2 
+
+--- PAGE 3 ---
+Therefore, to read it from the Teensy, a transimpedance 
+amplifier is required to produce readable voltage signals. As 
+seen in Figure 5, a 555 timer is used to generate the on signal 
+for the IR LED, and an MCP6004 op-amp is used to amplify 
+the signals received by the photodiodes. The resistor in the 
+photodiode circuit controls the voltage output through 
+Equation (3), which is the general voltage equation for a 
+circuit. Since the photodiode’s possible current is below 18 
+µA, the output voltage is bounded below 18 µA multiplied by 
+the resistor chosen, which was 47 kΩ. This produces a voltage 
+below 0.85 V, which is well under 3.3 V, ensuring that the 
+Teensy does not rail out. 
+ 
+​
+  ​
+(3) 
+𝑉= 𝐼𝑅
+ 
+ 
+ 
+ 
+ 
+Fig. 5  Turbidity Sensor and 555 Timer Circuit Design 
+ 
+The design of the turbidity can be seen in Figure 6. A 
+cuvette is used to examine the sample, and all of the turbidity 
+electronics are inside a box made of acrylic, which is not 
+porous and is a good waterproofing material. The cuvette is 
+blocked off on its sides to minimize external light 
+interference, since outside light would create noise and 
+negatively impact the accuracy of the turbidity results.  
+ 
+ 
+ 
+Fig. 6  Design of the Turbidity Sensor 
+ 
+The turbidity sensor’s calibration procedure involved using 
+5 different concentrations of milk-water solutions with NTU 
+values spaced between 0 and 100 NTU, giving a linear graph 
+with an equation relating Voltage to Turbidity, as seen in 
+Figure 7. The linear fit is strong, which is supported by the 
+R-squared value of 0.926. 
+ 
+ 
+Fig. 7 Voltage vs Turbidity Calibration Curve 
+ 
+ 
+D.​ pH Sensor 
+The robot is designed to read between a pH of 6 and 9. To 
+do this, a PASCO pH electrode is used.  Knowing that the pH 
+sensor is temperature sensitive, the prior linear temperature 
+sensor is used to retrospectively correct the pH measurements. 
+The pH electrode has an extremely high output impedance, 
+typically above 10 MΩ. To make up for this, the circuit, as 
+shown in Figure 8, implements a unity-gain buffer to prevent 
+loading effects, filter out noise, and ensure accuracy. There is 
+also an inverting offset op amp to fit the predicted voltage 
+range from the pH sensor onto the range of the Teensy (0V to 
+3.3V). To calculate all the resistor values required to fit the 
+range, Equation (1) was used. This produces a gain of 7.  
+3 
+
+--- PAGE 4 ---
+ 
+Fig. 8  pH Sensor Circuit Design 
+ 
+The pH sensor was calibrated using 6 solutions with pH 
+ranging from 6 to 9, producing a linear graph with an equation 
+relating Voltage to pH, as seen in Figure 9. The linear fit is 
+quite reliable, given the R-squared value of 0.936. 
+ 
+ 
+ 
+Fig. 9  Voltage vs pH Calibration Curve 
+ 
+E.​ Additional Details 
+The Teensy sampled all sensors at a rate of 20 Hz. This 
+sample rate was sufficient to accurately sample data because 
+temperature, pH, and turbidity change slowly over time, 
+especially compared to the sampling interval of 0.05 seconds.  
+Additionally, the deployment travel speed and mission 
+procedure were intentionally slow, with extra hovering time to 
+get ample data at each predetermined depth. Therefore, a 20 
+Hz sampling rate adequately satisfies the Nyquist requirement, 
+and a higher sampling rate would not meaningfully improve 
+the quality of our results. 
+The time constants for the sensors are sufficiently low 
+relative to the length of the mission. The pressure sensor has 
+an especially short time constant of 1 ms, while the pH and 
+linear temperature sensors have longer time constants of 
+around 30 seconds. Since the robot remains at each depth for 
+45 seconds during the mission, which is larger than the time 
+constants, the sensors had sufficient time to stabilize. 
+ 
+III.​ROBOT DESIGN 
+ 
+Fig. 10 Drawing of Robot Design 
+A.​ The Build 
+The robot is a diving robot, going to a depth of up to 2 
+meters, so it was designed to have a small and balanced frame. 
+Seen in Figure 10, the main box has holes drilled on the sides 
+and the bottom for motor wires, the pressure tube, the 
+temperature sensor, the turbidity sensor, and the pH sensor. 
+The pH sensor goes through the bottom hole of the electronics 
+box, positioned so that it does not break from colliding with 
+the ground. The temperature sensor wires, the pressure sensor 
+tubing, and the turbidity sensor wires come out of the side 
+holes of the box for simple and easy accessibility. Epoxy was 
+used around each of the drilled holes to ensure proper 
+waterproofing of the electronics box.  
+The pressure sensor simply has a tube coming out of the 
+box, which does not need any extra waterproofing besides the 
+epoxy stated above. The pH sensor is the same, with just the 
+sensor itself poking out of the bottom of the box. The 
+temperature sensor was first waterproofed with heat shrink 
+and then with parafilm. It was especially important to make 
+sure the temperature was waterproofed since it was the only 
+sensor with exposed wires at the end that aren’t protected by 
+epoxy. The turbidity sensor was in the shape of a cube made 
+with acrylic, which is known to be nonporous, and is also 
+reinforced with epoxy, as seen in Figure 6. 
+There are two motors positioned vertically to ensure 
+balance and stronger control of the robot. There are also pool 
+noodles attached to the PVC on the top ring of the robot, as 
+well as metal ballasts on the bottom of the robot. This way, the 
+center of mass is ensured to be below the center of buoyancy, 
+which prevents the robot from flipping over and ensures 
+stability. 
+B.​ Mass Calculations 
+The mass of the robot (without ballasts or sensors), mr, is 
+expected to be 1.54kg. The pH electrode adds around 0.08kg 
+4 
+
+--- PAGE 5 ---
+of 
+mass, 
+mpH. 
+The 
+pressure 
+sensor 
+and turbidity 
+cuvette-sensor combined will add mp+t, 0.02kg. Therefore, 
+the mass of the overall setup (without ballasts) can be 
+calculated from the parts: 
+ 
+𝑚𝑡𝑜𝑡𝑎𝑙= 1. 54𝑘𝑔+ 0. 08𝑘𝑔+ 0. 02𝑘𝑔= 1. 64𝑘𝑔
+C.​ Ballasting Calculations 
+The buoyancy of the robot in saltwater is expected to be 
+28.63N. This is calculated using the buoyancy equation seen 
+in Equation (4), where the volume taken up by the robot is 
+approximated as half of the electronics box added to the 
+volume taken by the PVC pipes. 
+​
+​
+(4) 
+𝐹𝑏= ρ𝑉𝑔
+Since the expected mass of the robot is 1.64 kg, the 
+expected gravitational force is 16.07 N. The difference 
+between buoyancy force and gravitational force is 12.56 N, 
+which, converted to kg, means 1.28 kg of metal ballasting is 
+needed in salt water. 
+IV.​DEPLOYMENT DETAILS 
+Prior to deployment, the buoyancy and ballast calculations 
+were used to estimate the amount of ballast required for 
+neutral buoyancy of the robot. It is important to make sure that 
+the robot is neutrally buoyant because it would make it easier 
+on the robot’s motor for vertical travel, and also would 
+minimize the robot’s deviation from the target depths.  
+Based on mixed-layer ocean models and research on Dana 
+Point Beach conditions, temperature and pH were expected to 
+remain relatively constant over shallow depths between 0 and 
+2 meters due to wind-induced mixing. Turbidity was expected 
+to increase slightly with increased depth because suspended 
+sediment concentrations are typically larger towards the 
+bottom of the ocean. These expectations of our sensor 
+measurements allowed for checking the reliability of the 
+retrieved data as well as understanding the results. 
+For the deployment at Dana Point, the robot was deployed 
+far from the shore along a pier, as shown in Figure 11, so that 
+it could reach at least a 2-meter depth. The robot battery was 
+also disconnected anytime a team member manipulated the 
+circuits to ensure safety. To prevent losing the robot, a tether is 
+attached to pull it up in emergencies. The mission starts at the 
+surface, and the robot implements proportional control to 
+reach target depths of 0.5 m, then 1m, and then 2m. After 
+reaching each target depth, the robot enters a hovering mode, 
+where it maintains at the set depth for 40 seconds. Then, the 
+robot enters the “motor-off” phase, a period of 5 seconds of 
+motor shutdown. This prevents motor-induced noise, which 
+was found to be a critical issue to data clarity in prior test 
+runs. The hovering mode was necessary to reduce the robot’s 
+speed immediately before the motor-off phase, minimizing 
+vertical drift and improving the reliability of the measured 
+data. This hovering also allowed the sensors to reach 
+equilibrium values, especially the linear temperature and pH 
+sensors, which have especially large time constants. 
+After the mission, the robot is brought back to the surface 
+and wiped dry, allowing the team to view the collected data 
+from the SD card. 
+ 
+ Fig. 11 Deployment Location in Dana Point 
+ 
+V.​ RESULTS 
+ 
+Figure 12 shows the deployment data at Dana Point. As 
+seen by the Depth vs Time plot, the proportional control and 
+the pressure sensor were working properly; supported by the 
+depth markings drawn on the tether, it is certain that the data 
+was collected at the desired and recorded depths. 
+To analyze the data, only the data during the “motor-off” 
+state of the robot is processed in order to avoid motor-induced 
+noise. The averages were taken of each of the sensor readings 
+during this “motor-off” phase, and the results are compiled in 
+Table I.  
+ 
+ 
+ 
+Fig. 12 Plots of Dana Point Deployment Data 
+ 
+ 
+As shown, the measured temperature of around 17.5°C 
+doesn't change significantly with depth. This measured value 
+is near the ground truth temperature of the surface of the 
+water, as seen in Table II, which was measured with a 
+thermometer to be 18.2 degrees Celsius. 
+Similarly, the measured pH of 7.72 did not change with 
+depth. This measured value is reasonably near the ground 
+truth of pH 7.9, which was measured by Prof. Lin. 
+As seen from Table I, the turbidity measurement increased 
+from 12.72 NTU to 21.97 NTU as the depth increased from 
+0.5 m to 1 m. It then spiked drastically to 110.83 NTU. The 
+initial turbidity measurements around 0.5 m and 1 m were 
+5 
+
+--- PAGE 6 ---
+near the ground truth of 23.25 NTU, which was measured 
+using a turbidity meter of a Dana Point ocean water sample.  
+TABLE I​
+SENSOR READING AVERAGES OVER MOTOR-OFF SETTING AT EACH 
+DEPTH 
+Depth 
+ 
+(± 0. 25 𝑚)
+0.5 m 
+1 m 
+2 m 
+Temperature (°C) 
+ 
+(± 0. 1 °𝐶)
+17.34 
+17.86 
+17.33 
+pH (
+ 
+± 0. 02)
+7.72 
+7.72 
+7.72 
+Turbidity (NTU) 
+12.72 
+21.97 
+110.83 
+TABLE II​
+GROUND TRUTH SENSOR READINGS ON THE SURFACE LEVELS OF 
+THE WATER AT DANA POINT 
+Temperature (°C) 
+18.2 
+pH 
+7.9 
+Turbidity (NTU) 
+23.25 
+To analyze the sensors’ accuracy to true values, the 
+measured deployment robot sensor values are compared with 
+ground truth measurements taken from the surface of the 
+water, outlined in Table II. The temperature sensor’s 
+measurement of around 17.5 compared to the ground truth 
+value of 18.2 corresponds to a percent error of 3.85%, 
+calculated using Equation (5). Using the same equation, the 
+pH measurement of 7.72 compared to the ground truth value 
+of 7.9 yields a 2.28% percent error.  
+ 
+​
+(5)\ 
+𝑃𝑒𝑟𝑐𝑒𝑛𝑡 𝐸𝑟𝑟𝑜𝑟= ∣𝑀𝑒𝑎𝑠𝑢𝑟𝑒𝑑−𝐺𝑟𝑜𝑢𝑛𝑑 𝑇𝑟𝑢𝑡ℎ∣
+𝐺𝑟𝑜𝑢𝑛𝑑 𝑇𝑟𝑢𝑡ℎ
+×100% 
+ 
+As stated before, the measured turbidity values at 0.5 m and 
+1 m depth were reasonably close to the ground truth value of 
+23.25 NTU. The discrepancies are likely caused by sensor 
+calibration 
+uncertainty, 
+electrical 
+noise, 
+and unstable 
+environmental 
+conditions 
+like 
+ocean 
+waves 
+during 
+deployment.  
+Additionally, 
+during 
+the motor-off periods of the 
+deployment, the temperature, pH, and turbidity sensors varied 
+very little and had noticeably less noise. This suggests that the 
+sensor performance was stable, and that removing motor noise 
+had a big effect on the data. 
+As expected, the temperature and pH did not change 
+significantly across different depths during the deployment. 
+This is because the depth of the deployment was only up to 2 
+meters, which is too shallow to have meaningful variation in 
+these 
+parameters. 
+Typically, 
+significant 
+variations 
+in 
+temperature and pH are only observed in larger depth ranges 
+of hundreds or even thousands of meters in depth. This is 
+especially true when talking about the mixed layer of the 
+ocean, which is the topmost layer of the ocean with a depth 
+that can range from around 20 meters to hundreds of meters, 
+depending on the season [9]. This layer is called the mixed 
+layer because of the turbulent and frequent mixing that occurs 
+there, which is caused by wind-driven currents as well as 
+ocean waves [9]. Therefore, it is expected that temperature 
+and pH are relatively similar throughout this layer. 
+The increase in turbidity makes sense, since with the ocean 
+floor only around 2 meters deep in the area of deployment, 
+even a small increase in depth would mean a very noticeable 
+increase in sediment. The sudden spike to 110.83 NTU at a 
+2-meter depth can be explained by the robot hitting the floor 
+of the ocean during the mission. This occurrence noticeably 
+kicked up sediment from the ocean floor and interfered with 
+the turbidity sensor, resulting in a much higher turbidity 
+reading. 
+ 
+Fig. 13 Screenshot captured from the Orange County 
+Health 
+Care 
+Agency 
+website 
+summarizing 
+bacterial 
+assessments at Dana Point [11]. 
+Several factors may have caused uncertainties in our 
+deployment data. The presence of ocean waves and tether 
+motion could have altered the robot's depth during data 
+collection. Ocean waves and tether motion could also have 
+introduced fluctuations in other variables such as temperature, 
+pH, and turbidity, which impact the consistency of these 
+measurements. Additionally, the turbidity sensor may have 
+been exposed to ambient light, which would explain the initial 
+low turbidity of 12.72 NTU at a depth of 0.5 meters. 
+Temperature variations in the pH probe may have also 
+contributed to differences between measured and ground truth 
+values. 
+The collected data showed normal and healthy ocean 
+temperatures, slightly basic pH values, and low surface water 
+turbidity, reflecting that Dana Point water is not so affected by 
+pollution. This makes sense since the area has an air quality 
+index of around 40, which is deemed as good [10]. 
+Additionally, as seen in Figure 13, the OC Health Care 
+Agency’s bacterial assessments deem the ocean water 
+bacterial levels at the Dana Point dock as meeting state health 
+standards [11]. This low bacteria level assessment indicates 
+low fecal pollution, meaning that the E80 robot experiments 
+were conducted in an area with minimal contamination from 
+sewage and animal waste. Overall, the measurements from the 
+robot make sense, as they support the cleanliness and low 
+levels of pollution in the waters of Dana Point. 
+ 
+VI.​CONCLUSION 
+ 
+6 
+
+--- PAGE 7 ---
+In this project, a pressure sensor, a temperature sensor, a 
+turbidity sensor, and a pH sensor were incorporated into an 
+AUV to examine the water pollution at Dana Point and how 
+each of these parameters changes with depth. Calibration plots 
+were used to convert sensor voltage readings to readable data 
+from which conclusions can be drawn. 
+This project showcases the usefulness of AUVs, being able 
+to produce repeatability in experiments with minimal human 
+interference. AUVs are also shown to be a cheap and 
+affordable way to perform tasks that would otherwise require 
+human subjects. This includes studying the vastness of the 
+ocean, monitoring water conditions, and dangerous missions 
+that are impossible with human divers. However, the 
+deployment at Dana Point also demonstrates the pitfalls of 
+AUVs. AUVs are very susceptible to external environmental 
+factors such as obstacles and ocean waves, which makes it 
+harder to achieve repeatability in experiments. For example, 
+the E80 robot, following the commands given, does not have 
+strong adaptability and spatial awareness, which makes it 
+harder to reach and maintain a set depth with waves pushing it 
+around.  
+Overall, the data were expected. Since Dana Point was not 
+expected to be a polluted and badly managed area, the sensor 
+readings included a low surface water turbidity value with 
+close to neutral pH values. The temperatures and pH levels 
+were all relatively constant through varying depths, which is 
+expected due to the mixing of the top layers of the ocean 
+caused by wind and small waves. The turbidity started off low 
+and slowly increased as depth increased, which makes sense 
+because sediment concentration increases as depth increases, 
+especially since the ocean floor is only around 2 meters deep 
+at the area of deployment. The turbidity spiked at a 2-meter 
+depth, hitting an unusual 110.83 NTU for turbidity. This was 
+caused by the robot hitting the bottom of the ocean floor, 
+which visibly kicked up sediment and blocked the turbidity 
+sensor, explaining the increase in measured turbidity. All in 
+all, the measured sensor values at Dana Point matched the 
+ground truths well, which supports that the water in Dana 
+Point is not noticeably polluted, but is actually very clean. 
+For future work, exploring further areas of the ocean would 
+be impactful to see how pH, temperature, and turbidity change 
+as the shore gets further and further away. Ideally, there would 
+also be a wider range of depth, since a depth of 2 meters is 
+well within the mixed layer of the ocean, which is not 
+expected to produce a significant difference in temperature 
+and pH sensor measurements. A wider range of data points 
+would allow researchers to make stronger claims about the 
+relationship between depth and parameters like temperature, 
+pH, and turbidity, leading to stronger claims on levels of water 
+pollution as well as how water pollution relates to the area of 
+water. 
+This project demonstrates how affordable autonomous 
+underwater vehicles can support long-term and repeatable 
+environmental monitoring, providing valuable data for 
+examining the health of marine ecosystems and the effects of 
+pollution on them. 
+ACKNOWLEDGMENT 
+The author would like to acknowledge Lachlan McDermott, 
+Sophie Qiu, and Brannan Rosenfeld for their contributions as 
+team members toward the successful deployment of the 
+project. The author would like to give special thanks to 
+Lachlan for saving the author from drowning. Additionally, 
+the E80 professors and Lab TAs were extremely helpful in the 
+author’s growth and learning throughout the project. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7 
+
+--- PAGE 8 ---
+REFERENCES 
+[1]​
+National Oceanic and Atmospheric Administration, “What is ocean 
+acidification?,” 
+NOAA, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://oceanservice.noaa.gov/facts/acidification.html  
+[2]​
+National Oceanic and Atmospheric Administration, “What is an 
+AUV?,” 
+NOAA, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://oceanexplorer.noaa.gov/ocean-fact/auv/  
+[3]​
+H2O Global News, “Effect of Temperature on Water Quality,” H2O 
+Global 
+News, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://h2oglobalnews.com/effect-of-temperature-on-water-quality/  
+[4]​
+NXP Semiconductors, “MPX5700 series pressure sensor data sheet,” 
+NXP, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://www.nxp.com/products/sensors/pressure-sensors/vacuum-senso
+rs-50-to-115-kpa/0-to-700-kpa-5-0v-gauge-pressure-sensor:MPX5700  
+ 
+[5]​
+GoPro Caribbean, “Freshwater Physics — PADI IDC and Divemaster 
+Theory,” GoPro Caribbean, accessed May 8, 2026. Available: 
+https://goprocaribbean.com/dive-physics-5  
+[6]​
+Microchip Technology Inc., “MCP9701A temperature sensor data 
+sheet,” 
+Microchip, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://www.microchip.com/en-us/product/MCP9701A   
+[7]​
+Jameco Electronics, “PIN Silicon Photodiode Type OP950,” Jameco, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://datasheet.octopart.com/OP950-TT-datasheet-7617992.pdf  
+[8]​
+Everlight, “Technical Data Sheet - 5mm Infrared LED , T-1 ¾,” 
+Everlight, 
+accessed 
+May 
+8, 
+2026. 
+Available: 
+https://media.digikey.com/PDF/Data%20Sheets/Everlight%20PDFs/9-I
+R1503.pdf  
+[9]​
+“Mixed layer,” Wikipedia, The Free Encyclopedia, accessed May 8, 
+2026. Available: https://en.wikipedia.org/wiki/Mixed_layer  
+[10]​
+IQAir, “Dana Point air quality index (AQI),” IQAir, accessed May 8, 
+2026. Available: https://www.iqair.com/us/usa/california/dana-point  
+[11]​
+Orange County Health Care Agency, “Dana Point beach information,” 
+OC Health Care Agency, accessed May 8, 2026. Available: 
+https://ocbeachinfo.com/danapoint/  
+ 
+ 
+ 
+ 
+8 

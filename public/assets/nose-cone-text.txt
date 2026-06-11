@@ -1,0 +1,249 @@
+--- PAGE 1 ---
+Computational and Experimental Aerodynamic 
+Analysis of Nose Cone Geometries 
+David Liu 
+E80, Harvey Mudd College 
+Abstract—Aerodynamic drag plays a critical role in the 
+performance and efficiency of vehicles operating in fluid 
+environments. This study investigates the aerodynamic behavior 
+of 
+three 
+nose 
+cone 
+geometries—flat, 
+rounded, 
+and 
+pointed—through a combination of wind tunnel testing and 
+Computational Fluid Dynamics (CFD) simulations. Airflow 
+velocities were measured using a Pitot tube and digital 
+manometer, while drag forces were quantified using a Linear 
+Variable Differential Transformer (LVDT). CFD models were 
+developed 
+in 
+COMSOL 
+Multiphysics 
+to 
+replicate 
+the 
+experimental conditions and predict aerodynamic performance. 
+Experimental and computational results demonstrated that the 
+flat nose cone generated significantly greater drag than the 
+streamlined geometries. The rounded and pointed nose cones 
+exhibited substantially lower drag coefficients, highlighting the 
+benefits of aerodynamic shaping. While the CFD models 
+successfully captured overall performance trends, discrepancies 
+between simulation and experimental data revealed the impact of 
+mesh resolution, geometric approximation, and testing conditions 
+on simulation accuracy. These findings demonstrate the value of 
+combining computational modeling with physical validation 
+when evaluating aerodynamic designs. 
+ 
+ 
+I.​ INTRODUCTION 
+The interaction between fluids and solid bodies is 
+fundamental to numerous engineering disciplines, including 
+aerospace, automotive, marine, and biomedical engineering. 
+One of the most significant forces arising from fluid flow is 
+aerodynamic drag, which opposes motion and directly impacts 
+energy consumption, efficiency, and overall system 
+performance. Engineers often optimize the geometry of 
+structures and vehicles to minimize drag and improve 
+operational effectiveness. 
+Aerodynamic design principles are evident in a wide range 
+of applications, from aircraft fuselages and rocket nose cones 
+to high-performance automobiles. Streamlined geometries 
+reduce flow separation and pressure drag, enabling objects to 
+move 
+more 
+efficiently 
+through 
+fluid 
+environments. 
+Understanding the relationship between geometry and 
+aerodynamic performance is therefore critical in engineering 
+design. 
+Two complementary approaches are commonly used to 
+investigate aerodynamic behavior: experimental testing and 
+numerical simulation. Wind tunnels provide controlled 
+environments for directly measuring aerodynamic forces and 
+validating 
+theoretical 
+predictions. Computational Fluid 
+Dynamics (CFD), meanwhile, enables engineers to visualize 
+flow behavior, evaluate design alternatives, and predict 
+performance before physical prototypes are constructed. 
+This investigation compares the aerodynamic performance 
+of flat, rounded, and pointed nose cone geometries using both 
+wind tunnel experimentation and CFD simulations. Airflow 
+velocity and drag force measurements were collected 
+experimentally and compared against numerical predictions 
+generated in COMSOL Multiphysics. Reynolds numbers and 
+drag coefficients were calculated to evaluate aerodynamic 
+performance across multiple flow conditions. By comparing 
+simulation and experimental results, this study assesses the 
+effectiveness of CFD as a predictive design tool while 
+illustrating the influence of geometry on aerodynamic drag. 
+II.​ METHODS AND ANALYSIS 
+A.​ EXPERIMENTAL PROCEDURE 
+Airflow velocity within the wind tunnel was measured 
+using a Pitot tube connected to a digital manometer. The Pitot 
+tube determines dynamic pressure by measuring the difference 
+between total pressure and static pressure, allowing air 
+velocity to be calculated. 
+Three nose cone geometries were tested during the 
+investigation. The geometries included a flat-faced nose cone, 
+a hemispherical nose cone, and a pointed nose cone. 
+Dimensions of the three models are shown in Fig. 1. 
+ 
+Fig. 1. Dimensions of the flat, rounded, and pointed nose cone 
+geometries. Taken from E80:Lab 6 Lab Manual [2]. 
+1 
+
+--- PAGE 2 ---
+Drag forces were measured using a Linear Variable 
+Differential Transformer (LVDT) over a range of airflow 
+velocities. Prior to collecting experimental data, baseline 
+measurements were obtained with the wind tunnel operating at 
+zero airflow to determine sensor offsets. These offsets were 
+subtracted from subsequent measurements to obtain corrected 
+drag force values. 
+B.​ COMPUTATIONAL FLUID DYNAMICS MODELING 
+CFD simulations were performed using COMSOL 
+Multiphysics to replicate the wind tunnel testing conditions. 
+Airflow was modeled using a laminar flow formulation with 
+prescribed inlet velocities corresponding to the experimental 
+measurements. Each nose cone geometry was discretized 
+using a free tetrahedral mesh to approximate the fluid domain 
+and capture aerodynamic behavior. 
+Simulation results were generated for the same operating 
+conditions used during physical testing, enabling direct 
+comparison between experimental and computational results. 
+C.​ AERODYNAMIC CALCULATIONS 
+To characterize aerodynamic performance, Reynolds 
+numbers and drag coefficients were calculated for each 
+geometry. 
+The Reynolds number was determined using 
+​
+​
+(1) 
+𝑅𝑒= υ𝐿
+ν
+where V is the fluid velocity, L is the characteristic length of 
+the nose cone, and ν is the kinematic viscosity of air. 
+The drag coefficient was calculated using 
+​
+​
+(2) 
+𝐶𝑑=
+2𝐷
+ρ𝑉
+2𝐴
+where D is the drag force, ρ is the fluid density, V is the fluid 
+velocity, and A is the reference area. 
+Reynolds number provides a dimensionless measure of 
+flow behavior by relating inertial forces to viscous forces. The 
+drag coefficient normalizes the drag force with respect to 
+velocity and geometry, enabling direct comparison between 
+different designs. 
+III.​RESULTS AND DISCUSSION 
+A.​ Wind Tunnel Calibration 
+The calibration relationship between fan rotational speed 
+and airflow velocity is presented in Fig. 2. 
+Fig. 2. Wind tunnel calibration curve relating fan RPM to airflow 
+velocity. 
+As expected, the calibration data demonstrated a strong 
+linear relationship between fan speed and airflow velocity. 
+This relationship enabled airflow conditions to be reproduced 
+consistently throughout testing and simplified subsequent 
+calculations involving Reynolds number and drag coefficient. 
+B.​ Drag Force Analysis 
+Measured and simulated drag force results as a function of 
+Reynolds number are shown in Fig. 3. 
+Fig. 3. Experimental and simulated drag force versus Reynolds 
+number for the three nose cone geometries. 
+For all three geometries, drag force increased with 
+Reynolds number due to increasing airflow velocity. The flat 
+nose cone consistently generated the highest drag force 
+because its geometry creates a large stagnation region and 
+promotes significant pressure drag. In contrast, the rounded 
+and pointed geometries redirected airflow more efficiently, 
+resulting in substantially lower drag forces. 
+Although CFD simulations captured the overall trends 
+observed experimentally, quantitative differences were 
+present. For the flat geometry, experimentally measured drag 
+coefficients exceeded simulation predictions. One likely 
+explanation is slight angular misalignment during testing, 
+2 
+
+--- PAGE 3 ---
+which would increase the effective frontal area exposed to the 
+airflow and therefore increase measured drag. 
+C.​ Drag Coefficient Analysis 
+The drag coefficient results are presented in Fig. 4. 
+ 
+Fig. 4. Experimental and simulated drag coefficient versus Reynolds 
+number for the three nose cone geometries. 
+The rounded and pointed nose cones exhibited 
+significantly lower drag coefficients than the flat geometry, 
+demonstrating the aerodynamic advantages of streamlined 
+designs. However, CFD simulations predicted higher drag 
+coefficients for the rounded and pointed geometries than were 
+observed experimentally. 
+The discrepancy was most pronounced for the rounded 
+geometry. Because the CFD model utilized a relatively coarse 
+tetrahedral mesh, smooth curved surfaces were approximated 
+using numerous flat elements. This approximation introduced 
+artificial flow disturbances and increased predicted drag. As a 
+result, the CFD model overestimated the drag coefficient for 
+the rounded nose cone. 
+The pointed geometry exhibited smaller discrepancies 
+because its profile contains more linear features and is 
+therefore less sensitive to mesh discretization effects. 
+Nevertheless, numerical approximations and limitations in 
+representing complex flow structures likely contributed to the 
+remaining differences between simulation and experimental 
+results. 
+Overall, the CFD simulations successfully predicted the 
+relative aerodynamic performance of each geometry despite 
+the observed quantitative discrepancies. 
+IV.​CONCLUSION 
+This investigation combined wind tunnel testing and 
+Computational Fluid Dynamics simulations to evaluate the 
+aerodynamic performance of flat, rounded, and pointed nose 
+cone geometries. Experimental and computational results 
+demonstrated that geometry strongly influences aerodynamic 
+drag characteristics. 
+The flat nose cone consistently produced the highest drag 
+forces and drag coefficients due to its blunt frontal surface and 
+increased flow separation. The rounded and pointed 
+geometries generated significantly lower drag, confirming the 
+effectiveness of streamlined designs in reducing aerodynamic 
+resistance. 
+While CFD simulations accurately captured the general 
+trends observed experimentally, differences between measured 
+and predicted results revealed limitations associated with 
+mesh quality, geometric approximation, and experimental 
+setup variability. In particular, coarse mesh resolution 
+contributed to drag overprediction for curved geometries. 
+These findings highlight the importance of validating CFD 
+models with experimental measurements and demonstrate 
+how numerical simulations and physical testing can be used 
+together to guide aerodynamic design decisions. Future work 
+should focus on mesh refinement, improved turbulence 
+modeling, and enhanced experimental alignment procedures to 
+further improve agreement between computational and 
+experimental results. 
+ 
+REFERENCES 
+[1]​
+RRT Automotive, “Aerodynamic Design,” RRT Automotive, 2026. 
+https://rrtautomotive.com/blogs/racing-services/aerodynamic-design?sr
+sltid=AfmBOoopAUVe8izwAhKLT080qp46uOKmRd65ieA9yzuCGX
+-yERuHT2wD [Accessed: March 12, 2026]  
+[2]​
+E80, “Lab 6: Fluid Dynamics,” Harvey Mudd College E80, 2026. 
+https://hmc-e80.github.io/labs/lab6/ [Accessed: March 10, 2026]  
+ 
+ 
+ 
+3 

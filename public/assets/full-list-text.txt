@@ -1,0 +1,91 @@
+--- PAGE 1 ---
+DA VID LIU
++1 (650) 750-5070  | davidliu@g.hmc.edu  | Claremont, CA, USA  | LinkedIn 
+PROFESSIONAL SUMMARY
+Mechanical Engineering student at Harvey Mudd College with experience in CAD, FEA, CFD, manufacturing, and autonomous 
+systems. Interested in aerospace, defense, robotics, and advanced vehicle design.
+EDUCATION
+Harvey Mudd College August 2024 - May 2028
+Bachelor of Science (BS), Mechanical Engineering GPA: 3.74
+SKILLS
+CAD & Design: SolidWorks, Engineering Drawings, GD&T, Materials Selection, Circuit Design
+Simulation & Analysis: FEA, CFD, MATLAB, Data Analysis, COMSOL
+Fabrication: Machining, 3D Printing, Mechanical Assembly, Prototyping
+Programming: Python, MATLAB, C++, Java, LabVIEW, Arduino IDE
+Languages: Spanish, Chinese, English
+PROFESSIONAL EXPERIENCE
+MRP Solutions June 2026 - Present
+Electro-Mechanical Engineering Intern Plattsburgh, NY, USA
+-  Designed 10+ mechanical assemblies, machine guards, and access-control systems in SolidWorks for automated manufacturing 
+equipment, producing fabrication-ready models and engineering drawings.
+-  Engineered retrofit locking systems and custom sheet-metal components for production machinery, translating engineering 
+requirements into manufacturable hardware solutions.
+-  Performed troubleshooting and root-cause analysis on integrated electro-mechanical systems, diagnosing mechanical, electrical, 
+and process-related failures.
+-  Conducted equipment testing, calibration, and validation activities to identify performance issues, support engineering 
+modifications, and improve operational reliability.
+-  Collaborated with mechanical, electrical, controls, and operations teams to implement hardware improvements and support 
+system integration.
+Harvey Mudd College August 2025 - Present
+Lab TA/Tutor/Grader Claremont, CA, USA
+-  Assisted instruction in chemistry laboratories and supported experimental troubleshooting and safety compliance.
+-  Tutored students in Python, MATLAB, calculus, and chemistry, strengthening technical communication and problem-solving 
+skills.
+ENGINEERING EXPERIENCE
+Electro-Mechanical Engineering Intern May 2026 - Present
+-  Designed 10+ mechanical assemblies, machine guards, and access-control systems in SolidWorks for automated manufacturing 
+equipment, producing fabrication-ready models and engineering drawings.
+-  Performed troubleshooting and root-cause analysis on integrated electro-mechanical systems, diagnosing mechanical, electrical, 
+and process-related failures.
+-  Conducted equipment testing, calibration, and validation activities to identify performance issues, support engineering 
+modifications, and improve operational reliability.
+-  Collaborated with mechanical, electrical, controls, and operations teams to implement hardware improvements and support 
+system integration.
+Autonomous Underwater Robot with Multi-Sensor Environmental Monitoring January 2026 - May 2026
+-  Designed and integrated pressure, pH, turbidity, and temperature sensing systems for an autonomous underwater vehicle (AUV) 
+enabling environmental data collection to depths of 2 meters.
+-  Developed and calibrated analog signal-conditioning and closed-loop depth control systems on a Teensy 4.0, using MATLAB 
+regression models and Arduino-based feedback control for stable autonomous operation.
+-  Conducted ocean field testing, validating sensor performance and analyzing water-quality trends across turbidity, pH, 
+temperature, and depth data.
+Harvey Mudd RoboSub Team August 2024 - Present
+-  Designed and prototyped a torpedo release mechanism for an autonomous underwater vehicle, focusing on reliability in 
+submerged conditions
+--- PAGE 2 ---
+-  Performed FEA in COMSOL to evaluate stress concentrations and deformation under operational loading conditions, informing 
+redesign decisions that improved structural reliability.
+-  Redesigned PCB layout to improve signal routing reliability and reduce electrical noise in underwater environments
+Mudd Automotive Club: Hybrids August 2024 - Present
+-  Contributed to the design and manufacturing of a student-built hybrid vehicle, supporting powertrain integration, braking systems, 
+and steering architecture
+-  Designed and fabricated structural frame and front-end assemblies, including brake mounts and steering components
+-  Developed detailed SolidWorks models and assemblies, translating designs into manufacturable parts through machining and 
+iterative prototyping
+-  Participated in hands-on assembly and system testing
+INVITE Institute REU, UIUC
+-  Developed LLM-based tools to analyze structured student performance datasets
+-  Designed synthetic datasets to evaluate model robustness and retrieval accuracy
+-  Built Python pipelines for data cleaning, structuring, and statistical evaluation
+-  Conducted quantitative analysis using performance metrics and error evaluation
+DOFPro Project, Harvey Mudd College
+-  Created interactive technical materials for Chemical & Thermal Processes using Reveal.js and LaTeX
+-  Translated complex engineering concepts into structured visual and computational models
+-  Published materials to faculty platform: dofpro.org
+Independent BioChem Research
+-  Investigated resiniferatoxin applications for osteoarthritis pain treatment
+-  Conducted literature analysis and synthesized findings into structured technical documentation
+-  Link to project
+Computational and Experimental Aerodynamic Analysis of Nose Cone Geometries January 2026 - May 2026
+-  Designed and executed a computational and experimental study comparing aerodynamic performance across multiple nose cone 
+geometries.
+-  Developed CFD models in COMSOL Multiphysics and validated predictions against wind tunnel testing, evaluating flow 
+behavior, pressure distributions, drag characteristics, and model accuracy.
+-  Applied fluid mechanics principles to analyze Reynolds number effects and identify geometry optimization strategies for drag 
+reduction and improved aerodynamic performance.
+RESEARCH
+INVITE Institute REU, UIUC                                                                                                                         May 2025 - August 2025
+-  Developed LLM-based tools to analyze structured student performance datasets
+-  Designed synthetic datasets to evaluate model robustness and retrieval accuracy- Built Python pipelines for data cleaning, 
+structuring, and statistical evaluation
+-  Conducted quantitative analysis using performance metrics and error evaluation
+ 

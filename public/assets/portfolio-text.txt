@@ -1,0 +1,242 @@
+--- PAGE 1 ---
+https://www.linkedin.com/in/david-liu-677113283/   DOFPro  Project,  Harvey  Mudd  College  •  Produced  engaging  lecture  materials  for  “Principles  of  Chemical  and  Thermal  Processes”  course  
+using
+ 
+Reveal.js,
+ 
+LaTeX,
+ 
+and
+ 
+video
+ 
+editing.
+ •  Published  educational  resources  on  the  Degrees  of  Freedom  Project  website:  dofpro.org  Custom  Convertible  Sofa  Bed   •  Led  the  design  of  a  deployable  sofa-bed  mechanism  for  a  client  seeking  improved  ergonomics  and  
+functionality
+ 
+in
+ 
+a
+ 
+camper
+ 
+van
+ 
+living
+ 
+space.
+ •  Developed  multiple  low-ﬁdelity  prototypes  and  incorporated  client  feedback  to  reﬁne  hinge  
+mechanisms,
+ 
+folding
+ 
+motion,
+ 
+and
+ 
+removable
+ 
+support-leg
+ 
+designs.
+ •  Conducted  FEA  studies  to  compare  support  conﬁgurations  and  identify  an  optimal  three-leg  design  
+that
+ 
+minimized
+ 
+peak
+ 
+Von
+ 
+Mises
+ 
+stresses.
+ •  Designed  hinge  and  support  mechanisms  to  balance  structural  rigidity,  manufacturability,  storage  
+accessibility,
+ 
+and
+ 
+ease
+ 
+of
+ 
+operation.
+ •  Fabricated  and  assembled  a  full-scale  prototype  and  performed  installation  within  the  client’s  
+vehicle.
+ •  Executed  validation  testing  to  quantify  conversion  time  and  operating  force,  demonstrating  reliable  
+transition
+ 
+between
+ 
+conﬁgurations
+ 
+in
+ 
+82
+ 
+seconds
+ 
+with
+ 
+a
+ 
+single
+ 
+user.
+ 
+ 
+  
+ 
+
+--- PAGE 2 ---
+ Autonomous  Underwater  Robot  with  Multi-Sensor  Environmental  Monitoring  
+Jan  2026  –  May  2026  
+•  Designed  and  integrated  pressure,  pH,  turbidity,  and  temperature  sensing  systems  for  an  
+autonomous
+ 
+underwater
+ 
+vehicle
+ 
+(AUV)
+ 
+capable
+ 
+of
+ 
+collecting
+ 
+environmental
+ 
+data
+ 
+to
+ 
+depths
+ 
+of
+ 
+2
+ 
+meters.
+ •  Developed  analog  signal-conditioning  circuits  using  operational  ampliﬁers,  ﬁlters,  and  
+impedance-matching
+ 
+techniques
+ 
+to
+ 
+scale
+ 
+sensor
+ 
+outputs
+ 
+within
+ 
+Teensy
+ 
+4.0
+ 
+ADC
+ 
+limits
+ 
+while
+ 
+minimizing
+ 
+electrical
+ 
+noise.
+ •  Calibrated  sensors  through  experimental  testing  and  generated  voltage-to-physical-unit  conversion  
+models
+ 
+in
+ 
+MATLAB
+ 
+with
+ 
+strong
+ 
+linear
+ 
+regression
+ 
+ﬁts
+ •  Implemented  closed-loop  depth  control  algorithms  in  Arduino  using  pressure  sensor  feedback,  
+enabling
+ 
+autonomous
+ 
+navigation
+ 
+and
+ 
+stable
+ 
+depth
+ 
+tracking
+ 
+during
+ 
+ﬁeld
+ 
+deployment.
+ 
+•  Conducted  ocean  ﬁeld  testing  at  Dana  Point,  CA,  collecting  and  analyzing  water-quality  data  to  
+evaluate
+ 
+trends
+ 
+in
+ 
+turbidity,
+ 
+pH,
+ 
+temperature,
+ 
+and
+ 
+depth.
+ 
+ https://docs.google.com/document/d/1dYdVNELfExa3zqZ-c2O43QBFHcyBPAl5/edit?usp=sharing&ouid=110843218653311755074&rtpof=true&sd=true        
+
+--- PAGE 3 ---
+Computational  and  Experimental  Aerodynamic  Analysis  of  Nose  Cone  Geometries  
+Jan  2026  –  May  2026  
+•  Designed  and  executed  a  combined  experimental  and  computational  study  of  aerodynamic  drag  on  
+multiple
+ 
+nose
+ 
+cone
+ 
+geometries.
+ •  Built  CFD  models  in  COMSOL  and  validated  simulation  results  against  physical  wind  tunnel  
+measurements.
+ •  Analyzed  Reynolds  number  effects  and  drag  coeﬃcients  to  compare  aerodynamic  eﬃciency  across  
+designs.
+ •  Evaluated  simulation  accuracy  by  investigating  the  impact  of  mesh  discretization  and  experimental  
+alignment
+ 
+errors.
+ 
+•  Applied  ﬂuid  mechanics  principles  to  assess  geometry  optimization  strategies  for  drag  reduction.   https://docs.google.com/document/d/1WCSK_Sf1ER8bfxqd92lMt5cTgfyI670_/edit?usp=sharing&ouid=110843218653311755074&rtpof=true&sd=true    Hammer  
+  
+
+--- PAGE 4 ---
+Plate  design  using  CNC  Mill
+
+--- PAGE 5 ---
+  
+
+--- PAGE 6 ---
+Wooden  knife
+ 
+
+--- PAGE 7 ---
+ 

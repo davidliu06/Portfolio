@@ -1,0 +1,277 @@
+--- PAGE 1 ---
+Glide Lounge Final Prototype Memo 
+ 
+Problem Statement  
+Michelle Harrison has a sofa bed at the end of her camper van that is supposed to convert from a sofa to a 
+bed. The client has a difficult time moving between the two setups (sofa and bed) as the system is 
+outdated—the planks are slipping apart from one another and switching positions requires disassembling 
+the entire construction, which makes the practical use of it challenging. The client needs a solution that 
+allows her to easily move the position from bed to couch and vice versa. The final prototype should also 
+address shaking and noisiness, which arises from unevenness on the road while the trailer is moving. 
+ 
+Prior Prototypes 
+In the previous low-resolution prototype, the final design alternative was explored: two wood pieces with 
+hinges in between them, with a cord at the back to pull 
+both planks upwards to access the storage space 
+beneath. The prototype was low-resolution, as it used 
+cardboard and hot glue. This method of construction 
+allowed a faster decision to be made about the design 
+because it was quick to construct, as well as benefited 
+the overall budget of the project because no funding 
+had to be used to construct the prototype. This scaled 
+down prototype of the hinge design allowed major 
+problems to be identified. Since the client wanted to 
+access the generator in the storage space, both planks 
+needed to fold up. However, in the fixed-leg design, the 
+legs on the outer plank prevented folding. This 
+demonstrated that the legs for future designs must not impede folding. Another issue that came from this 
+prototype is that even without legs, full range movement of the wall hinges was impeded by the outer 
+plank. To solve this issue, it was decided to make the outer plank shorter than the inner plank.  
+ 
+The following low-resolution cardboard prototype of the leg mechanism 
+was constructed after consulting with the client on how to resolve the 
+issue of the impeding legs. The client said that they wanted the legs to be 
+removable, which has been honored in the prototype. The prototype uses 
+a screw mechanism that allows the legs to be screwed into and out of the 
+plank, with the screw being embedded in the leg to ensure the screw is 
+not lost. This prototype proved the screwing mechanism to be effective 
+for the desired purpose, and was then incorporated in the high-resolution 
+prototype.  
+ 
+ 
+ 
+ 
+
+--- PAGE 2 ---
+ 
+Question 
+ 
+Does the prototype allow for quick and easy (requires at most two people and standard strength, 
+process takes less than 3 minutes) conversion between bed and sofa positions? 
+ 
+The client’s main issue with the previous sofa-bed design was that it was very difficult to shift between 
+the sofa mode and the bed mode and vice versa. Therefore, minimizing the effort to shift positions was 
+the team’s primary objective. The main question regarding the ease of changing positions of the 
+prototype, (with ease being defined as taking less than 3 minutes, requiring up to two people with average 
+strength to set it up) will assess how well the primary objective is fulfilled by the prototype. Additionally, 
+the prototype will allow the team to determine the alignment with the functions of allowing easy 
+conversion between the bed and sofa systems and functioning effectively as both a bed and a couch. The 
+metric scale for the force objective has been set to 0-5, where a score of 0 means that more than 50 
+pounds of force are required to use the design, while a 5 requires less than 10 pounds. For the time 
+objective, the metric scale has been set to 0-4. A score of 0 means that it takes more than 150 seconds to 
+convert between modes, while a score of 4 means that it takes less than 60 seconds. Answering this 
+question will help determine how well the prototype fulfills the primary objective and whether any 
+adjustments should be made to further increase the ease of adjustment between positions. 
+ 
+Prototype 
+Note: The prototype is not in the classroom because the evaluation plan included installing the prototype 
+into the camper, where it now permanently resides, so photos are included throughout the memo to show 
+all details of the design. 
+ 
+The prototype was first designed through multiple client consultations, low-resolution cardboard 
+prototypes to brainstorm the possible mechanisms, and taking various measurements to determine the 
+necessary size of the design in order to fit in the camper. After the prototype was ideated and tested on a 
+smaller scale, a full-scale prototype was outlined and materials sourced. The convertible bed/couch 
+system prototype was made by wood cutting, sanding, and drilling, and installing hinge mechanisms. Two 
+planks were first acquired from Lowe’s, and were then hand sanded to remove any splinters and create a 
+polished finish. Long hinges and screws to fit were acquired from McMaster-Carr as well as smaller 
+pieces of wood for the supportive legs that were obtained from the wood shop. 
+ 
+To determine the placement of supportive legs in the system, Finite Element Analysis was conducted. 
+Since the front plank is connected to the back via a hinge and external ledge support, a small back support 
+to replicate the ledge and two legs were placed to see how the pressure would be distributed. Each of the 
+results include legs and the electrical box, which is hollow on the inside and part of the camper setup.  
+ 
+
+--- PAGE 3 ---
+ 
+Figure 1: Back Support 
+ 
+The back ledge support was removed and the study was conducted with two legs and then three legs, 
+roughly equally spaced. The updated pressure distribution can be seen in Fig. 2 and Fig. 3. 
+ 
+ 
+Figure 2. Two Legs, no back ledge support ​
+​
+Figure 3. Three Legs, no back ledge support 
+ 
+As can be seen in the Von Mises graph, with two legs, there was an extreme amount of pressure in the 
+middle. This pressure could cause the planks to break when a mass is placed on top, creating both a safety 
+hazard and rendering the two-leg design difunctional.  However, once a third leg is added in the middle, 
+the pressure becomes more distributed, as can be seen in Fig 3. where there are no red high-pressure 
+areas. Therefore, three legs were determined to be the best option for the prototype.  
+ 
+Once the number of supportive legs required was determined, they were cut out using a wood saw 
+according to measured values from previously-acquired rectangular stocks of oak wood. The legs have 
+
+--- PAGE 4 ---
+been designed so that they have a hole in the middle in which a screw is inserted in resin. The plank was 
+tapped with wood inserts that fit those screws so that the legs can be screwed on and off as desired by the 
+client. This allows ease of use whenever the position of the system is changed, as well as comfort, since 
+the legs can be removed when the mechanism is in couch mode (they would be pointing upwards 
+otherwise when the system is hinged). Holes were drilled in the bottoms of the legs, and grub screws were 
+inserted (Figure 6). Afterwards, three hinges were installed to connect the two planks, and additional 
+hinges were added to the opposite edge of the plank without legs. These hinges were connected to the 
+back wall of the camper via screws (Figure 4).  The prototype features a high-resolution manufacture that 
+allows it to most closely reflect the desired design and illustrate the ideas previously expressed through 
+low-resolution cardboard prototypes. Since it is close to the final design, it can be evaluated based on its 
+effectiveness in fulfilling the primary objective as outlined by the main testing question. The prototype 
+fulfills all of the project constraints. The final design cost less than $150, and was installed successfully 
+into the van, showing that it fits into the camper. During testing the prototype only needed one person to 
+convert it from bed to couch mode, and the conversion took on average 82 seconds. Additionally, the user 
+was able to lift the design to access the storage space beneath, so all constraints were met or exceeded.  
+ 
+ 
+Figure 4. Installed Couch Form​ ​
+​
+​
+​
+​
+  Figure 5. Installed Bed Form 
+ 
+
+--- PAGE 5 ---
+ 
+Figure 6. Legs with Inserted Screws 
+ 
+ 
+Figure 7. Insertion of Screws 
+ 
+ 
+Figure 8. Wood Insert Locations 
+
+--- PAGE 6 ---
+ 
+Figure 9. Installation of Hinges Between Planks 
+ 
+ 
+Evaluation Plan  
+ 
+1st Evaluation—time to set up 
+ 
+1)​ Switch prototype from bed mode to couch mode, and then back to bed mode. This should include 
+starting with the design fully set up as a bed, then removing the cushions, placing them aside, 
+folding up the outside plank, removing the legs, and putting back the cushions in their couch 
+orientation. Going back to bed mode should be the same steps, just in the reverse order.  
+2)​ Record the amount of time it takes to perform this cycle. Timed using a stopwatch and two 
+people, one to time and one to convert the prototype.  
+3)​ Repeat steps 1 and 2 five times and calculate the average time. Things that should be recorded 
+during this testing include the amount of time taken, as well as if any difficulties occur during a 
+particular step of the conversion cycle. These difficulties should be noted so that in a future 
+design iteration, changes can be made to eliminate them and decrease the conversion time. The 
+user converting the design should also record their feelings on which step in the cycle takes the 
+longest, so that increasing the efficiency of that step could be taken into consideration for a future 
+iteration as well. Future and prior iterations with the same main objective - simplifying the 
+process to switch between couch and bed - can use the same evaluation plan to test the prototype. 
+ 
+2nd Evaluation—Weight of conversion 
+ 
+1)​ Record the amount of weight that needs to be lifted (in pounds) in order to switch between bed 
+and couch (with qualitative feedback). For this step, the user should first pick up a 20, 30 and 50 
+pound dumbbell, to get a sense for what each feels like. The user should then convert the system 
+between bed and couch and record which amount of weight feels most similar. The qualitative 
+feedback that should be recorded at this step includes asking the user if they feel that they are 
+over-exerting themselves while using the design, or if it feels easy.  
+2)​ Record the amount of weight that needs to be lifted (in pounds) in order to switch between couch 
+and bed (with qualitative feedback) The user should complete the same process of picking up the 
+weights and comparing the feel of the weights to the amount of weight required to lift to shift 
+
+--- PAGE 7 ---
+between the two modes. The qualitative feedback that should be recorded at this step includes 
+asking the user if they feel that they are over-exerting themselves while using the design, or if it 
+feels easy.  
+a)​ Note: Steps one and two were estimated using this subjective method of measuring due to 
+the fact that no portable scale devices were available at the time of testing.  
+3)​ Repeat steps 1 and 2 five times and calculate the average estimated weight. For each trial, the 
+team lifted the prototype at different locations along the edge of the plank to better estimate the 
+average force. Future and prior iterations with the same main objective - simplifying the process 
+to switch between couch and bed - can use the same evaluation plan to test the prototype. 
+ 
+The evaluations will be scored based on the following metrics:  
+ 
+Minimize set up 
+time 
+Time needed to convert from bed to 
+couch and back 
+Score 
+More than 150 seconds 
+0 
+121 seconds - 150 seconds 
+1 
+91 seconds - 120 seconds 
+2 
+61 seconds - 90 seconds 
+3 
+ Less than 60 seconds 
+4 
+ 
+Figure 1: Metric for time 
+ 
+Minimize Force to 
+Shift Positions 
+Weight needed to lift to shift 
+positions (in Pounds) 
+Score 
+51+ 
+0 
+41-50 
+1 
+31-40 
+2 
+21-30 
+3 
+11-20 
+4 
+<10 
+5 
+ 
+Figure 2: Metric for Force 
+ 
+ 
+ 
+ 
+
+--- PAGE 8 ---
+​Evaluation Results 
+ 
+From the prototype testing, several important results were gathered, including the amount of weight to lift 
+the design to convert between bed and couch mode, as well as how quickly the user is able to transition 
+between modes. The first result gathered from the testing was that the prototype is able to be quickly 
+converted from one mode to the other by one user, with quickly being defined as less than 150 seconds. 
+The average amount of time it took to shift the prototype from bed mode to couch mode and back was 82 
+seconds. This included removing the decorative cushions, attaching/removing the legs, and using the 
+hinges to flip the planks from one mode to the other. When graded against the metric scale, the prototype 
+scored a 3 out of 4 on the time metric, and is well below the cutoff for the setup time constraint of 7 
+minutes. The other data that was recorded included the user stating that they felt the step that took the 
+longest during setup was screwing and unscrewing the legs from the plank. In any future iterations of this 
+prototype, the only improvement that could be made to decrease the amount of time required to set up 
+would be to have a different mechanism to attach the legs to the plank instead of screws, since the action 
+of screwing/unscrewing all three legs to the threaded inserts takes up the majority of the set up time.  
+ 
+The second result gathered from the testing was that the prototype can easily be converted from one mode 
+to another by a singular user, since it does not require an extreme amount of force. During testing, the 
+maximum weight required to be lifted/exerted by the person setting up at a singular moment when 
+converting from bed to couch and couch to bed was estimated to be 20 pounds. During evaluation, the 
+user said that they felt they did not have to over-exert themselves in order to convert between modes, and 
+that it felt easy. When grading the results against the metric scale, the prototype scored a 4 out of 5 on the 
+force metric and was successful in achieving the force constraint, indicating that the design is easy to 
+convert between bed and couch modes. In future evaluation testing of this prototype, it would be ideal to 
+have a scale or device that would be able to quantitatively measure the amount of weight required to be 
+lifted to shift modes, since that would give an objective measurement that could be graded by the same 
+metric scale. For future iterations of this prototype, the design could be improved by using a different 
+material for the planks that is more lightweight, since most of the weight that required the user to use 
+force to lift was due to the wooden planks. If a different material was used, much of the weight of the 
+design would be reduced and the user would need to use even less force, which would be ideal. Moving 
+forward from this prototype, ideally the client will be able to use this prototype for the foreseeable future, 
+since it is a successful solution to the client’s problem, fulfilling all constraints and converting between 
+bed and sofa mode quickly and easily, so theoretically no further action is required moving forward. 
+However, if another iteration of the design were to be created, the improvements that could be made 
+include changing the material of the planks to be more lightweight, as well as changing the method of 
+attachment for the legs in order to be faster to attach. Additionally, the first low-resolution prototype 
+included a cord attached to the planks to create an easier way to lift the planks up to access the storage 
+space, and the final prototype did not include this. This was not included because the client had a specific 
+strap that they wanted to use, so it was decided that they would add the strap that they wanted after the 
+prototype was installed. Future iterations of the prototype could be improved by adding this cord to the 
+design so that it could be used during the evaluation stage to measure the amount of force required to lift 
+using the strap. 
+ 
