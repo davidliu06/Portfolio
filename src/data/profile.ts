@@ -11,7 +11,7 @@ export const profile = {
   gpa: "3.74",
   email: "davidliu@g.hmc.edu",
   linkedin: "https://www.linkedin.com/in/david-liu-677113283/",
-  github: "TBD",
+  github: "https://github.com/davidliu06",
   resumePath: "/resume/david-liu-resume.pdf",
   headshotPath: "/images/david-headshot.jpg",
   takeaway:

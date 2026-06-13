@@ -57,10 +57,10 @@ export function ContactSection() {
                 <Linkedin size={20} />
                 LinkedIn
               </a>
-              <span className="flex items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 text-muted-foreground">
+              <a className="flex items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:bg-muted" href={profile.github}>
                 <Github size={20} />
-                GitHub TBD
-              </span>
+                GitHub
+              </a>
             </div>
           </div>
           <form className="night-card rounded-[1.5rem] border p-6" onSubmit={onSubmit}>
