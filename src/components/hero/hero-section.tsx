@@ -20,6 +20,11 @@ const STATIC_FALLBACK = (
 export function HeroSection() {
   return (
     <section id="top" className="relative overflow-hidden pt-28">
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 -z-10 h-[48rem]"
+        style={{ background: "linear-gradient(to bottom, #0B1120 0%, #0B1120 55%, transparent 100%)" }}
+      />
       <LazyCanvas className="absolute inset-x-0 top-0 -z-10 h-[48rem]" fallback={STATIC_FALLBACK}>
         <Scene cameraPosition={[0, 0, 9]} fallback={STATIC_FALLBACK}>
           <EngineeringUniverse />

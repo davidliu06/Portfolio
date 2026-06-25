@@ -23,18 +23,32 @@ type AssemblyShowcaseProps = {
   accentColor?: string;
   title: string;
   caption: string;
+  /** A short looping exploded-view clip (rendered offline via the project's Remotion sub-project) shown in place of the real model until it's loaded — gives mobile/slow-network visitors something compelling without waiting on WebGL. */
+  posterClip?: string;
 };
+
+const BLUEPRINT_GRID_STYLE = {
+  backgroundImage:
+    "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+  backgroundSize: "28px 28px"
+};
+
+function CornerTick({ className }: { className: string }) {
+  return <div aria-hidden className={`pointer-events-none absolute h-4 w-4 border-white/25 ${className}`} />;
+}
 
 /**
  * The interactive CAD-assembly viewer: original GLB rendered with real PBR
- * materials, a voxel "energy field" sampled from its own geometry as a
- * passive ambient shimmer, hover-highlight / click-to-isolate / exploded-view
- * driven by the model's real SolidWorks hierarchy, and drag-to-look-around
- * camera-free orbiting (the model itself turns, not the camera) on top of a
- * gentle idle auto-rotate and pointer-tilt. The scroll-tied camera dolly is
- * scoped to this embed's own container — never the page scroll.
+ * materials, hover-highlight / click-to-isolate / exploded-view driven by the
+ * model's real SolidWorks hierarchy, and drag-to-look-around orbiting (the
+ * model itself turns, fully and without limit, on top of a gentle idle
+ * auto-rotate and pointer-tilt that pause while exploded or isolated so the
+ * layout can actually be studied). The scroll-tied camera dolly is scoped to
+ * this embed's own container — never the page scroll. The Canvas mounts only
+ * while the container is actually intersecting the viewport (no preload
+ * margin), so the GLB never fetches until it's genuinely in view.
  */
-export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", title, caption }: AssemblyShowcaseProps) {
+export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", title, caption, posterClip }: AssemblyShowcaseProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollProgressRef = useRef(0);
   const reducedMotion = usePrefersReducedMotion();
@@ -43,7 +57,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
   const [exploded, setExploded] = useState(false);
   const [isolatedName, setIsolatedName] = useState<string | null>(null);
   const [isolatedLabel, setIsolatedLabel] = useState<string | null>(null);
-  const [modelLoaded, setModelLoaded] = useState(false);
+  const [partCount, setPartCount] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const isDraggingRef = useRef(false);
@@ -112,7 +126,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
     );
   }
 
-  const dpr: [number, number] = tier === "low" ? [1, 1] : tier === "medium" ? [1, 1.5] : [1, 2];
+  const dpr: [number, number] = tier === "low" ? [1, 1] : tier === "medium" ? [1, 1.5] : [1, 1.5];
 
   return (
     <div
@@ -120,11 +134,17 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
       ref={containerRef}
     >
       <div className="relative h-[520px] w-full">
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={BLUEPRINT_GRID_STYLE} />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{ background: `radial-gradient(circle at 50% 45%, ${accentColor}26, transparent 65%)` }}
         />
+        <CornerTick className="left-4 top-4 border-l-2 border-t-2" />
+        <CornerTick className="right-4 top-4 border-r-2 border-t-2" />
+        <CornerTick className="bottom-4 left-4 border-b-2 border-l-2" />
+        <CornerTick className="bottom-4 right-4 border-b-2 border-r-2" />
+
         <div
           className="absolute inset-0"
           onPointerCancel={handleDragEnd}
@@ -142,7 +162,9 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
               </div>
             }
           >
-            <LazyCanvas className="absolute inset-0">
+            {/* No rootMargin — the GLB and its textures never fetch until this
+                container is genuinely intersecting the viewport, not a moment before. */}
+            <LazyCanvas className="absolute inset-0" rootMargin="0px">
               <Canvas
                 camera={{ position: [0, 0.6, 4.2], fov: 42 }}
                 dpr={dpr}
@@ -158,7 +180,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
                     isolatedName={isolatedName}
                     namePrefix={namePrefix}
                     onHoverChange={setHoveredLabel}
-                    onModelLoaded={() => setModelLoaded(true)}
+                    onModelLoaded={setPartCount}
                     onPartClick={handlePartClick}
                     scrollProgressRef={scrollProgressRef}
                     url={url}
@@ -175,7 +197,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
         </div>
 
         <AnimatePresence>
-          {!modelLoaded && (
+          {partCount === null && (
             <motion.div
               animate={{ opacity: 1 }}
               className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3"
@@ -183,11 +205,16 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
               initial={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <div
-                className="h-9 w-9 animate-spin rounded-full border-2 border-white/15"
-                style={{ borderTopColor: accentColor }}
-              />
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-400">Loading model…</p>
+              {posterClip && (
+                <video autoPlay className="absolute inset-0 h-full w-full object-cover opacity-70" loop muted playsInline src={posterClip} />
+              )}
+              <div className="relative flex flex-col items-center gap-3 rounded-2xl bg-[#060912]/60 px-6 py-4 backdrop-blur-sm">
+                <div
+                  className="h-7 w-7 animate-spin rounded-full border-2 border-white/15"
+                  style={{ borderTopColor: accentColor }}
+                />
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-300">Loading interactive model…</p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -205,6 +232,13 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
             </div>
           )}
         </div>
+
+        {partCount !== null && (
+          <div className="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-widest text-slate-400">
+            PARTS&nbsp;
+            <span className="text-white">{partCount}</span>
+          </div>
+        )}
 
         <div className="pointer-events-auto absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-wrap justify-center gap-2 px-4">
           <button

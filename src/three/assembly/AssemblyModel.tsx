@@ -7,6 +7,11 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { buildExplodeTargets, humanizePartName, type ExplodeTarget } from "./explode";
 
+// Smaller than the original 0.9 — kept the exploded assembly from outgrowing
+// the camera frame (the model is normalized to a 2.4-unit max dimension, so
+// 0.9 could nearly double a part's distance from center in some directions).
+const EXPLODE_DISTANCE = 0.55;
+
 type AssemblyModelProps = {
   url: string;
   exploded: boolean;
@@ -16,7 +21,7 @@ type AssemblyModelProps = {
   dragDistanceRef: { current: number };
   onHoverChange: (label: string | null) => void;
   onPartClick: (rawName: string) => void;
-  onReady: (model: THREE.Object3D) => void;
+  onReady: (model: THREE.Object3D, partCount: number) => void;
 };
 
 type PreparedAssembly = {
@@ -68,12 +73,12 @@ export function AssemblyModel({
   const hoveredMesh = useRef<THREE.Mesh | null>(null);
 
   useEffect(() => {
-    onReady(model);
-  }, [model, onReady]);
+    onReady(model, meshes.length);
+  }, [model, meshes, onReady]);
 
   useEffect(() => {
     const tweens = explodeTargets.map((target) => {
-      const goal = exploded ? target.restPosition.clone().addScaledVector(target.direction, 0.9) : target.restPosition;
+      const goal = exploded ? target.restPosition.clone().addScaledVector(target.direction, EXPLODE_DISTANCE) : target.restPosition;
       return gsap.to(target.object.position, { x: goal.x, y: goal.y, z: goal.z, duration: 1.1, ease: "power3.inOut" });
     });
     return () => tweens.forEach((tween) => tween.kill());

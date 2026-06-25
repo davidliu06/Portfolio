@@ -11,15 +11,18 @@ const AssemblyShowcase = dynamic(() => import("@/three/assembly/AssemblyShowcase
   ssr: false
 });
 
+type EmbedConfig = { url: string; namePrefix: string; accentColor: string; title: string; caption: string; posterClip: string };
+
 /** Keyed by organization — drops a real, interactive CAD viewer directly above the timeline entry it belongs to. */
-const EMBED_BEFORE: Record<string, { url: string; namePrefix: string; accentColor: string; title: string; caption: string }> = {
+const EMBED_BEFORE: Record<string, EmbedConfig> = {
   "Mudd Amateur Rocketry Club": {
     url: "/models/rocket.glb",
     namePrefix: "APLYN1_",
     accentColor: "#FF5D3A",
     title: "Apollyon I",
     caption:
-      "The actual FAR Unlimited competition rocket, rendered from the real CAD assembly — hover a part to see what it is, click to isolate it, or explode the view to see how the airframe, avionics, and recovery sections stack together."
+      "The actual FAR Unlimited competition rocket, rendered from the real CAD assembly — hover a part to see what it is, click to isolate it, or explode the view to see how the airframe, avionics, and recovery sections stack together.",
+    posterClip: "/videos/exploded-schematic-coral.mp4"
   },
   "MuddSub / Harvey Mudd RoboSub Team": {
     url: "/models/crush-system.glb",
@@ -27,7 +30,8 @@ const EMBED_BEFORE: Record<string, { url: string; namePrefix: string; accentColo
     accentColor: "#2F5DFF",
     title: "Crush Drive System",
     caption:
-      "The drive-system assembly from MuddSub's autonomous underwater vehicle — thrusters, frame, and electronics enclosure modeled in SolidWorks. Explore it the same way: hover, click to isolate, or explode the subassemblies apart."
+      "The drive-system assembly from MuddSub's autonomous underwater vehicle — thrusters, frame, and electronics enclosure modeled in SolidWorks. Explore it the same way: hover, click to isolate, or explode the subassemblies apart.",
+    posterClip: "/videos/exploded-schematic-cobalt.mp4"
   }
 };
 
@@ -53,6 +57,7 @@ export function ExperienceSection() {
                         accentColor={embed.accentColor}
                         caption={embed.caption}
                         namePrefix={embed.namePrefix}
+                        posterClip={embed.posterClip}
                         title={embed.title}
                         url={embed.url}
                       />

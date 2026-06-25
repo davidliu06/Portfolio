@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
 import { AssemblyModel } from "./AssemblyModel";
-import { VoxelField } from "./VoxelField";
 import { RotationRig } from "./RotationRig";
 
 type AssemblySceneProps = {
@@ -20,7 +19,7 @@ type AssemblySceneProps = {
   exploded: boolean;
   isolatedName: string | null;
   onPartClick: (rawName: string) => void;
-  onModelLoaded?: () => void;
+  onModelLoaded?: (partCount: number) => void;
 };
 
 /** Subtle orbit tied to scroll progress through the embed's own container — the camera move stays inside this viewer, never the page. Manual drag rotates the object itself (see RotationRig), so this rig only ever has to think about scroll. */
@@ -56,19 +55,6 @@ export function AssemblyScene({
   onPartClick,
   onModelLoaded
 }: AssemblySceneProps) {
-  const [model, setModel] = useState<THREE.Object3D | null>(null);
-  const [voxelOpacity, setVoxelOpacity] = useState(0.55);
-
-  useFrame((_, delta) => {
-    const target = exploded ? 0.95 : 0.55;
-    setVoxelOpacity((current) => THREE.MathUtils.damp(current, target, 4, delta));
-  });
-
-  function handleModelReady(readyModel: THREE.Object3D) {
-    setModel(readyModel);
-    onModelLoaded?.();
-  }
-
   return (
     <>
       <ScrollCameraRig scrollProgressRef={scrollProgressRef} />
@@ -81,11 +67,12 @@ export function AssemblyScene({
         <Lightformer color={accentColor} form="rect" intensity={1.4} position={[3, -1, -3]} scale={[3, 4, 1]} />
       </Environment>
       <ambientLight intensity={0.45} />
-      <directionalLight castShadow intensity={1.2} position={[3, 4, 2]} />
+      {/* No shadow-receiving surface in this scene, so shadow casting is left off — it's a real render-pass cost with nothing to show for it. */}
+      <directionalLight intensity={1.2} position={[3, 4, 2]} />
       <directionalLight intensity={0.3} position={[-2, 1, 3]} />
       <pointLight color={accentColor} intensity={1.1} position={[-3, -1, -2]} />
 
-      <RotationRig dragRotationRef={dragRotationRef} isDraggingRef={isDraggingRef}>
+      <RotationRig dragRotationRef={dragRotationRef} isDraggingRef={isDraggingRef} pauseIdle={exploded || isolatedName !== null}>
         <AssemblyModel
           dragDistanceRef={dragDistanceRef}
           exploded={exploded}
@@ -94,10 +81,9 @@ export function AssemblyScene({
           namePrefix={namePrefix}
           onHoverChange={onHoverChange}
           onPartClick={onPartClick}
-          onReady={handleModelReady}
+          onReady={(_model, partCount) => onModelLoaded?.(partCount)}
           url={url}
         />
-        {model && <VoxelField model={model} opacity={voxelOpacity} />}
       </RotationRig>
     </>
   );

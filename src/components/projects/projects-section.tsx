@@ -123,7 +123,7 @@ export function ProjectsSection() {
           description="Three projects, as a galaxy you can explore — click a planet to dive in, design, simulation, fabrication, and field-tested results."
         />
 
-        <div className="night-card relative h-[640px] overflow-hidden rounded-[2rem] border">
+        <div className="relative h-[640px] overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)]">
           <LazyCanvas className="absolute inset-0" fallback={<StaticProjectsFallback />}>
             <Scene cameraPosition={[0, 0, 8.5]} fallback={<StaticProjectsFallback />}>
               <ProjectGalaxy
@@ -136,7 +136,7 @@ export function ProjectsSection() {
               />
             </Scene>
           </LazyCanvas>
-          <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-border/50 bg-background/70 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
+          <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-slate-300 backdrop-blur-md">
             Click a planet to explore · Esc to close
           </p>
         </div>
