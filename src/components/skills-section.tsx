@@ -13,9 +13,9 @@ export function SkillsSection() {
     <section id="skills" className="py-20">
       <div className="section-shell">
         <SectionHeading
-          eyebrow="Skills"
-          title="Technical skills"
-          description="A practical mechanical engineering stack for design, simulation, robotics, manufacturing, electronics, and analysis."
+          eyebrow="02 — Building"
+          title="The stack behind the hardware"
+          description="What it actually takes to get from a CAD model to a working, tested system: design, simulation, robotics, manufacturing, electronics, and analysis."
         />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {skills.map((group) => {

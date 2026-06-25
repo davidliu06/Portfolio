@@ -13,7 +13,24 @@ export const experience: Experience[] = [
       "Troubleshot integrated electro-mechanical systems across mechanical, electrical, and process-related failures.",
       "Conducted equipment testing, calibration, and validation to support engineering modifications and improve reliability."
     ],
-    tools: ["SolidWorks", "Sheet Metal", "Manufacturing", "Validation", "Electro-Mechanical Systems"]
+    tools: ["SolidWorks", "Sheet Metal", "Manufacturing", "Validation", "Electro-Mechanical Systems"],
+    chapter: "engineering"
+  },
+  {
+    organization: "Mudd Amateur Rocketry Club",
+    role: "Propulsion Lead",
+    dates: "August 2024 - Present",
+    location: "Harvey Mudd College",
+    type: "Leadership",
+    bullets: [
+      "Led mechanical development of Apollyon I, a full-M-class FAR Unlimited competition rocket, coordinating 40+ members across propulsion, structures, avionics, recovery, and simulation to achieve 1st Place at FAR Unlimited 2026.",
+      "Directed systems integration and launch-readiness reviews across 5 subteams, driving design decisions throughout the development cycle.",
+      "Evaluated 10+ configurations for motor selection, stability margins, recovery sizing, and composite airframe design using OpenRocket, RASAero II, MATLAB, SolidWorks, and COMSOL.",
+      "Manufactured and integrated flight hardware for Gladius III, contributing to a 3rd Place finish (2025) and validating simulations against flight data with 99.95% apogee accuracy."
+    ],
+    tools: ["OpenRocket", "RASAero II", "MATLAB", "SolidWorks", "COMSOL", "Systems Integration", "Propulsion"],
+    chapter: "engineering",
+    alsoFeaturedIn: ["systems"]
   },
   {
     organization: "Mudd Automotive Club: Hybrids",
@@ -28,7 +45,9 @@ export const experience: Experience[] = [
     ],
     tools: ["SolidWorks", "Vehicle Design", "Machining", "Manufacturing", "System Testing"],
     image: "/images/experience/mach.png",
-    imageAlt: "Mudd Automotive Club Hybrids team with vehicle frame"
+    imageAlt: "Mudd Automotive Club Hybrids team with vehicle frame",
+    chapter: "engineering",
+    alsoFeaturedIn: ["systems"]
   },
   {
     organization: "MuddSub / Harvey Mudd RoboSub Team",
@@ -43,7 +62,8 @@ export const experience: Experience[] = [
     ],
     tools: ["AUVs", "COMSOL", "FEA", "PCB Layout", "Mechanism Design"],
     image: "/images/experience/muddsub-2.png",
-    imageAlt: "MuddSub autonomous underwater vehicle CAD model"
+    imageAlt: "MuddSub autonomous underwater vehicle CAD model",
+    chapter: "engineering"
   },
   {
     organization: "Harvey Mudd College",
@@ -56,7 +76,8 @@ export const experience: Experience[] = [
       "Tutored students in programming (Python/MATLAB), calculus, and chemistry, strengthening structured problem-solving and debugging skills.",
       "Evaluated lab reports and assignments, providing clear, actionable technical feedback to improve analytical accuracy and code quality."
     ],
-    tools: ["Leadership", "Communication", "Python", "MATLAB", "Chemistry"]
+    tools: ["Leadership", "Communication", "Python", "MATLAB", "Chemistry"],
+    chapter: "research"
   },
   {
     organization: "INVITE Institute, UIUC",
@@ -72,7 +93,9 @@ export const experience: Experience[] = [
     ],
     tools: ["Python", "LLMs", "Data Analysis", "Synthetic Data", "Evaluation"],
     image: "/images/experience/invite.png",
-    imageAlt: "INVITE Institute logo"
+    imageAlt: "INVITE Institute logo",
+    chapter: "research",
+    alsoFeaturedIn: ["ai"]
   },
   {
     organization: "Project Think",
@@ -85,7 +108,8 @@ export const experience: Experience[] = [
       "Introduced students to engineering and STEM pathways.",
       "Taught block coding, robotics, collaboration, problem solving, and advanced computing concepts."
     ],
-    tools: ["Engineering Design", "Robotics", "Teaching", "Block Coding", "STEM Education"]
+    tools: ["Engineering Design", "Robotics", "Teaching", "Block Coding", "STEM Education"],
+    chapter: "building"
   },
   {
     organization: "Harvey Mudd College",
@@ -99,7 +123,8 @@ export const experience: Experience[] = [
     ],
     tools: ["Reveal.js", "LaTeX", "Video Editing", "Educational Research"],
     image: "/images/experience/dofpro.png",
-    imageAlt: "DOFPro logo"
+    imageAlt: "DOFPro logo",
+    chapter: "research"
   },
   {
     organization: "ChemTalk",
@@ -113,6 +138,7 @@ export const experience: Experience[] = [
     ],
     tools: ["Scientific Research", "Writing", "LaTeX", "Chemistry Communication"],
     image: "/images/experience/chemtalk.png",
-    imageAlt: "ChemTalk logo"
+    imageAlt: "ChemTalk logo",
+    chapter: "research"
   }
 ];

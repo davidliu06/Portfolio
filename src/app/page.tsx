@@ -1,12 +1,14 @@
 import { AboutSection } from "@/components/about-section";
+import { AiSection } from "@/components/ai-section";
 import { Chatbot } from "@/components/chatbot/chatbot";
 import { ContactSection } from "@/components/contact-section";
 import { HeroSection } from "@/components/hero/hero-section";
-import { MissionBoardSection } from "@/components/mission-board-section";
 import { ProjectsSection } from "@/components/projects/projects-section";
+import { ResearchSection } from "@/components/research-section";
 import { ResumeSection } from "@/components/resume-section";
 import { SiteHeader } from "@/components/site-header";
 import { SkillsSection } from "@/components/skills-section";
+import { SystemsThinkingSection } from "@/components/systems-thinking-section";
 import { ExperienceSection } from "@/components/timeline/experience-section";
 
 export default function Home() {
@@ -16,10 +18,12 @@ export default function Home() {
       <main className="relative z-10">
         <HeroSection />
         <AboutSection />
-        <MissionBoardSection />
+        <SkillsSection />
+        <ResearchSection />
         <ExperienceSection />
         <ProjectsSection />
-        <SkillsSection />
+        <AiSection />
+        <SystemsThinkingSection />
         <ResumeSection />
         <ContactSection />
       </main>

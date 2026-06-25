@@ -45,25 +45,36 @@ src/
 
 ## Component Hierarchy
 
-- `SiteHeader`
-- `HeroSection`
-  - `ChibiAvatar` using `public/images/david-chibi.png`
-- `AboutSection`
-- `MissionBoardSection`
-- `ProjectsSection`
-- `ExperienceSection`
-- `SkillsSection`
-- `ResumeSection`
-- `ContactSection`
-- `Chatbot`
+The page is a 7-chapter cinematic journey (Curiosity → Building → Research → Engineering → AI →
+Systems Thinking → Future Vision), not a flat section stack:
+
+- `SiteHeader` — chapter-jump nav
+- `HeroSection` — cold open; mounts the `EngineeringUniverse` Three.js scene (`src/three/`) as a
+  mouse-reactive background
+- `AboutSection` (01 — Curiosity)
+- `SkillsSection` (02 — Building)
+- `ResearchSection` (03 — Research)
+- `ExperienceSection` + `ProjectsSection` (04 — Engineering)
+- `AiSection` (05 — AI) — also surfaces the `Chatbot` as a live demo, not just a corner widget
+- `SystemsThinkingSection` (06 — Systems Thinking)
+- `ResumeSection` + `ContactSection` (07 — Future Vision)
+- `Chatbot` — floating, openable from anywhere via a `window.dispatchEvent(new Event("open-ask-david"))`
+
+`src/three/` (Scene root, hooks, procedural mechanical-part components) and `src/store/journeyStore.ts`
+(Zustand store for scroll/chapter/mouse-force state shared between the DOM and the R3F canvas) are new,
+additive subsystems — see the project's `.claude/plans/` history for the full redesign rationale.
 
 ## Design System
 
-- Theme: chill purple night game setting
+- Theme: dark luxury / sci-fi engineering lab — deep near-black navy, electric blue accents, metallic
+  silver/graphite, restrained warm gold used sparingly. Single theme; no light/dark toggle.
 - Audience: engineering recruiters, aerospace/defense internships, robotics and hardware teams
-- Visuals: starry night background, glassy dark panels, rounded cards, chibi assistant avatar, real project images
-- Motion: Framer Motion section reveals, subtle hover movement, reduced-motion support
-- Accessibility: semantic sections, keyboard-reachable controls, labels, focus rings, responsive layout
+- Visuals: a real Three.js scene (procedural gears/bearings/shafts, bloom postprocessing) behind the
+  hero, glassy dark panels, real project images
+- Motion: Framer Motion section reveals + GSAP/Lenis scroll choreography, mouse-reactive 3D parts,
+  reduced-motion support (the Three.js canvas never mounts for `prefers-reduced-motion: reduce`)
+- Accessibility: semantic sections, keyboard-reachable controls, labels, focus rings, responsive layout,
+  device-tier-aware 3D quality scaling
 
 ## Updating Content
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { Send, X } from "lucide-react";
+import { Bot, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { suggestedQuestions } from "@/data/chatbot";
+import { useAchievementsStore } from "@/store/achievementsStore";
 import { cn } from "@/lib/utils";
 
 type Message = {
@@ -26,11 +26,18 @@ export function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const addProgress = useAchievementsStore((state) => state.addProgress);
 
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem("ask-david-chat");
     if (stored) setMessages(JSON.parse(stored) as Message[]);
+
+    function handleOpenRequest() {
+      setOpen(true);
+    }
+    window.addEventListener("open-ask-david", handleOpenRequest);
+    return () => window.removeEventListener("open-ask-david", handleOpenRequest);
   }, []);
 
   useEffect(() => {
@@ -45,6 +52,7 @@ export function Chatbot() {
     setMessages((current) => [...current, userMessage]);
     setInput("");
     setLoading(true);
+    addProgress("curious-mind");
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 10000);
 
@@ -102,14 +110,8 @@ export function Chatbot() {
       >
         <div className="flex items-center justify-between border-b p-4">
           <div className="flex items-center gap-3">
-            <span className="grid h-14 w-10 place-items-center overflow-hidden">
-              <Image
-                src="/images/david-chibi.png"
-                alt="Ask David assistant avatar"
-                width={42}
-                height={78}
-                className="h-14 w-auto object-contain"
-              />
+            <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-primary/12 text-primary shadow-glow">
+              <Bot size={22} />
             </span>
             <div>
               <h2 className="font-bold">Ask David</h2>
@@ -173,16 +175,16 @@ export function Chatbot() {
         onClick={() => setOpen((current) => !current)}
         suppressHydrationWarning
       >
-        <span className="mb-1 rounded-full border border-primary/25 bg-background/85 px-3 py-1 text-xs font-semibold text-primary shadow-glow backdrop-blur">
+        <span className="mb-2 hidden rounded-full border border-primary/25 bg-background/85 px-3 py-1 text-xs font-semibold text-primary shadow-glow backdrop-blur sm:block">
           Ask David
         </span>
-        <Image
-          src="/images/david-chibi.png"
-          alt=""
-          width={88}
-          height={162}
-          className="h-32 w-auto object-contain drop-shadow-[0_18px_22px_rgba(8,7,25,0.65)] transition group-hover:scale-105"
-        />
+        <span className="relative grid h-12 w-12 place-items-center sm:h-16 sm:w-16">
+          <span className="absolute inset-0 animate-pulse rounded-full bg-primary/25 blur-md" />
+          <span className="relative grid h-11 w-11 place-items-center rounded-full border border-primary/30 bg-card text-primary shadow-glow transition group-hover:scale-105 sm:h-14 sm:w-14">
+            <Bot size={22} className="sm:hidden" />
+            <Bot size={26} className="hidden sm:block" />
+          </span>
+        </span>
       </button>
     </div>
   );

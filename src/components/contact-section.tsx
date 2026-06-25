@@ -41,9 +41,9 @@ export function ContactSection() {
     <section id="contact" className="py-20">
       <div className="section-shell">
         <SectionHeading
-          eyebrow="Contact"
-          title="Contact"
-          description="Send a message directly from the site. It will be delivered through Resend."
+          eyebrow="Get in touch"
+          title="Let's build something."
+          description="Reach out directly — messages go straight to my inbox through Resend."
         />
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="night-card rounded-[1.5rem] border p-6">

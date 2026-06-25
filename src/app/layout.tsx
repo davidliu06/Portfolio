@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import { Inter, Outfit } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
+import { AchievementToast } from "@/components/achievements/achievement-toast";
+import { ChapterTracker } from "@/components/chapter-tracker";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,22 +24,20 @@ export const metadata: Metadata = {
   }
 };
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}"
-          }}
-        />
-      </head>
+    <html className={`${inter.variable} ${outfit.variable} ${GeistMono.variable}`} lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <SmoothScrollProvider />
+        <ChapterTracker />
+        <AchievementToast />
         {children}
         <Analytics />
       </body>

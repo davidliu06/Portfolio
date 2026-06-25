@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
 
 const links = [
-  ["Projects", "#projects"],
-  ["Mission", "#mission"],
+  ["About", "#about"],
+  ["Skills", "#skills"],
   ["Experience", "#experience"],
+  ["Projects", "#projects"],
+  ["AI", "#ai"],
   ["Resume", "#resume"],
   ["Contact", "#contact"]
 ];
@@ -33,7 +34,6 @@ export function SiteHeader() {
             </Link>
           ))}
         </div>
-        <ThemeToggle />
       </nav>
     </header>
   );

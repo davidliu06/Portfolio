@@ -9,9 +9,9 @@ export function ExperienceSection() {
     <section id="experience" className="py-20">
       <div className="section-shell">
         <SectionHeading
-          eyebrow="Professional Experience"
-          title="Internship, research, and engineering teams"
-          description="Professional experience is listed first, followed by research, teaching, and technical team work relevant to mechanical, aerospace, defense, and robotics roles."
+          eyebrow="04 — Engineering"
+          title="From internship to competition rocket"
+          description="The full record — internships, research, and the engineering teams where most of this was actually learned."
         />
         <div className="relative mx-auto max-w-4xl">
           <div className="absolute bottom-0 left-5 top-0 hidden w-px bg-border sm:block" />
@@ -39,7 +39,7 @@ export function ExperienceSection() {
                   </div>
                 </div>
                 {item.image && (
-                  <div className="mt-5 overflow-hidden rounded-2xl border border-violet-200/10 bg-white/5">
+                  <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-muted/50">
                     <Image
                       src={item.image}
                       alt={item.imageAlt ?? `${item.organization} image`}
