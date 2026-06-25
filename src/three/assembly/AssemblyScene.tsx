@@ -2,23 +2,28 @@
 
 import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
 import { AssemblyModel } from "./AssemblyModel";
 import { VoxelField } from "./VoxelField";
+import { RotationRig } from "./RotationRig";
 
 type AssemblySceneProps = {
   url: string;
   namePrefix?: string;
   accentColor: string;
   scrollProgressRef: { current: number };
+  isDraggingRef: { current: boolean };
+  dragRotationRef: { current: { x: number; y: number } };
+  dragDistanceRef: { current: number };
   onHoverChange: (label: string | null) => void;
   exploded: boolean;
   isolatedName: string | null;
   onPartClick: (rawName: string) => void;
+  onModelLoaded?: () => void;
 };
 
-/** Subtle orbit tied to scroll progress through the embed's own container, plus a gentle mouse parallax — the camera move stays inside this viewer, never the page. */
+/** Subtle orbit tied to scroll progress through the embed's own container — the camera move stays inside this viewer, never the page. Manual drag rotates the object itself (see RotationRig), so this rig only ever has to think about scroll. */
 function ScrollCameraRig({ scrollProgressRef }: { scrollProgressRef: { current: number } }) {
   const { camera } = useThree();
   const angle = useRef(0);
@@ -42,12 +47,15 @@ export function AssemblyScene({
   namePrefix,
   accentColor,
   scrollProgressRef,
+  isDraggingRef,
+  dragRotationRef,
+  dragDistanceRef,
   onHoverChange,
   exploded,
   isolatedName,
-  onPartClick
+  onPartClick,
+  onModelLoaded
 }: AssemblySceneProps) {
-  const cursorRef = useRef<THREE.Vector3 | null>(null);
   const [model, setModel] = useState<THREE.Object3D | null>(null);
   const [voxelOpacity, setVoxelOpacity] = useState(0.55);
 
@@ -56,25 +64,41 @@ export function AssemblyScene({
     setVoxelOpacity((current) => THREE.MathUtils.damp(current, target, 4, delta));
   });
 
+  function handleModelReady(readyModel: THREE.Object3D) {
+    setModel(readyModel);
+    onModelLoaded?.();
+  }
+
   return (
     <>
       <ScrollCameraRig scrollProgressRef={scrollProgressRef} />
-      <Environment preset="studio" />
-      <ambientLight intensity={0.5} />
-      <directionalLight castShadow intensity={1.4} position={[3, 4, 2]} />
-      <pointLight color={accentColor} intensity={0.8} position={[-3, -1, -2]} />
+      {/* Procedurally generated studio environment — built from local Lightformer
+          panels rather than a fetched HDRI, so the model's PBR reflections never
+          depend on a third-party CDN being reachable. */}
+      <Environment resolution={256}>
+        <Lightformer color="#ffffff" form="rect" intensity={2.2} position={[0, 4, 1]} rotation={[Math.PI / 2, 0, 0]} scale={[6, 6, 1]} />
+        <Lightformer color="#ffffff" form="rect" intensity={1} position={[-4, 1, 3]} scale={[3, 4, 1]} />
+        <Lightformer color={accentColor} form="rect" intensity={1.4} position={[3, -1, -3]} scale={[3, 4, 1]} />
+      </Environment>
+      <ambientLight intensity={0.45} />
+      <directionalLight castShadow intensity={1.2} position={[3, 4, 2]} />
+      <directionalLight intensity={0.3} position={[-2, 1, 3]} />
+      <pointLight color={accentColor} intensity={1.1} position={[-3, -1, -2]} />
 
-      <AssemblyModel
-        cursorRef={cursorRef}
-        exploded={exploded}
-        isolatedName={isolatedName}
-        namePrefix={namePrefix}
-        onHoverChange={onHoverChange}
-        onPartClick={onPartClick}
-        onReady={setModel}
-        url={url}
-      />
-      {model && <VoxelField cursorRef={cursorRef} model={model} opacity={voxelOpacity} />}
+      <RotationRig dragRotationRef={dragRotationRef} isDraggingRef={isDraggingRef}>
+        <AssemblyModel
+          dragDistanceRef={dragDistanceRef}
+          exploded={exploded}
+          isDraggingRef={isDraggingRef}
+          isolatedName={isolatedName}
+          namePrefix={namePrefix}
+          onHoverChange={onHoverChange}
+          onPartClick={onPartClick}
+          onReady={handleModelReady}
+          url={url}
+        />
+        {model && <VoxelField model={model} opacity={voxelOpacity} />}
+      </RotationRig>
     </>
   );
 }

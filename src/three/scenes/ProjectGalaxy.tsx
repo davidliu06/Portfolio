@@ -2,15 +2,17 @@
 
 import { useEffect } from "react";
 import { Sparkles } from "@react-three/drei";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "@/data/projects";
 import { useAchievementsStore } from "@/store/achievementsStore";
+import { getLenis } from "@/lib/scroll";
 import { ProjectPlanet } from "../components/ProjectPlanet";
 import { GalaxyCameraRig } from "../components/GalaxyCameraRig";
 
 const POSITIONS: Record<string, [number, number, number]> = {
   "autonomous-underwater-vehicle": [-2.6, 0.8, 0],
   "aerodynamic-nose-cones": [2.4, -0.6, -0.5],
-  "glidelounge-sofa-bed": [0, -1.8, 1]
+  "glidelounge-sofa-bed": [0, -0.9, 1]
 };
 
 type ProjectGalaxyProps = {
@@ -29,6 +31,19 @@ export default function ProjectGalaxy({ activeSlug, onOpenProject, onCloseProjec
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeSlug, onCloseProject]);
+
+  // The canvas mounting here is the last thing on the page to reach its
+  // final layout size (LazyCanvas swaps in a differently-sized fallback
+  // beforehand) — force both scroll engines to recompute their cached page
+  // height/limits against the settled layout, so wheel scroll never gets
+  // stuck against a stale bound from before this section existed.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      getLenis()?.resize();
+      ScrollTrigger.refresh();
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const focusPosition = activeSlug ? POSITIONS[activeSlug] ?? null : null;
 

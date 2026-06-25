@@ -9,10 +9,11 @@ import { buildExplodeTargets, humanizePartName, type ExplodeTarget } from "./exp
 
 type AssemblyModelProps = {
   url: string;
-  cursorRef: { current: THREE.Vector3 | null };
   exploded: boolean;
   isolatedName: string | null;
   namePrefix?: string;
+  isDraggingRef: { current: boolean };
+  dragDistanceRef: { current: number };
   onHoverChange: (label: string | null) => void;
   onPartClick: (rawName: string) => void;
   onReady: (model: THREE.Object3D) => void;
@@ -53,10 +54,11 @@ function prepareAssembly(scene: THREE.Object3D): PreparedAssembly {
 
 export function AssemblyModel({
   url,
-  cursorRef,
   exploded,
   isolatedName,
   namePrefix,
+  isDraggingRef,
+  dragDistanceRef,
   onHoverChange,
   onPartClick,
   onReady
@@ -96,24 +98,22 @@ export function AssemblyModel({
 
   function handlePointerMove(event: ThreeEvent<PointerEvent>) {
     event.stopPropagation();
-    cursorRef.current = event.point;
+    if (isDraggingRef.current) return;
     const mesh = event.object as THREE.Mesh;
     if (hoveredMesh.current !== mesh) {
       hoveredMesh.current = mesh;
-      document.body.style.cursor = "pointer";
       onHoverChange(humanizePartName(mesh.name, namePrefix));
     }
   }
 
   function handlePointerLeave() {
-    cursorRef.current = null;
     hoveredMesh.current = null;
-    document.body.style.cursor = "auto";
     onHoverChange(null);
   }
 
   function handleClick(event: ThreeEvent<MouseEvent>) {
     event.stopPropagation();
+    if (dragDistanceRef.current > 4) return;
     onPartClick((event.object as THREE.Mesh).name);
   }
 
