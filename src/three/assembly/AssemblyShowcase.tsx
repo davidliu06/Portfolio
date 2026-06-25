@@ -64,11 +64,11 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
 
   if (reducedMotion) {
     return (
-      <div className="night-card rounded-[2rem] border p-8 text-center">
+      <div className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] p-8 text-center">
         <p className="text-sm font-semibold uppercase tracking-wide" style={{ color: accentColor }}>
           {title}
         </p>
-        <p className="mt-2 text-sm text-muted-foreground">{caption}</p>
+        <p className="mt-2 text-sm text-slate-300">{caption}</p>
       </div>
     );
   }
@@ -76,8 +76,16 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
   const dpr: [number, number] = tier === "low" ? [1, 1] : tier === "medium" ? [1, 1.5] : [1, 2];
 
   return (
-    <div className="night-card relative overflow-hidden rounded-[2rem] border" ref={containerRef}>
+    <div
+      className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)]"
+      ref={containerRef}
+    >
       <div className="relative h-[520px] w-full">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ background: `radial-gradient(circle at 50% 45%, ${accentColor}26, transparent 65%)` }}
+        />
         <LazyCanvas className="absolute inset-0">
           <Canvas
             camera={{ position: [0, 0.6, 4.2], fov: 42 }}
@@ -105,9 +113,14 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
         </LazyCanvas>
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-4">
-          <div className="night-card rounded-full border px-3 py-1.5 text-xs font-semibold text-foreground shadow-glow">{title}</div>
+          <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+            {title}
+          </div>
           {(hoveredLabel || isolatedLabel) && (
-            <div className="night-card rounded-full border px-3 py-1.5 text-xs font-semibold shadow-glow" style={{ color: accentColor }}>
+            <div
+              className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold backdrop-blur-md"
+              style={{ color: accentColor }}
+            >
               {isolatedLabel ?? hoveredLabel}
             </div>
           )}
@@ -115,7 +128,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
 
         <div className="pointer-events-auto absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-wrap justify-center gap-2 px-4">
           <button
-            className="night-card inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:-translate-y-0.5"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/15"
             onClick={() => setExploded((current) => !current)}
           >
             <Maximize2 size={14} />
@@ -123,7 +136,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
           </button>
           {isolatedName && (
             <button
-              className="night-card inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:-translate-y-0.5"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/15"
               onClick={() => {
                 setIsolatedName(null);
                 setIsolatedLabel(null);
@@ -133,13 +146,13 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
               Show all
             </button>
           )}
-          <span className="night-card inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 backdrop-blur-md">
             <Layers size={14} />
             Click a part to isolate
           </span>
         </div>
       </div>
-      <p className="border-t p-4 text-sm text-muted-foreground">{caption}</p>
+      <p className="border-t border-white/10 p-4 text-sm text-slate-300">{caption}</p>
     </div>
   );
 }
