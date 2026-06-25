@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { projects } from "@/data/projects";
 import { Scene } from "@/three/Scene";
+import { LazyCanvas } from "@/three/LazyCanvas";
 import { ProjectDetailView } from "./project-detail-view";
 
 const ProjectGalaxy = dynamic(() => import("@/three/scenes/ProjectGalaxy"), { ssr: false });
@@ -123,16 +124,18 @@ export function ProjectsSection() {
         />
 
         <div className="night-card relative h-[640px] overflow-hidden rounded-[2rem] border">
-          <Scene cameraPosition={[0, 0, 8.5]} fallback={<StaticProjectsFallback />}>
-            <ProjectGalaxy
-              activeSlug={detailSlug}
-              onCloseProject={handleCloseProject}
-              onOpenProject={(slug, point) => {
-                setOriginPoint(point);
-                setDetailSlug(slug);
-              }}
-            />
-          </Scene>
+          <LazyCanvas className="absolute inset-0" fallback={<StaticProjectsFallback />}>
+            <Scene cameraPosition={[0, 0, 8.5]} fallback={<StaticProjectsFallback />}>
+              <ProjectGalaxy
+                activeSlug={detailSlug}
+                onCloseProject={handleCloseProject}
+                onOpenProject={(slug, point) => {
+                  setOriginPoint(point);
+                  setDetailSlug(slug);
+                }}
+              />
+            </Scene>
+          </LazyCanvas>
           <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-border/50 bg-background/70 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             Click a planet to explore · Esc to close
           </p>

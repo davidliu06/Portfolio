@@ -16,6 +16,8 @@ export type Chapter = "curiosity" | "building" | "research" | "engineering" | "a
 export type Project = {
   slug: string;
   name: string;
+  /** 2-3 words — for tight spaces like the floating planet label, where the full name overflows. */
+  shortTitle: string;
   category: "Engineering Focused" | "Other";
   dates: string;
   summary: string;

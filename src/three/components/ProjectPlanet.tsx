@@ -81,7 +81,7 @@ export function ProjectPlanet({ project, position, isActive, onOpen }: ProjectPl
       {!isActive && (
         <Html center distanceFactor={10} position={[0, -1.7, 0]} style={{ pointerEvents: "none" }}>
           <p className="night-card whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground shadow-glow">
-            {project.name}
+            {project.shortTitle}
           </p>
         </Html>
       )}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowLeft, Calendar, CheckCircle2, FileText, Github, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "@/types/portfolio";
+import { getLenis } from "@/lib/scroll";
 import { CountUpStat } from "./count-up-stat";
 import { RevealGroup, RevealItem, RevealSection } from "./reveal";
 
@@ -41,6 +42,10 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Lenis hijacks wheel/touch globally for the main page's smooth scroll — without
+    // pausing it, scrolling inside this overlay's own `overflow-y-auto` never receives
+    // the input, since Lenis already consumed it and applied it to the page behind us.
+    getLenis()?.stop();
     backButtonRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -50,6 +55,7 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      getLenis()?.start();
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);

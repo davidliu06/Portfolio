@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { profile } from "@/data/profile";
 import { Scene } from "@/three/Scene";
+import { LazyCanvas } from "@/three/LazyCanvas";
 import { usePrefersReducedMotion } from "@/three/hooks/usePrefersReducedMotion";
 
 const FutureVision = dynamic(() => import("@/three/scenes/FutureVision"), { ssr: false });
@@ -16,11 +17,11 @@ export function ResumeSection() {
 
   return (
     <section id="resume" className="relative overflow-hidden py-20">
-      <div className="absolute inset-0 -z-10">
+      <LazyCanvas className="absolute inset-0 -z-10">
         <Scene cameraPosition={[0, 0, 9]}>
           <FutureVision />
         </Scene>
-      </div>
+      </LazyCanvas>
       <div className="section-shell">
         {!reducedMotion && (
           <video

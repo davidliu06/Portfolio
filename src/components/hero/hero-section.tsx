@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { profile } from "@/data/profile";
 import { Scene } from "@/three/Scene";
+import { LazyCanvas } from "@/three/LazyCanvas";
 
 const EngineeringUniverse = dynamic(() => import("@/three/scenes/EngineeringUniverse"), { ssr: false });
 
@@ -19,11 +20,11 @@ const STATIC_FALLBACK = (
 export function HeroSection() {
   return (
     <section id="top" className="relative overflow-hidden pt-28">
-      <div className="absolute inset-x-0 top-0 -z-10 h-[48rem]">
+      <LazyCanvas className="absolute inset-x-0 top-0 -z-10 h-[48rem]" fallback={STATIC_FALLBACK}>
         <Scene cameraPosition={[0, 0, 9]} fallback={STATIC_FALLBACK}>
           <EngineeringUniverse />
         </Scene>
-      </div>
+      </LazyCanvas>
       <div className="section-shell grid min-h-[calc(100vh-7rem)] items-center gap-12 pb-20 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           className="legibility-scrim rounded-[2rem] p-5 sm:p-6"

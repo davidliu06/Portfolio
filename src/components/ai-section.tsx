@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { experience } from "@/data/experience";
 import { Scene } from "@/three/Scene";
+import { LazyCanvas } from "@/three/LazyCanvas";
 
 const NeuralNetwork = dynamic(() => import("@/three/scenes/NeuralNetwork"), { ssr: false });
 
@@ -15,11 +16,11 @@ export function AiSection() {
 
   return (
     <section id="ai" className="relative overflow-hidden py-20">
-      <div className="absolute inset-0 -z-10">
+      <LazyCanvas className="absolute inset-0 -z-10">
         <Scene cameraPosition={[0, 0, 8]}>
           <NeuralNetwork />
         </Scene>
-      </div>
+      </LazyCanvas>
       <div className="section-shell">
         <SectionHeading
           eyebrow="05 — AI"

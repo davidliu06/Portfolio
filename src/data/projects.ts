@@ -4,6 +4,7 @@ export const projects: Project[] = [
   {
     slug: "autonomous-underwater-vehicle",
     name: "Autonomous Underwater Robot",
+    shortTitle: "Underwater Robot",
     category: "Engineering Focused",
     dates: "Jan 2026 - May 2026",
     summary: "Embedded sensing and depth-control AUV for environmental monitoring at Dana Point.",
@@ -34,6 +35,7 @@ export const projects: Project[] = [
   {
     slug: "aerodynamic-nose-cones",
     name: "Computational and Experimental Aerodynamic Analysis of Nose Cone Geometries",
+    shortTitle: "Nose Cone CFD",
     category: "Engineering Focused",
     dates: "Jan 2026 - May 2026",
     summary: "CFD and wind tunnel comparison of flat, rounded, and pointed nose cone geometries.",
@@ -64,6 +66,7 @@ export const projects: Project[] = [
   {
     slug: "glidelounge-sofa-bed",
     name: "Convertible Sofa-Bed System for Camper Van Applications",
+    shortTitle: "Sofa-Bed System",
     category: "Engineering Focused",
     dates: "Jan 2025 - May 2025",
     summary: "Deployable camper-van sofa-bed mechanism designed for easier conversion and storage access.",
