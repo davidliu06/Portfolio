@@ -17,7 +17,7 @@ type ProjectPlanetProps = {
   project: Project;
   position: [number, number, number];
   isActive: boolean;
-  onOpen: (point: { x: number; y: number }) => void;
+  onOpen: () => void;
 };
 
 /** A planet that dramatically scales up and brightens as the camera dives toward it when opened — the visual half of the cinematic zoom transition. An expanding, fading pulse ring fires on the moment of activation as a secondary "energy release" beat, so the open doesn't just stop once the dive starts. */
@@ -54,7 +54,7 @@ export function ProjectPlanet({ project, position, isActive, onOpen }: ProjectPl
 
   function handleClick(event: ThreeEvent<PointerEvent>) {
     event.stopPropagation();
-    onOpen({ x: event.clientX, y: event.clientY });
+    onOpen();
   }
 
   return (

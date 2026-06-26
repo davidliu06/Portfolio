@@ -4,7 +4,6 @@ import { ReactNode, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useDeviceTier } from "./hooks/useDeviceTier";
-import { useMouseForce } from "./hooks/useMouseForce";
 import { usePrefersReducedMotion } from "./hooks/usePrefersReducedMotion";
 import { CursorLight } from "./components/CursorLight";
 
@@ -18,12 +17,14 @@ type SceneProps = {
 /**
  * Shared Canvas root: lighting, device-tier-aware postprocessing/DPR, and the
  * prefers-reduced-motion guardrail. A reduced-motion visitor never mounts
- * WebGL at all — they get `fallback` instead.
+ * WebGL at all — they get `fallback` instead. Mouse force tracking lives in a
+ * single app-level MouseForceProvider, not here — Scene can mount several
+ * times at once near LazyCanvas boundaries, and each instance calling
+ * useMouseForce used to mean that many redundant window listeners.
  */
 export function Scene({ children, fallback = null, cameraPosition = [0, 0, 8], fov = 45 }: SceneProps) {
   const reducedMotion = usePrefersReducedMotion();
   const tier = useDeviceTier();
-  useMouseForce();
 
   if (reducedMotion) return <>{fallback}</>;
 

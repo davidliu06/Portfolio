@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AchievementToast } from "@/components/achievements/achievement-toast";
 import { AtmosphereBackground } from "@/components/atmosphere-background";
 import { ChapterTracker } from "@/components/chapter-tracker";
+import { MouseForceProvider } from "@/components/mouse-force-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html className={`${inter.variable} ${outfit.variable} ${GeistMono.variable}`} lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <SmoothScrollProvider />
+        <MouseForceProvider />
         <AtmosphereBackground />
         <ChapterTracker />
         <AchievementToast />

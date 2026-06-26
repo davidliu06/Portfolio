@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Calendar, FileText, ImageOff } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -11,9 +12,15 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { projects } from "@/data/projects";
 import { Scene } from "@/three/Scene";
 import { LazyCanvas } from "@/three/LazyCanvas";
-import { ProjectDetailView } from "./project-detail-view";
+import { getLenis } from "@/lib/scroll";
 
 const ProjectGalaxy = dynamic(() => import("@/three/scenes/ProjectGalaxy"), { ssr: false });
+
+const SCROLL_STORAGE_KEY = "galaxy-scroll-y";
+// How long the camera gets to dive toward the clicked planet before the
+// route actually changes — long enough to read as "diving in," short enough
+// to still feel responsive.
+const DIVE_DELAY_MS = 550;
 
 const groups = ["Engineering Focused", "Other"] as const;
 
@@ -105,13 +112,61 @@ function StaticProjectsFallback() {
 }
 
 export function ProjectsSection() {
-  const [detailSlug, setDetailSlug] = useState<string | null>(null);
-  const [originPoint, setOriginPoint] = useState({ x: 0, y: 0 });
+  const router = useRouter();
+  // Purely the pre-navigation "diving in" visual — the moment the route
+  // actually changes, this component (and the whole galaxy) unmounts with
+  // it, so this never needs a "show the project" branch of its own.
+  const [divingSlug, setDivingSlug] = useState<string | null>(null);
+  const navigateTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeProject = projects.find((project) => project.slug === detailSlug) ?? null;
+  // Restore the scroll position the user was at right before they dove into
+  // a project, the moment they're back on "/" — instant, not animated, so it
+  // reads as "returning to where you were," not a fresh scroll. A short
+  // timeout (rather than just one rAF) gives the page a moment to settle
+  // into its real layout height first; resize() refreshes Lenis's cached
+  // dimensions against that settled height before the jump, and force:true
+  // means the jump still happens even if Lenis briefly reports itself
+  // stopped/locked during the just-mounted moment.
+  //
+  // Deliberately does NOT remove the sessionStorage key until the timeout
+  // actually fires. React's Strict Mode double-invokes effects in
+  // development (mount -> cleanup -> mount again) — clearing the key on the
+  // first invocation meant the second invocation always found nothing to
+  // restore, since the first invocation's own timeout had already been
+  // cancelled by its cleanup. Leaving the key in place until the surviving
+  // invocation's timeout fires makes this safe under double-invocation.
+  useEffect(() => {
+    const saved = sessionStorage.getItem(SCROLL_STORAGE_KEY);
+    if (!saved) return;
+    const y = Number(saved);
+    const id = setTimeout(() => {
+      sessionStorage.removeItem(SCROLL_STORAGE_KEY);
+      const lenis = getLenis();
+      lenis?.resize();
+      if (lenis) lenis.scrollTo(y, { force: true, immediate: true });
+      else window.scrollTo(0, y);
+    }, 80);
+    return () => clearTimeout(id);
+  }, []);
 
-  function handleCloseProject() {
-    setDetailSlug(null);
+  useEffect(() => () => {
+    if (navigateTimeout.current) clearTimeout(navigateTimeout.current);
+  }, []);
+
+  function handleOpenProject(slug: string) {
+    setDivingSlug(slug);
+    sessionStorage.setItem(SCROLL_STORAGE_KEY, String(window.scrollY));
+    navigateTimeout.current = setTimeout(() => {
+      router.push(`/projects/${slug}`);
+    }, DIVE_DELAY_MS);
+  }
+
+  function handleCancelDive() {
+    if (navigateTimeout.current) {
+      clearTimeout(navigateTimeout.current);
+      navigateTimeout.current = null;
+    }
+    setDivingSlug(null);
   }
 
   return (
@@ -126,14 +181,7 @@ export function ProjectsSection() {
         <div className="relative h-[640px] overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)]">
           <LazyCanvas className="absolute inset-0" fallback={<StaticProjectsFallback />}>
             <Scene cameraPosition={[0, 0, 8.5]} fallback={<StaticProjectsFallback />}>
-              <ProjectGalaxy
-                activeSlug={detailSlug}
-                onCloseProject={handleCloseProject}
-                onOpenProject={(slug, point) => {
-                  setOriginPoint(point);
-                  setDetailSlug(slug);
-                }}
-              />
+              <ProjectGalaxy activeSlug={divingSlug} onCloseProject={handleCancelDive} onOpenProject={handleOpenProject} />
             </Scene>
           </LazyCanvas>
           <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-slate-300 backdrop-blur-md">
@@ -141,10 +189,6 @@ export function ProjectsSection() {
           </p>
         </div>
       </div>
-
-      <AnimatePresence>
-        {activeProject && <ProjectDetailView onClose={handleCloseProject} originPoint={originPoint} project={activeProject} />}
-      </AnimatePresence>
     </section>
   );
 }

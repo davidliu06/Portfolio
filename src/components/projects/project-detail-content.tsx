@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, Calendar, CheckCircle2, FileText, Github, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "@/types/portfolio";
-import { getLenis } from "@/lib/scroll";
 import { CountUpStat } from "./count-up-stat";
 import { RevealGroup, RevealItem, RevealSection } from "@/components/ui/reveal";
 
@@ -26,53 +26,43 @@ const ACCENT_TEXT: Record<Project["accent"], string> = {
   orange: "#9A3412"
 };
 
-type ProjectDetailViewProps = {
-  project: Project;
-  originPoint: { x: number; y: number };
-  onClose: () => void;
-};
-
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-export function ProjectDetailView({ project, originPoint, onClose }: ProjectDetailViewProps) {
+/**
+ * The project's own page content — this is a real route (src/app/projects/[slug]/page.tsx),
+ * not an overlay stacked on top of the home page. That means: no second
+ * scroll container to fight Lenis over, no z-index layering against the
+ * galaxy, and the galaxy/home page genuinely unmount while this is on screen
+ * (Next.js swaps the route's page content; nothing from "/" stays mounted).
+ * "Back to galaxy" is a real navigation, not a state toggle.
+ */
+export function ProjectDetailContent({ project }: { project: Project }) {
+  const router = useRouter();
   const vivid = ACCENT_VIVID[project.accent];
   const textAccent = ACCENT_TEXT[project.accent];
-  const backButtonRef = useRef<HTMLButtonElement>(null);
+
+  function goBack() {
+    // scroll: false — otherwise Next.js's own post-navigation "scroll to
+    // top" behavior fights the galaxy's own scroll-position restore on "/".
+    router.push("/", { scroll: false });
+  }
 
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    // Lenis hijacks wheel/touch globally for the main page's smooth scroll — without
-    // pausing it, scrolling inside this overlay's own `overflow-y-auto` never receives
-    // the input, since Lenis already consumed it and applied it to the page behind us.
-    getLenis()?.stop();
-    backButtonRef.current?.focus();
-
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") goBack();
     }
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      getLenis()?.start();
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
-  const circle = (percent: string) => `circle(${percent} at ${originPoint.x}px ${originPoint.y}px)`;
+    return () => window.removeEventListener("keydown", handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <motion.div
-      aria-label={project.name}
-      aria-modal="true"
-      role="dialog"
-      className="fixed inset-0 z-[100] overflow-y-auto bg-background"
+      animate={{ opacity: 1 }}
+      className="relative min-h-screen bg-background"
+      initial={{ opacity: 0 }}
       style={{ backgroundImage: `radial-gradient(ellipse 60rem 50rem at 20% -10%, ${vivid}1a, transparent 60%)` }}
-      initial={{ clipPath: circle("0%") }}
-      animate={{ clipPath: circle("150%") }}
-      exit={{ clipPath: circle("0%") }}
-      transition={{ duration: 0.75, ease: EASE }}
+      transition={{ duration: 0.4 }}
     >
       {/* Always-visible primary nav — outside the scrolling flow on purpose, never scrolls away, never gets buried under content. */}
       <div
@@ -80,9 +70,9 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
         style={{ paddingTop: "max(1.25rem, env(safe-area-inset-top))", paddingLeft: "max(1.25rem, env(safe-area-inset-left))" }}
       >
         <motion.button
-          ref={backButtonRef}
+          autoFocus
           className="legibility-scrim inline-flex items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground shadow-glow"
-          onClick={onClose}
+          onClick={goBack}
           whileHover={{ x: -4, scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           transition={{ duration: 0.2, ease: EASE }}
@@ -94,7 +84,7 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
 
       <div className="section-shell py-10">
         {/* Scene 1 — title + hero image */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.5, ease: EASE }}>
+        <RevealSection delay={0.1} duration={0.5} preset="cinematic">
           <p className="mt-16 text-sm font-bold uppercase tracking-wide sm:mt-12" style={{ color: textAccent }}>
             {project.summary}
           </p>
@@ -111,16 +101,16 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
           {project.image && (
             <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[1.75rem] border" style={{ borderColor: `${vivid}33` }}>
               <motion.div
+                animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
                 className="absolute inset-0"
                 initial={{ clipPath: "inset(0% 0% 0% 100%)" }}
-                animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
+                transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
               >
                 <Image src={project.image} alt={`${project.name} primary image`} fill sizes="(min-width: 1024px) 960px, 100vw" className="object-cover" priority />
               </motion.div>
             </div>
           )}
-        </motion.div>
+        </RevealSection>
 
         {/* Scene 2 — description, its own paced moment */}
         <RevealSection className="mx-auto max-w-3xl py-20 text-center" preset="fade-up">
@@ -217,7 +207,7 @@ export function ProjectDetailView({ project, originPoint, onClose }: ProjectDeta
 
           <button
             className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition hover:text-foreground"
-            onClick={onClose}
+            onClick={goBack}
           >
             <ArrowLeft size={16} />
             Back to galaxy

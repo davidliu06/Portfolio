@@ -23,7 +23,7 @@ const POSITIONS: Record<string, [number, number, number]> = {
 
 type ProjectGalaxyProps = {
   activeSlug: string | null;
-  onOpenProject: (slug: string, point: { x: number; y: number }) => void;
+  onOpenProject: (slug: string) => void;
   onCloseProject: () => void;
 };
 
@@ -76,9 +76,9 @@ export default function ProjectGalaxy({ activeSlug, onOpenProject, onCloseProjec
           project={project}
           position={POSITIONS[project.slug] ?? [0, 0, 0]}
           isActive={activeSlug === project.slug}
-          onOpen={(point) => {
+          onOpen={() => {
             addProgress("planet-hopper", project.slug);
-            onOpenProject(project.slug, point);
+            onOpenProject(project.slug);
           }}
         />
       ))}
