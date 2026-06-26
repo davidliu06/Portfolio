@@ -71,7 +71,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
       >
         <motion.button
           autoFocus
-          className="legibility-scrim inline-flex items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground shadow-glow"
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-card/90 px-4 py-2.5 text-sm font-semibold text-foreground shadow-glow"
           onClick={goBack}
           whileHover={{ x: -4, scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
@@ -178,7 +178,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
           <div className="flex flex-wrap gap-3">
             {project.githubUrl && (
               <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                <span className="night-card inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold text-foreground transition hover:-translate-y-0.5">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:-translate-y-0.5">
                   <Github size={16} />
                   GitHub
                 </span>
@@ -186,7 +186,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
             )}
             {project.demoUrl && (
               <a href={project.demoUrl} target="_blank" rel="noreferrer">
-                <span className="night-card inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold text-foreground transition hover:-translate-y-0.5">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:-translate-y-0.5">
                   <Globe size={16} />
                   Live Demo
                 </span>
