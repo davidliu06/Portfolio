@@ -1,28 +1,18 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { RevealSection } from "@/components/ui/reveal";
 import { profile } from "@/data/profile";
-import { Scene } from "@/three/Scene";
-import { LazyCanvas } from "@/three/LazyCanvas";
 import { usePrefersReducedMotion } from "@/three/hooks/usePrefersReducedMotion";
-
-const FutureVision = dynamic(() => import("@/three/scenes/FutureVision"), { ssr: false });
 
 export function ResumeSection() {
   const reducedMotion = usePrefersReducedMotion();
 
   return (
     <section id="resume" className="relative overflow-hidden py-20">
-      <LazyCanvas className="absolute inset-0 -z-10">
-        <Scene cameraPosition={[0, 0, 9]}>
-          <FutureVision />
-        </Scene>
-      </LazyCanvas>
       <div className="section-shell">
         {!reducedMotion && (
           <video
@@ -39,7 +29,6 @@ export function ResumeSection() {
             eyebrow="07 — Future Vision"
             title="What's next"
             description={profile.takeaway}
-            scrim
           />
         </RevealSection>
         <RevealSection preset="fade-up">

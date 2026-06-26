@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,28 +7,10 @@ import { ArrowDown, Download, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { profile } from "@/data/profile";
-import { Scene } from "@/three/Scene";
-import { LazyCanvas } from "@/three/LazyCanvas";
-
-const EngineeringUniverse = dynamic(() => import("@/three/scenes/EngineeringUniverse"), { ssr: false });
-
-const STATIC_FALLBACK = (
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(47,93,255,0.18),transparent_32%),radial-gradient(circle_at_72%_20%,rgba(255,93,58,0.12),transparent_26%)]" />
-);
 
 export function HeroSection() {
   return (
     <section id="top" className="relative overflow-hidden pt-28">
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 -z-10 h-[48rem]"
-        style={{ background: "linear-gradient(to bottom, #0B1120 0%, #0B1120 55%, transparent 100%)" }}
-      />
-      <LazyCanvas className="absolute inset-x-0 top-0 -z-10 h-[48rem]" fallback={STATIC_FALLBACK}>
-        <Scene cameraPosition={[0, 0, 9]} fallback={STATIC_FALLBACK}>
-          <EngineeringUniverse />
-        </Scene>
-      </LazyCanvas>
       <div className="section-shell grid min-h-[calc(100vh-7rem)] items-center gap-12 pb-20 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           className="legibility-scrim rounded-[2rem] p-5 sm:p-6"
@@ -112,7 +93,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           <div className="soft-panel relative mx-auto aspect-[0.88] max-w-[460px] rounded-[2rem] border bg-card/70 p-4 shadow-glow backdrop-blur">
-            <div className="absolute right-5 top-5 z-10 rounded-full border border-primary/25 bg-background/80 px-3 py-1 font-mono text-xs font-semibold text-primary shadow-sm backdrop-blur">
+            <div className="absolute right-5 top-5 z-10 rounded-full border border-primary/25 bg-card/95 px-3 py-1 font-mono text-xs font-semibold text-primary shadow-sm">
               OPEN TO INTERNSHIPS
             </div>
             <Image

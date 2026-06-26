@@ -3,21 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --background: 220 38% 97%;
-  --foreground: 222 47% 9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 9%;
-  --primary: 226 92% 58%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 16 95% 58%;
+  /* Deep-space dark theme — designed for WebGL bloom and emissive materials to actually register. */
+  --background: 222 47% 6%;
+  --foreground: 213 25% 87%;
+  --card: 221 42% 9%;
+  --card-foreground: 213 25% 87%;
+  --primary: 226 95% 67%;
+  --primary-foreground: 222 47% 6%;
+  --secondary: 16 95% 62%;
   --secondary-foreground: 0 0% 100%;
-  --muted: 220 28% 93%;
-  --muted-foreground: 222 18% 40%;
+  --muted: 221 38% 13%;
+  --muted-foreground: 215 18% 50%;
   --accent: 38 92% 55%;
-  --accent-foreground: 222 47% 9%;
-  --border: 222 25% 88%;
-  --input: 222 25% 88%;
-  --ring: 226 92% 58%;
+  --accent-foreground: 222 47% 6%;
+  --border: 220 33% 17%;
+  --input: 220 33% 17%;
+  --ring: 226 95% 67%;
   --violet: 262 83% 64%;
   --violet-foreground: 0 0% 100%;
 }
@@ -30,9 +31,9 @@ body {
   position: relative;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse 60rem 40rem at 12% -5%, rgba(47, 93, 255, 0.16), transparent 60%),
-    radial-gradient(ellipse 50rem 36rem at 92% 10%, rgba(139, 92, 246, 0.14), transparent 60%),
-    radial-gradient(ellipse 55rem 40rem at 50% 105%, rgba(255, 93, 58, 0.12), transparent 60%),
+    radial-gradient(ellipse 60rem 40rem at 12% -5%, rgba(47, 93, 255, 0.1), transparent 60%),
+    radial-gradient(ellipse 50rem 36rem at 92% 10%, rgba(139, 92, 246, 0.08), transparent 60%),
+    radial-gradient(ellipse 55rem 40rem at 50% 105%, rgba(255, 93, 58, 0.07), transparent 60%),
     hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -41,7 +42,7 @@ body {
 }
 
 body::selection {
-  background: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.7);
   color: hsl(var(--primary-foreground));
 }
 
@@ -66,27 +67,37 @@ h4 {
   letter-spacing: -0.01em;
 }
 
+/* Dark-glass card — frosted pane over the deep-space canvas. */
+.night-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.025) 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+}
+
 .soft-panel {
   border-radius: 2rem;
   box-shadow:
-    0 24px 70px rgba(47, 93, 255, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-.night-card {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(247, 248, 255, 0.86));
-  border-color: hsl(var(--border));
-  box-shadow: 0 18px 50px rgba(47, 93, 255, 0.1);
-  backdrop-filter: blur(12px);
+    0 24px 70px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .game-panel {
-  background: linear-gradient(180deg, rgba(47, 93, 255, 0.06), rgba(139, 92, 246, 0.04));
-  border-color: hsl(var(--border));
+  background: linear-gradient(180deg, rgba(47, 93, 255, 0.07), rgba(139, 92, 246, 0.04));
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
+/* Semi-transparent dark scrim — makes hero text legible over the 3D canvas. */
+.legibility-scrim {
+  background: hsl(var(--background) / 0.72);
+  backdrop-filter: blur(16px);
+}
+
+/* Form input fields */
 .contact-field {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
   color: hsl(var(--foreground));
   border-color: hsl(var(--border));
 }
@@ -95,13 +106,9 @@ h4 {
   color: hsl(var(--muted-foreground));
 }
 
-.legibility-scrim {
-  background: hsl(var(--background) / 0.78);
-  backdrop-filter: blur(14px);
-}
-
+/* Gradient text — cobalt → violet → coral */
 .aurora-text {
-  background: linear-gradient(90deg, hsl(226 92% 58%), hsl(262 83% 64%), hsl(16 95% 58%));
+  background: linear-gradient(90deg, hsl(226 92% 68%), hsl(262 83% 64%), hsl(16 95% 62%));
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;

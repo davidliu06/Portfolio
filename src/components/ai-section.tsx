@@ -1,34 +1,23 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Bot, MessageCircle, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { RevealSection } from "@/components/ui/reveal";
 import { experience } from "@/data/experience";
-import { Scene } from "@/three/Scene";
-import { LazyCanvas } from "@/three/LazyCanvas";
-
-const NeuralNetwork = dynamic(() => import("@/three/scenes/NeuralNetwork"), { ssr: false });
 
 export function AiSection() {
   const invite = experience.find((item) => item.organization === "INVITE Institute, UIUC");
 
   return (
     <section id="ai" className="relative overflow-hidden py-20">
-      <LazyCanvas className="absolute inset-0 -z-10">
-        <Scene cameraPosition={[0, 0, 8]}>
-          <NeuralNetwork />
-        </Scene>
-      </LazyCanvas>
       <div className="section-shell">
         <RevealSection preset="depth-drift">
           <SectionHeading
             eyebrow="05 — AI"
             title="The assistant answering your questions? I built that."
             description="AI isn't a side interest here — it's a tool I've used in real research, and it's running live on this page."
-            scrim
           />
         </RevealSection>
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">

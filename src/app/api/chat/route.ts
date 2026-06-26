@@ -52,13 +52,15 @@ const STOP_WORDS = new Set([
 
 const SYNONYMS: Record<string, string[]> = {
   ai: ["artificial intelligence", "llm", "machine learning", "invite"],
-  aerospace: ["aerodynamics", "cfd", "wind tunnel", "nose cone", "vehicle"],
+  aerospace: ["aerodynamics", "cfd", "wind tunnel", "nose cone", "vehicle", "rocketry", "rocket", "propulsion"],
   auv: ["underwater", "muddsub", "robosub", "submarine", "depth", "sensor"],
   automotive: ["mach", "vehicle", "hybrid", "powertrain", "steering", "braking"],
   cad: ["solidworks", "mechanical design", "assembly", "drawing"],
   defense: ["reliability", "mission", "aerospace", "hardware", "testing"],
   electronics: ["pcb", "circuit", "signal", "teensy", "arduino", "sensor"],
+  jarvis: ["voice assistant", "voice ai", "desktop automation", "workflow automation", "local ai", "gpt tool calling"],
   manufacturing: ["machining", "sheet metal", "fabrication", "assembly", "mrp"],
+  rocketry: ["apollyon", "rocket", "propulsion", "spaceport", "tripoli", "high power rocketry", "l1", "altitude", "apogee", "muddrocket"],
   robotics: ["auv", "muddsub", "robosub", "autonomous", "sensor", "controls"],
   simulation: ["fea", "cfd", "comsol", "analysis", "modeling"]
 };
@@ -80,7 +82,10 @@ function normalize(value: string) {
     .replace(/solid works/g, "solidworks")
     .replace(/nosecone/g, "nose cone")
     .replace(/llms/g, "llm")
-    .replace(/résumé/g, "resume");
+    .replace(/résumé/g, "resume")
+    .replace(/apollyon/g, "apollyon rocketry rocket propulsion")
+    .replace(/muddrocket/g, "muddrocket rocketry rocket")
+    .replace(/jarvis/g, "jarvis voice ai automation");
 }
 
 function expandedQueryTokens(question: string, history: ChatMessage[]) {
@@ -224,6 +229,38 @@ function localIntentAnswer(question: string, matches: ReturnType<typeof retrieve
     return [
       "David's core technical stack includes SolidWorks, CAD, FEA, CFD, COMSOL, MATLAB, Python, Arduino/Teensy, embedded sensing, analog signal conditioning, PCB layout, machining, and fabrication.",
       "His strongest overlap is mechanical design plus robotics: building systems that combine hardware, electronics, controls, simulation, and testing."
+    ].join("\n");
+  }
+
+  if (
+    query.includes("rocket") ||
+    query.includes("rocketry") ||
+    query.includes("apollyon") ||
+    query.includes("propulsion") ||
+    query.includes("spaceport") ||
+    query.includes("tripoli") ||
+    query.includes("muddrocket")
+  ) {
+    return [
+      "David leads propulsion and structures on Harvey Mudd's Muddrocket team, building Apollyon I for Spaceport America Cup 2026.",
+      "Target is 10,000 ft AGL with a dual-deployment recovery system — drogue at apogee, main chute at 700 ft for a sub-25 fps landing.",
+      "His work covers motor selection and OpenRocket flight simulation, composite airframe design, aluminum fin can manufacturing, and launch operations.",
+      "He has earned his Tripoli Rocketry Association L1 certification, the first step toward full high-power rocketry clearance."
+    ].join("\n");
+  }
+
+  if (
+    query.includes("jarvis") ||
+    query.includes("voice assistant") ||
+    query.includes("desktop automation") ||
+    query.includes("voice ai") ||
+    query.includes("workflow automation")
+  ) {
+    return [
+      "Jarvis is David's self-built local voice AI desktop assistant — you speak a command, it figures out what tool to call, then executes it on your desktop.",
+      "The system uses GPT-4o mini with OpenAI structured tool calling to dispatch browser control, app launching, file I/O, clipboard, screenshots, OCR, and more.",
+      "It includes a persistent SQLite memory system with hybrid keyword + embedding search wired into every LLM prompt, plus a 40+ module architecture for execution tracing, retry policy, and multi-step planning.",
+      "The most advanced layer is self-healing workflow automation: it records your UI interactions, anchors them to screen elements via OCR, and re-resolves those anchors at playback time even if windows move."
     ].join("\n");
   }
 

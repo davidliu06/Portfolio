@@ -5,7 +5,7 @@ export const profile = {
   subheadline:
     "From underwater robots to competition rockets, I take engineering systems from first sketch to flight-tested hardware — mechanical design, simulation, fabrication, electronics, and the AI tooling that ties it together.",
   tagline: "Mechanical design, robotics, propulsion, and AI-enabled engineering.",
-  currentRole: "Mechanical Engineering Student at Harvey Mudd College",
+  currentRole: "Junior, Mechanical Engineering — Harvey Mudd College",
   school: "Harvey Mudd College",
   degree: "B.S. Mechanical Engineering",
   graduation: "Expected May 2028",

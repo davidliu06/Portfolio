@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AchievementToast } from "@/components/achievements/achievement-toast";
 import { AtmosphereBackground } from "@/components/atmosphere-background";
 import { ChapterTracker } from "@/components/chapter-tracker";
+import { GlobalCanvasProvider } from "@/components/GlobalCanvasProvider";
 import { MouseForceProvider } from "@/components/mouse-force-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className="antialiased" suppressHydrationWarning>
         <SmoothScrollProvider />
         <MouseForceProvider />
+        <GlobalCanvasProvider />
         <AtmosphereBackground />
         <ChapterTracker />
         <AchievementToast />

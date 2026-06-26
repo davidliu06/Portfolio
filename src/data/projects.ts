@@ -94,5 +94,58 @@ export const projects: Project[] = [
       "/images/project-docs/glidelounge-image-p4-1.png",
       "/images/project-docs/glidelounge-image-p5-3.png"
     ]
+  },
+  {
+    slug: "apollyon-i-rocketry",
+    name: "Apollyon I — High-Power Competition Rocketry",
+    shortTitle: "Apollyon I",
+    category: "Engineering Focused",
+    dates: "Sep 2025 - Present",
+    summary: "Competition rocket targeting 10,000 ft AGL at Spaceport America Cup 2026.",
+    description:
+      "Leading propulsion and structures for Harvey Mudd's Muddrocket team — designing and flying Apollyon I, a high-power rocket built to hit 10,000 ft AGL and land safely under a dual-deployment recovery system at Spaceport America Cup 2026.",
+    challenge:
+      "Motor selection and propulsion analysis, composite airframe design and manufacturing, fin geometry optimization, recovery system deployment sequencing, and integrating avionics for dual-deployment staging.",
+    role: "Propulsion & Structures — motor selection, airframe design, fin geometry, recovery system engineering, and launch operations.",
+    technologies: ["OpenRocket", "SolidWorks", "Composite Manufacturing", "High-Power Rocketry", "Avionics", "Flight Dynamics"],
+    achievements: [
+      "Achieved Tripoli Rocketry Association L1 certification — first step toward full competition clearance",
+      "Ran OpenRocket simulations converging on motor selection and predicted apogee within 3% of target",
+      "Designed composite airframe with aluminum fin can and fiberglass body tubes, manufactured in-house",
+      "Engineered dual-deployment recovery sequence — drogue at apogee, main at 700 ft — targeting sub-25 fps landing"
+    ],
+    links: [{ label: "ADD LATER", href: "#" }],
+    featured: true,
+    accent: "orange",
+    chapter: "engineering",
+    heroStat: { value: 10000, suffix: "ft", label: "target altitude AGL" }
+  },
+  {
+    slug: "jarvis-ai-assistant",
+    name: "Jarvis — Local Voice-Controlled AI Desktop Assistant",
+    shortTitle: "Jarvis AI",
+    category: "Engineering Focused",
+    dates: "Jan 2026 - Present",
+    summary: "Python AI assistant that listens, reasons, and acts — browser, files, apps, and desktop automation.",
+    description:
+      "Built a fully local voice AI assistant that converts speech to intent, calls GPT-4o mini with structured tool-calling, then executes the result — opening browsers, launching apps, searching the web, reading your clipboard, and automating multi-step workflows. Designed as a 40+ module system from the ground up.",
+    challenge:
+      "Architected a composable tool dispatch system where the LLM picks the right tool with validated arguments, retries on failure, traces every execution, and recovers gracefully. Extended to support vision-guided automation, persistent memory with hybrid semantic search, and self-healing workflow playback.",
+    role: "Solo architect and engineer — designed the full pipeline from voice I/O through LLM integration, tool dispatch, execution tracing, persistent memory, and vision-guided desktop automation.",
+    technologies: ["Python", "GPT-4o mini", "OpenAI Tool Calling", "SQLite", "PyAutoGUI", "pynput", "Speech Recognition", "Tesseract OCR"],
+    achievements: [
+      "Built a full LLM tool-calling pipeline with structured intent parsing, retry/timeout policy, and per-request execution tracing",
+      "Wired hybrid keyword + OpenAI-embedding memory search into every LLM call — the assistant remembers and contextualizes",
+      "Designed a self-healing workflow recorder/player with vision-guided UI anchoring and graduated recovery strategies",
+      "Architected 40+ modules spanning voice I/O, LLM integration, multi-step planning, and desktop automation — zero frameworks, pure Python"
+    ],
+    links: [
+      { label: "View on GitHub", href: "https://github.com/davidliu06/jarvis-v1" }
+    ],
+    githubUrl: "https://github.com/davidliu06/jarvis-v1",
+    featured: true,
+    accent: "blue",
+    chapter: "ai",
+    heroStat: { value: 40, suffix: "+", label: "architecture modules" }
   }
 ];

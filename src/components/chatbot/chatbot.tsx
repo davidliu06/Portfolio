@@ -84,7 +84,7 @@ export function Chatbot() {
         {
           role: "assistant",
           content:
-            "I could not reach the local chat endpoint. Try refreshing the page, and make sure the Next.js dev server is running."
+            "Something went wrong — please try again in a moment."
         }
       ]);
     } finally {
@@ -175,7 +175,7 @@ export function Chatbot() {
         onClick={() => setOpen((current) => !current)}
         suppressHydrationWarning
       >
-        <span className="mb-2 hidden rounded-full border border-primary/25 bg-background/85 px-3 py-1 text-xs font-semibold text-primary shadow-glow backdrop-blur sm:block">
+        <span className="mb-2 hidden rounded-full border border-primary/25 bg-card/95 px-3 py-1 text-xs font-semibold text-primary shadow-glow sm:block">
           Ask David
         </span>
         <span className="relative grid h-12 w-12 place-items-center sm:h-16 sm:w-16">

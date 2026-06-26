@@ -18,7 +18,9 @@ let hasRefreshedAfterMount = false;
 const POSITIONS: Record<string, [number, number, number]> = {
   "autonomous-underwater-vehicle": [-2.6, 0.8, 0],
   "aerodynamic-nose-cones": [2.4, -0.6, -0.5],
-  "glidelounge-sofa-bed": [0, -0.9, 1]
+  "glidelounge-sofa-bed": [0, -0.9, 1],
+  "apollyon-i-rocketry": [-1.4, 1.9, -1.2],
+  "jarvis-ai-assistant": [2.9, 1.4, 0.4]
 };
 
 type ProjectGalaxyProps = {

@@ -184,7 +184,7 @@ export function ProjectsSection() {
               <ProjectGalaxy activeSlug={divingSlug} onCloseProject={handleCancelDive} onOpenProject={handleOpenProject} />
             </Scene>
           </LazyCanvas>
-          <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-slate-300 backdrop-blur-md">
+          <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-card/90 px-3 py-1 text-xs text-slate-300">
             Click a planet to explore · Esc to close
           </p>
         </div>

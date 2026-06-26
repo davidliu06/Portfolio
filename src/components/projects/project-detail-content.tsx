@@ -18,12 +18,12 @@ const ACCENT_VIVID: Record<Project["accent"], string> = {
   orange: "#FF5D3A"
 };
 
-/** Darkened per-hue — for anything that's actually text or a meaningful icon, so every accent clears 4.5:1 on the porcelain background (the vivid gold/orange originals sit at ~1.9–2.8:1 and fail outright). */
+/** Lightened per-hue — high-contrast text on the dark background (L≈6%). All clear 4.5:1. */
 const ACCENT_TEXT: Record<Project["accent"], string> = {
-  blue: "#1D4ED8",
-  teal: "#6D28D9",
-  gold: "#92400E",
-  orange: "#9A3412"
+  blue: "#60A5FA",
+  teal: "#A78BFA",
+  gold: "#FCD34D",
+  orange: "#FB923C"
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
