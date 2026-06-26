@@ -16,8 +16,8 @@ interface GlobalCanvasProps {
  */
 export function GlobalCanvas({ children }: GlobalCanvasProps) {
   const tier = useDeviceTier();
-  const dpr: [number, number] =
-    tier === "high" ? [1, 2] : tier === "medium" ? [1, 1.5] : [1, 1];
+  // Cap at 1.2 — Bloom at 2× DPR processes 4× the pixels. Not worth it.
+  const dpr: [number, number] = tier === "low" ? [1, 1] : [1, 1.2];
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
@@ -26,8 +26,10 @@ export function GlobalCanvas({ children }: GlobalCanvasProps) {
         dpr={dpr}
         gl={{
           alpha: true,
-          antialias: tier !== "low",
-          powerPreference: "high-performance"
+          antialias: false,
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
         }}
       >
         {children}

@@ -11,7 +11,9 @@ export function initSmoothScroll() {
 
   lenis = new Lenis({
     autoRaf: false,
-    smoothWheel: true
+    smoothWheel: true,
+    lerp: 0.12,
+    wheelMultiplier: 0.9,
   });
 
   lenis.on("scroll", ScrollTrigger.update);

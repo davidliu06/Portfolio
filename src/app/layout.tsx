@@ -4,10 +4,14 @@ import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
 import { AchievementToast } from "@/components/achievements/achievement-toast";
 import { AtmosphereBackground } from "@/components/atmosphere-background";
+import { BackToTop } from "@/components/back-to-top";
+import { CardSpotlight } from "@/components/card-spotlight";
 import { ChapterTracker } from "@/components/chapter-tracker";
+import { CustomCursor } from "@/components/custom-cursor";
 import { GlobalCanvasProvider } from "@/components/GlobalCanvasProvider";
 import { MouseForceProvider } from "@/components/mouse-force-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -38,12 +42,16 @@ export default function RootLayout({
   return (
     <html className={`${inter.variable} ${outfit.variable} ${GeistMono.variable}`} lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <CustomCursor />
+        <CardSpotlight />
+        <ScrollProgress />
         <SmoothScrollProvider />
         <MouseForceProvider />
         <GlobalCanvasProvider />
         <AtmosphereBackground />
         <ChapterTracker />
         <AchievementToast />
+        <BackToTop />
         {children}
         <Analytics />
       </body>

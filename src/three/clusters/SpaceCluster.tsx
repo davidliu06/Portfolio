@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { useJourneyStore } from "@/store/journeyStore";
+import { useDeviceTier } from "@/three/hooks/useDeviceTier";
 
 type GemConfig = {
   pos: [number, number, number];
@@ -35,6 +36,11 @@ const GEMS: GemConfig[] = [
 ];
 
 export function SpaceCluster() {
+  const tier = useDeviceTier();
+  const starCount = tier === "high" ? 6000 : tier === "medium" ? 2800 : 900;
+  const gemList = tier === "low" ? GEMS.slice(0, 4) : GEMS;
+  const simpleMaterial = tier !== "high";
+
   const sceneRef = useRef<THREE.Group>(null);
   const gemsRef = useRef<THREE.Group>(null);
   const smoothMouse = useRef({ x: 0, y: 0 });
@@ -57,7 +63,7 @@ export function SpaceCluster() {
     if (gemsRef.current) {
       gemsRef.current.rotation.y +=
         (smoothMouse.current.x * 0.06 - gemsRef.current.rotation.y) * k;
-      GEMS.forEach((gem, i) => {
+      gemList.forEach((gem, i) => {
         const child = gemsRef.current!.children[i] as THREE.Mesh;
         if (!child) return;
         child.rotation.x += delta * gem.rx;
@@ -70,7 +76,7 @@ export function SpaceCluster() {
   return (
     <>
       {/* Stars live outside the drift group — the universe stays fixed */}
-      <Stars radius={90} depth={55} count={7000} factor={4} saturation={0.3} fade speed={0.15} />
+      <Stars radius={90} depth={55} count={starCount} factor={4} saturation={0.3} fade speed={0.15} />
 
       <group ref={sceneRef}>
         {/* Nebula gas volumes — additive blending so they glow, not occlude */}
@@ -110,18 +116,22 @@ export function SpaceCluster() {
 
         {/* Engineering precision gemstones */}
         <group ref={gemsRef}>
-          {GEMS.map((gem, i) => (
+          {gemList.map((gem, i) => (
             <mesh key={i} position={gem.pos} scale={gem.size}>
               {gem.geo === "ico" && <icosahedronGeometry args={[1, 0]} />}
               {gem.geo === "oct" && <octahedronGeometry args={[1, 0]} />}
               {gem.geo === "tet" && <tetrahedronGeometry args={[1, 0]} />}
-              <meshStandardMaterial
-                color={gem.color}
-                metalness={0.92}
-                roughness={0.08}
-                emissive={gem.color}
-                emissiveIntensity={0.28}
-              />
+              {simpleMaterial ? (
+                <meshBasicMaterial color={gem.color} />
+              ) : (
+                <meshStandardMaterial
+                  color={gem.color}
+                  metalness={0.92}
+                  roughness={0.08}
+                  emissive={gem.color}
+                  emissiveIntensity={0.28}
+                />
+              )}
             </mesh>
           ))}
         </group>

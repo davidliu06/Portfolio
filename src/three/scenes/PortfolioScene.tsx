@@ -8,13 +8,14 @@ import { useDeviceTier } from "@/three/hooks/useDeviceTier";
 
 function SceneEffects() {
   const tier = useDeviceTier();
-  if (tier === "low") return null;
+  // Bloom is expensive (multi-pass render). Only run on high-tier devices.
+  if (tier !== "high") return null;
   return (
-    <EffectComposer>
+    <EffectComposer multisampling={0}>
       <Bloom
-        intensity={0.85}
-        luminanceThreshold={0.28}
-        luminanceSmoothing={0.9}
+        intensity={0.75}
+        luminanceThreshold={0.35}
+        luminanceSmoothing={0.85}
         mipmapBlur
       />
     </EffectComposer>
