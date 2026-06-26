@@ -2,12 +2,18 @@
 
 import { useEffect } from "react";
 import { Sparkles } from "@react-three/drei";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "@/data/projects";
 import { useAchievementsStore } from "@/store/achievementsStore";
 import { getLenis } from "@/lib/scroll";
 import { ProjectPlanet } from "../components/ProjectPlanet";
 import { GalaxyCameraRig } from "../components/GalaxyCameraRig";
+
+// ScrollTrigger.refresh() recalculates every trigger on the page — real cost,
+// not something to pay on every mount. This component is lazy-mounted via
+// LazyCanvas, so it can mount/unmount repeatedly while scrolling near the
+// boundary; module-level state makes the one-time settle-the-layout refresh
+// actually one-time, regardless of how many times the component remounts.
+let hasRefreshedAfterMount = false;
 
 const POSITIONS: Record<string, [number, number, number]> = {
   "autonomous-underwater-vehicle": [-2.6, 0.8, 0],
@@ -34,13 +40,18 @@ export default function ProjectGalaxy({ activeSlug, onOpenProject, onCloseProjec
 
   // The canvas mounting here is the last thing on the page to reach its
   // final layout size (LazyCanvas swaps in a differently-sized fallback
-  // beforehand) — force both scroll engines to recompute their cached page
-  // height/limits against the settled layout, so wheel scroll never gets
-  // stuck against a stale bound from before this section existed.
+  // beforehand) — recompute the scroll engine's cached page height once
+  // against the settled layout, so wheel scroll never gets stuck against a
+  // stale bound from before this section existed. Guarded to actually only
+  // run once (see hasRefreshedAfterMount above), and skips the expensive
+  // ScrollTrigger.refresh() — lenis.resize() alone is enough to fix a stale
+  // scroll limit, and refresh()'s full-page trigger recalculation isn't worth
+  // paying for here.
   useEffect(() => {
+    if (hasRefreshedAfterMount) return;
+    hasRefreshedAfterMount = true;
     const id = requestAnimationFrame(() => {
       getLenis()?.resize();
-      ScrollTrigger.refresh();
     });
     return () => cancelAnimationFrame(id);
   }, []);
