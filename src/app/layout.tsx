@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
 import { AchievementToast } from "@/components/achievements/achievement-toast";
+import { AtmosphereBackground } from "@/components/atmosphere-background";
 import { ChapterTracker } from "@/components/chapter-tracker";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import "./globals.css";
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html className={`${inter.variable} ${outfit.variable} ${GeistMono.variable}`} lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <SmoothScrollProvider />
+        <AtmosphereBackground />
         <ChapterTracker />
         <AchievementToast />
         {children}

@@ -5,6 +5,7 @@ import { Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RevealSection } from "@/components/ui/reveal";
 import { profile } from "@/data/profile";
 import { Scene } from "@/three/Scene";
 import { LazyCanvas } from "@/three/LazyCanvas";
@@ -33,41 +34,47 @@ export function ResumeSection() {
             src="/videos/ignition-mark.mp4"
           />
         )}
-        <SectionHeading
-          eyebrow="07 — Future Vision"
-          title="What's next"
-          description={profile.takeaway}
-          scrim
-        />
-        <div className="night-card mb-8 rounded-[1.5rem] border p-6 md:p-8">
-          <p className="text-sm font-semibold text-muted-foreground">Currently targeting</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {profile.targets.map((target) => (
-              <Badge className="border-primary/25 bg-primary/10 text-primary" key={target}>
-                {target}
-              </Badge>
-            ))}
-          </div>
-        </div>
-        <div className="night-card overflow-hidden rounded-[1.5rem] border">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b p-4">
-            <div>
-              <h3 className="font-bold">David Liu Resume</h3>
-              <p className="text-sm text-muted-foreground">Mechanical engineering, robotics, aerospace, autonomous systems.</p>
-            </div>
-            <a href={profile.resumePath} download>
-              <Button>
-                <Download size={18} />
-                Download PDF
-              </Button>
-            </a>
-          </div>
-          <iframe
-            className="h-[720px] w-full bg-muted"
-            src={`${profile.resumePath}#toolbar=1&navpanes=0`}
-            title="David Liu resume PDF"
+        <RevealSection preset="depth-drift">
+          <SectionHeading
+            eyebrow="07 — Future Vision"
+            title="What's next"
+            description={profile.takeaway}
+            scrim
           />
-        </div>
+        </RevealSection>
+        <RevealSection preset="fade-up">
+          <div className="night-card mb-8 rounded-[1.5rem] border p-6 md:p-8">
+            <p className="text-sm font-semibold text-muted-foreground">Currently targeting</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {profile.targets.map((target) => (
+                <Badge className="border-primary/25 bg-primary/10 text-primary" key={target}>
+                  {target}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </RevealSection>
+        <RevealSection delay={0.1} preset="mask-wipe">
+          <div className="night-card overflow-hidden rounded-[1.5rem] border">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b p-4">
+              <div>
+                <h3 className="font-bold">David Liu Resume</h3>
+                <p className="text-sm text-muted-foreground">Mechanical engineering, robotics, aerospace, autonomous systems.</p>
+              </div>
+              <a href={profile.resumePath} download>
+                <Button>
+                  <Download size={18} />
+                  Download PDF
+                </Button>
+              </a>
+            </div>
+            <iframe
+              className="h-[720px] w-full bg-muted"
+              src={`${profile.resumePath}#toolbar=1&navpanes=0`}
+              title="David Liu resume PDF"
+            />
+          </div>
+        </RevealSection>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RevealSection } from "@/components/ui/reveal";
 import { experience } from "@/data/experience";
 
 const AssemblyShowcase = dynamic(() => import("@/three/assembly/AssemblyShowcase").then((mod) => mod.AssemblyShowcase), {
@@ -39,18 +40,20 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="py-20">
       <div className="section-shell">
-        <SectionHeading
-          eyebrow="04 — Engineering"
-          title="From internship to competition rocket"
-          description="The full record — internships, research, and the engineering teams where most of this was actually learned."
-        />
+        <RevealSection preset="fade-up">
+          <SectionHeading
+            eyebrow="04 — Engineering"
+            title="From internship to competition rocket"
+            description="The full record — internships, research, and the engineering teams where most of this was actually learned."
+          />
+        </RevealSection>
         <div className="relative mx-auto max-w-4xl">
           <div className="absolute bottom-0 left-5 top-0 hidden w-px bg-border sm:block" />
           <div className="space-y-5">
             {experience.map((item) => {
               const embed = EMBED_BEFORE[item.organization];
               return (
-                <div key={`${item.organization}-${item.role}`}>
+                <RevealSection key={`${item.organization}-${item.role}`} preset="slide-right">
                   {embed && (
                     <div className="mb-5 sm:ml-14">
                       <AssemblyShowcase
@@ -63,7 +66,7 @@ export function ExperienceSection() {
                       />
                     </div>
                   )}
-                  <article className="night-card relative rounded-[1.5rem] border p-6 sm:ml-14">
+                  <article className="night-card relative rounded-[1.5rem] border p-6 transition hover:-translate-y-1 sm:ml-14">
                     <span className="absolute -left-[3.25rem] top-6 hidden h-10 w-10 rounded-lg border bg-background sm:grid sm:place-items-center">
                       <span className="h-3 w-3 rounded-full bg-primary" />
                     </span>
@@ -113,7 +116,7 @@ export function ExperienceSection() {
                       ))}
                     </div>
                   </article>
-                </div>
+                </RevealSection>
               );
             })}
           </div>

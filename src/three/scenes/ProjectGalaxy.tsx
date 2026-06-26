@@ -61,7 +61,9 @@ export default function ProjectGalaxy({ activeSlug, onOpenProject, onCloseProjec
   return (
     <>
       <GalaxyCameraRig focusPosition={focusPosition} diving={!!activeSlug} />
-      <Sparkles count={60} scale={10} size={1.6} speed={0.2} color="#8B5CF6" opacity={0.4} />
+      {/* count/scale stay fixed (those define the particle buffer) — only speed/opacity
+          shift when diving into a planet, a cheap uniform-only "energy rising" cue. */}
+      <Sparkles count={60} scale={10} size={1.6} speed={activeSlug ? 0.7 : 0.2} color="#8B5CF6" opacity={activeSlug ? 0.75 : 0.4} />
 
       <mesh position={[0, 0, -6]} onClick={() => activeSlug && onCloseProject()}>
         <planeGeometry args={[40, 40]} />

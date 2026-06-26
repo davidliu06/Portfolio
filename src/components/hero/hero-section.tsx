@@ -33,20 +33,42 @@ export function HeroSection() {
       <div className="section-shell grid min-h-[calc(100vh-7rem)] items-center gap-12 pb-20 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           className="legibility-scrim rounded-[2rem] p-5 sm:p-6"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }}
         >
-          <Badge className="mb-5 border-primary/30 bg-primary/10 text-primary">
-            <Sparkles size={14} className="mr-2" />
-            Mechanical engineering portfolio
-          </Badge>
-          <h1 className="text-balance text-5xl font-black tracking-normal sm:text-6xl lg:text-7xl">
+          <motion.div variants={{ hidden: { opacity: 0, y: 16, filter: "blur(8px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)" } }} transition={{ duration: 0.6 }}>
+            <Badge className="mb-5 border-primary/30 bg-primary/10 text-primary">
+              <Sparkles size={14} className="mr-2" />
+              Mechanical engineering portfolio
+            </Badge>
+          </motion.div>
+          <motion.h1
+            className="text-balance text-5xl font-black tracking-normal sm:text-6xl lg:text-7xl"
+            transition={{ duration: 0.7 }}
+            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+          >
             {profile.shortHero}
-          </h1>
-          <p className="mt-5 max-w-2xl text-xl leading-8 text-muted-foreground">{profile.subheadline}</p>
-          <p className="mt-4 font-semibold text-primary">{profile.currentRole}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          </motion.h1>
+          <motion.p
+            className="mt-5 max-w-2xl text-xl leading-8 text-muted-foreground"
+            transition={{ duration: 0.6 }}
+            variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }}
+          >
+            {profile.subheadline}
+          </motion.p>
+          <motion.p
+            className="mt-4 font-semibold text-primary"
+            transition={{ duration: 0.5 }}
+            variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
+          >
+            {profile.currentRole}
+          </motion.p>
+          <motion.div
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            transition={{ duration: 0.55 }}
+            variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }}
+          >
             <Link className="w-full sm:w-auto" href="#projects">
               <Button className="w-full sm:w-auto" size="lg">
                 View Projects
@@ -65,14 +87,23 @@ export function HeroSection() {
                 Contact
               </Button>
             </Link>
-          </div>
-          <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+          </motion.div>
+          <motion.div
+            className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4"
+            transition={{ staggerChildren: 0.06 }}
+            variants={{ hidden: {}, visible: {} }}
+          >
             {["Aerospace", "Defense", "Robotics", "Manufacturing"].map((item) => (
-              <div className="night-card rounded-2xl border p-3 text-sm font-semibold text-foreground transition hover:-translate-y-1" key={item}>
+              <motion.div
+                className="night-card rounded-2xl border p-3 text-sm font-semibold text-foreground transition hover:-translate-y-1 hover:shadow-glow"
+                key={item}
+                transition={{ duration: 0.45 }}
+                variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
+              >
                 {item}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
         <motion.div
           className="relative"

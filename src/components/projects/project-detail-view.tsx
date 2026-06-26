@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Project } from "@/types/portfolio";
 import { getLenis } from "@/lib/scroll";
 import { CountUpStat } from "./count-up-stat";
-import { RevealGroup, RevealItem, RevealSection } from "./reveal";
+import { RevealGroup, RevealItem, RevealSection } from "@/components/ui/reveal";
 
 /** Vivid — for backgrounds, borders, decorative 3D/icon fills where WCAG text-contrast rules don't apply. */
 const ACCENT_VIVID: Record<Project["accent"], string> = {

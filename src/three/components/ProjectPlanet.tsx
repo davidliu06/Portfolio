@@ -20,12 +20,15 @@ type ProjectPlanetProps = {
   onOpen: (point: { x: number; y: number }) => void;
 };
 
-/** A planet that dramatically scales up and brightens as the camera dives toward it when opened — the visual half of the cinematic zoom transition. */
+/** A planet that dramatically scales up and brightens as the camera dives toward it when opened — the visual half of the cinematic zoom transition. An expanding, fading pulse ring fires on the moment of activation as a secondary "energy release" beat, so the open doesn't just stop once the dive starts. */
 export function ProjectPlanet({ project, position, isActive, onOpen }: ProjectPlanetProps) {
   const [hovered, setHovered] = useState(false);
   const group = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);
+  const pulseRing = useRef<THREE.Mesh>(null);
   const scaleRef = useRef(1);
+  const pulse = useRef(0);
+  const wasActive = useRef(false);
   const color = ACCENT_COLORS[project.accent];
 
   useFrame((_, delta) => {
@@ -36,6 +39,17 @@ export function ProjectPlanet({ project, position, isActive, onOpen }: ProjectPl
     const lambda = isActive ? 3.2 : 6;
     scaleRef.current = THREE.MathUtils.damp(scaleRef.current, targetScale, lambda, delta);
     group.current?.scale.setScalar(scaleRef.current);
+
+    if (isActive && !wasActive.current) pulse.current = 1;
+    wasActive.current = isActive;
+    if (pulse.current > 0) pulse.current = Math.max(0, pulse.current - delta * 1.1);
+
+    if (pulseRing.current) {
+      const progress = 1 - pulse.current;
+      pulseRing.current.scale.setScalar(1 + progress * 3.2);
+      const material = pulseRing.current.material as THREE.MeshBasicMaterial;
+      material.opacity = pulse.current * 0.8;
+    }
   });
 
   function handleClick(event: ThreeEvent<PointerEvent>) {
@@ -74,6 +88,11 @@ export function ProjectPlanet({ project, position, isActive, onOpen }: ProjectPl
           <mesh ref={ring} rotation={[Math.PI / 2.4, 0.4, 0]}>
             <torusGeometry args={[1.45, 0.015, 8, 64]} />
             <meshBasicMaterial color={color} transparent opacity={isActive ? 0 : 0.5} />
+          </mesh>
+          {/* The activation "energy release" — expands outward and fades over ~0.9s, driven entirely by the pulse ref above. Invisible (opacity 0) the rest of the time. */}
+          <mesh ref={pulseRing} rotation={[Math.PI / 2.4, 0.4, 0]}>
+            <torusGeometry args={[1.45, 0.02, 8, 64]} />
+            <meshBasicMaterial color={color} transparent depthWrite={false} opacity={0} toneMapped={false} />
           </mesh>
         </group>
       </Float>

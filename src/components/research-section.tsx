@@ -1,5 +1,6 @@
 import { FlaskConical } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RevealGroup, RevealItem, RevealSection } from "@/components/ui/reveal";
 import { experience } from "@/data/experience";
 
 const RESEARCH_TAKEAWAYS: Record<string, string> = {
@@ -22,24 +23,28 @@ export function ResearchSection() {
   return (
     <section id="research" className="py-20">
       <div className="section-shell">
-        <SectionHeading
-          eyebrow="03 — Research"
-          title="Research is curiosity with a method."
-          description="The same instinct that sends me into a workshop sends me into a dataset — test the idea, gather the evidence, explain what's actually true."
-        />
-        <div className="grid gap-5 sm:grid-cols-2">
+        <RevealSection preset="blur-rise">
+          <SectionHeading
+            eyebrow="03 — Research"
+            title="Research is curiosity with a method."
+            description="The same instinct that sends me into a workshop sends me into a dataset — test the idea, gather the evidence, explain what's actually true."
+          />
+        </RevealSection>
+        <RevealGroup className="grid gap-5 sm:grid-cols-2" stagger={0.12}>
           {researchEntries.map((item) => (
-            <article className="night-card rounded-[1.5rem] border p-5" key={`${item.organization}-${item.role}`}>
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                <FlaskConical size={20} />
-              </span>
-              <h3 className="mt-4 font-bold text-foreground">{item.role}</h3>
-              <p className="text-sm font-semibold text-primary">{item.organization}</p>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">{takeawayFor(item.role)}</p>
-              <p className="mt-3 text-xs text-muted-foreground">{item.dates}</p>
-            </article>
+            <RevealItem key={`${item.organization}-${item.role}`} preset="blur-rise">
+              <article className="night-card h-full rounded-[1.5rem] border p-5 transition hover:-translate-y-1 hover:border-primary/40">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <FlaskConical size={20} />
+                </span>
+                <h3 className="mt-4 font-bold text-foreground">{item.role}</h3>
+                <p className="text-sm font-semibold text-primary">{item.organization}</p>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{takeawayFor(item.role)}</p>
+                <p className="mt-3 text-xs text-muted-foreground">{item.dates}</p>
+              </article>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

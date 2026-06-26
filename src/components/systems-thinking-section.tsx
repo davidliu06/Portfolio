@@ -1,6 +1,7 @@
 import { GitBranch } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RevealGroup, RevealItem, RevealSection } from "@/components/ui/reveal";
 import { experience } from "@/data/experience";
 
 const SYSTEMS_TAKEAWAYS: Record<string, string> = {
@@ -16,46 +17,52 @@ export function SystemsThinkingSection() {
   return (
     <section id="systems" className="py-20">
       <div className="section-shell">
-        <SectionHeading
-          eyebrow="06 — Systems Thinking"
-          title="Systems thinking, not just parts."
-          description="Individual components are easy. The hard part is making 40 people, 5 subteams, and a dozen subsystems converge on a single launch date."
-        />
+        <RevealSection preset="fade-up">
+          <SectionHeading
+            eyebrow="06 — Systems Thinking"
+            title="Systems thinking, not just parts."
+            description="Individual components are easy. The hard part is making 40 people, 5 subteams, and a dozen subsystems converge on a single launch date."
+          />
+        </RevealSection>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="night-card rounded-[2rem] border p-6">
-            <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary">
-                <GitBranch size={24} />
-              </span>
-              <div>
-                <p className="text-sm text-muted-foreground">The unglamorous part</p>
-                <h3 className="text-2xl font-bold text-foreground">Reviews, trade studies, and interfaces</h3>
+          <RevealSection glow="cobalt" preset="depth-drift">
+            <div className="night-card h-full rounded-[2rem] border p-6">
+              <div className="flex items-center gap-3">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary">
+                  <GitBranch size={24} />
+                </span>
+                <div>
+                  <p className="text-sm text-muted-foreground">The unglamorous part</p>
+                  <h3 className="text-2xl font-bold text-foreground">Reviews, trade studies, and interfaces</h3>
+                </div>
+              </div>
+              <p className="mt-5 leading-7 text-muted-foreground">
+                On Apollyon I, my job wasn&apos;t just propulsion — it was making sure propulsion,
+                structures, avionics, recovery, and simulation all agreed with each other before a single
+                switch got flipped. That&apos;s the part of engineering most people don&apos;t see: the
+                design reviews, the trade studies, the moment you catch a conflict between two subteams
+                before it becomes a launch-pad problem.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["Systems Integration", "Launch-Readiness Reviews", "Cross-Team Coordination", "Trade Studies"].map((item) => (
+                  <Badge className="border-primary/25 bg-primary/10 text-primary" key={item}>
+                    {item}
+                  </Badge>
+                ))}
               </div>
             </div>
-            <p className="mt-5 leading-7 text-muted-foreground">
-              On Apollyon I, my job wasn&apos;t just propulsion — it was making sure propulsion,
-              structures, avionics, recovery, and simulation all agreed with each other before a single
-              switch got flipped. That&apos;s the part of engineering most people don&apos;t see: the
-              design reviews, the trade studies, the moment you catch a conflict between two subteams
-              before it becomes a launch-pad problem.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["Systems Integration", "Launch-Readiness Reviews", "Cross-Team Coordination", "Trade Studies"].map((item) => (
-                <Badge className="border-primary/25 bg-primary/10 text-primary" key={item}>
-                  {item}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          <div className="grid gap-4">
+          </RevealSection>
+          <RevealGroup className="grid gap-4" stagger={0.12}>
             {systemsEntries.map((item) => (
-              <article className="night-card rounded-[1.5rem] border p-5 transition hover:-translate-y-1 hover:border-primary/40" key={item.role}>
-                <h3 className="font-bold text-foreground">{item.role}</h3>
-                <p className="text-sm font-semibold text-primary">{item.organization}</p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{SYSTEMS_TAKEAWAYS[item.role]}</p>
-              </article>
+              <RevealItem key={item.role} preset="slide-right">
+                <article className="night-card rounded-[1.5rem] border p-5 transition hover:-translate-y-1 hover:border-primary/40">
+                  <h3 className="font-bold text-foreground">{item.role}</h3>
+                  <p className="text-sm font-semibold text-primary">{item.organization}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{SYSTEMS_TAKEAWAYS[item.role]}</p>
+                </article>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </div>
     </section>
