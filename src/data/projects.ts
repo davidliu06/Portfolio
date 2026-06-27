@@ -117,9 +117,9 @@ export const projects: Project[] = [
       "Ran OpenRocket simulations converging on motor selection with predicted apogee within 3% of actual"
     ],
     links: [],
-    image: "/images/apollyon-exploded-cad.jpg",
+    image: "/images/apollyon-exploded-cad.png",
     video: "/videos/apollyon-launch.mp4",
-    gallery: ["/images/apollyon-competition-results.jpg"],
+    gallery: ["/images/apollyon-competition-results.jpeg"],
     featured: true,
     accent: "orange",
     chapter: "engineering",
