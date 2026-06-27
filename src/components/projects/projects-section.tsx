@@ -178,7 +178,7 @@ export function ProjectsSection() {
           description="Three projects, as a galaxy you can explore — click a planet to dive in, design, simulation, fabrication, and field-tested results."
         />
 
-        <div className="relative h-[640px] overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)]">
+        <div className="relative h-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)] sm:h-[540px] lg:h-[640px]">
           <LazyCanvas className="absolute inset-0" fallback={<StaticProjectsFallback />}>
             <Scene cameraPosition={[0, 0, 8.5]} fallback={<StaticProjectsFallback />}>
               <ProjectGalaxy activeSlug={divingSlug} onCloseProject={handleCancelDive} onOpenProject={handleOpenProject} />

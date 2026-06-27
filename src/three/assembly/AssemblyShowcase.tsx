@@ -132,7 +132,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
       className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0B1120] to-[#060912] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.55)]"
       ref={containerRef}
     >
-      <div className="relative h-[520px] w-full">
+      <div className="relative h-[360px] w-full sm:h-[440px] lg:h-[520px]">
         <div aria-hidden className="pointer-events-none absolute inset-0" style={BLUEPRINT_GRID_STYLE} />
         <div
           aria-hidden
@@ -219,12 +219,12 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
         </AnimatePresence>
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-4">
-          <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+          <div className="rounded-full border border-white/15 bg-[#060c1a]/85 px-3 py-1.5 text-xs font-semibold text-white">
             {title}
           </div>
           {(hoveredLabel || isolatedLabel) && (
             <div
-              className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold backdrop-blur-md"
+              className="rounded-full border border-white/15 bg-[#060c1a]/85 px-3 py-1.5 text-xs font-semibold"
               style={{ color: accentColor }}
             >
               {isolatedLabel ?? hoveredLabel}
@@ -242,7 +242,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
         <div className="pointer-events-auto absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-wrap justify-center gap-2 px-4">
           {isolatedName && (
             <button
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/15"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#060c1a]/85 px-3 py-1.5 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#0d1628]/90"
               onClick={() => {
                 setIsolatedName(null);
                 setIsolatedLabel(null);
@@ -252,7 +252,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
               Show all
             </button>
           )}
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 backdrop-blur-md">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#060c1a]/75 px-3 py-1.5 text-xs text-slate-300">
             <Layers size={14} />
             Drag to rotate · Hover a part · Click to isolate
           </span>

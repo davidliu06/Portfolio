@@ -25,14 +25,14 @@ export function HeroSection() {
             </Badge>
           </motion.div>
           <motion.h1
-            className="text-balance text-5xl font-black tracking-normal sm:text-6xl lg:text-7xl"
+            className="text-balance text-4xl font-black tracking-normal sm:text-5xl lg:text-7xl"
             transition={{ duration: 0.7 }}
             variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
           >
             {profile.shortHero}
           </motion.h1>
           <motion.p
-            className="mt-5 max-w-2xl text-xl leading-8 text-muted-foreground"
+            className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-xl sm:leading-8"
             transition={{ duration: 0.6 }}
             variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }}
           >
