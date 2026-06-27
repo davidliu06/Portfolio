@@ -38,6 +38,8 @@ export type Project = {
   /** Only set when a project genuinely has one — these are physical hardware projects, not every one has a repo or live demo. */
   githubUrl?: string;
   demoUrl?: string;
+  /** Path to a highlight video (e.g. launch footage) shown as a player in the detail view. */
+  video?: string;
   /** A single standout, real number worth a count-up moment in the detail view. */
   heroStat?: {
     value: number;

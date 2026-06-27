@@ -112,6 +112,22 @@ export function ProjectDetailContent({ project }: { project: Project }) {
           )}
         </RevealSection>
 
+        {/* Launch / highlight video — shown directly below the hero image when available */}
+        {project.video && (
+          <RevealSection className="mt-6" preset="fade-up">
+            <div className="overflow-hidden rounded-[1.75rem] border" style={{ borderColor: `${vivid}33` }}>
+              <video
+                controls
+                className="w-full"
+                src={project.video}
+                poster={project.image}
+              >
+                Your browser does not support video playback.
+              </video>
+            </div>
+          </RevealSection>
+        )}
+
         {/* Scene 2 — description, its own paced moment */}
         <RevealSection className="mx-auto max-w-3xl py-20 text-center" preset="fade-up">
           <p className="text-balance text-2xl font-medium leading-snug text-foreground sm:text-3xl">{project.description}</p>

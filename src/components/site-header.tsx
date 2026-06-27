@@ -30,7 +30,7 @@ function useActiveSection() {
           }
         }
       },
-      { threshold: 0, rootMargin: "-40% 0px -50% 0px" }
+      { threshold: 0, rootMargin: "-20% 0px -30% 0px" }
     );
 
     SECTION_IDS.forEach((id) => {
@@ -81,13 +81,13 @@ export function SiteHeader() {
                   className={cn(
                     "relative rounded-lg px-3 py-2 text-sm font-medium transition",
                     isActive
-                      ? "text-foreground"
+                      ? "bg-primary/12 text-primary"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
                   {label}
                   {isActive && (
-                    <span className="absolute inset-x-3 -bottom-px h-px bg-primary" />
+                    <span className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-primary" />
                   )}
                 </Link>
               );

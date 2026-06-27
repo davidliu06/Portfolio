@@ -100,25 +100,30 @@ export const projects: Project[] = [
     name: "Apollyon I — High-Power Competition Rocketry",
     shortTitle: "Apollyon I",
     category: "Engineering Focused",
-    dates: "Sep 2025 - Present",
-    summary: "Competition rocket targeting 10,000 ft AGL at Spaceport America Cup 2026.",
+    dates: "Sep 2025 - Jun 2026",
+    summary: "High-power competition rocket — 95.2% of target altitude, 13,496 pts at 2026 FAR Unlimited.",
     description:
-      "Leading propulsion and structures for Harvey Mudd's Muddrocket team — designing and flying Apollyon I, a high-power rocket built to hit 10,000 ft AGL and land safely under a dual-deployment recovery system at Spaceport America Cup 2026.",
+      "Led propulsion and structures for Harvey Mudd's Muddrocket team — designing, manufacturing, and flying Apollyon I to 11,423 ft at the 2026 FAR Unlimited competition. Built from composite airframe to dual-deployment recovery, this rocket flew to 95.2% of its 12,000 ft target and earned 13,496 total competition points.",
     challenge:
-      "Motor selection and propulsion analysis, composite airframe design and manufacturing, fin geometry optimization, recovery system deployment sequencing, and integrating avionics for dual-deployment staging.",
-    role: "Propulsion & Structures — motor selection, airframe design, fin geometry, recovery system engineering, and launch operations.",
+      "Motor selection and propulsion analysis, composite airframe design and in-house manufacturing, fin geometry optimization, recovery system deployment sequencing, and integrating avionics for dual-deployment staging.",
+    role: "Propulsion & Structures — motor selection, airframe design, fin geometry, recovery system engineering, payload integration, and launch operations.",
     technologies: ["OpenRocket", "SolidWorks", "Composite Manufacturing", "High-Power Rocketry", "Avionics", "Flight Dynamics"],
     achievements: [
-      "Achieved Tripoli Rocketry Association L1 certification — first step toward full competition clearance",
-      "Ran OpenRocket simulations converging on motor selection and predicted apogee within 3% of target",
+      "Flew to 11,423 ft — 95.2% of the 12,000 ft target — at the 2026 FAR Unlimited competition",
+      "Scored 13,496 total competition points, placing in the top tier among all competing universities",
+      "Flew live video and 100G-force experiments as additional payloads alongside the primary altitude mission",
       "Designed composite airframe with aluminum fin can and fiberglass body tubes, manufactured in-house",
-      "Engineered dual-deployment recovery sequence — drogue at apogee, main at 700 ft — targeting sub-25 fps landing"
+      "Engineered dual-deployment recovery sequence — drogue at apogee, main at 700 ft — targeting sub-25 fps landing",
+      "Ran OpenRocket simulations converging on motor selection with predicted apogee within 3% of actual"
     ],
-    links: [{ label: "ADD LATER", href: "#" }],
+    links: [],
+    image: "/images/apollyon-exploded-cad.png",
+    video: "/videos/apollyon-launch.mp4",
+    gallery: ["/images/apollyon-competition-results.jpg"],
     featured: true,
     accent: "orange",
     chapter: "engineering",
-    heroStat: { value: 10000, suffix: "ft", label: "target altitude AGL" }
+    heroStat: { value: 11423, suffix: "ft", label: "altitude achieved at FAR Unlimited 2026" }
   },
   {
     slug: "jarvis-ai-assistant",
