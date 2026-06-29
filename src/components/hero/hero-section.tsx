@@ -92,7 +92,7 @@ export function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <div className="soft-panel relative mx-auto aspect-[0.88] max-w-[460px] rounded-[2rem] border bg-card/70 p-4 shadow-glow backdrop-blur">
+          <div className="soft-panel relative mx-auto aspect-[0.88] max-w-[460px] rounded-[2rem] border bg-card/90 p-4 shadow-glow">
             <div className="absolute right-5 top-5 z-10 rounded-full border border-primary/25 bg-card/95 px-3 py-1 font-mono text-xs font-semibold text-primary shadow-sm">
               OPEN TO INTERNSHIPS
             </div>

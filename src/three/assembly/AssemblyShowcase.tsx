@@ -207,7 +207,7 @@ export function AssemblyShowcase({ url, namePrefix, accentColor = "#2F5DFF", tit
               {posterClip && (
                 <video autoPlay className="absolute inset-0 h-full w-full object-cover opacity-70" loop muted playsInline src={posterClip} />
               )}
-              <div className="relative flex flex-col items-center gap-3 rounded-2xl bg-[#060912]/60 px-6 py-4 backdrop-blur-sm">
+              <div className="relative flex flex-col items-center gap-3 rounded-2xl bg-[#060912]/88 px-6 py-4">
                 <div
                   className="h-7 w-7 animate-spin rounded-full border-2 border-white/15"
                   style={{ borderTopColor: accentColor }}

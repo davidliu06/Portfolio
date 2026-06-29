@@ -112,8 +112,7 @@ h4 {
 
 /* Semi-transparent dark scrim — makes hero text legible over the 3D canvas. */
 .legibility-scrim {
-  background: hsl(var(--background) / 0.72);
-  backdrop-filter: blur(16px);
+  background: hsl(var(--background) / 0.82);
 }
 
 /* Form input fields */

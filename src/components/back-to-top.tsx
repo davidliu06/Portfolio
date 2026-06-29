@@ -32,7 +32,7 @@ export function BackToTop() {
       {visible && (
         <motion.button
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-full border border-primary/30 bg-card/95 text-primary shadow-glow backdrop-blur-sm transition hover:bg-primary hover:text-primary-foreground"
+          className="fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-full border border-primary/30 bg-card text-primary shadow-glow transition hover:bg-primary hover:text-primary-foreground"
           initial={{ opacity: 0, scale: 0.7, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.7, y: 12 }}
