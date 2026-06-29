@@ -53,15 +53,15 @@ export function ContactSection() {
             <div className="night-card h-full rounded-[1.5rem] border p-6">
               <h3 className="text-xl font-bold">Links</h3>
               <div className="mt-5 grid gap-3">
-                <a className="flex items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:-translate-y-0.5 hover:bg-muted" href={`mailto:${profile.email}`}>
+                <a className="flex w-full items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:bg-muted" href={`mailto:${profile.email}`}>
                   <Mail size={20} />
                   {profile.email}
                 </a>
-                <a className="flex items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:-translate-y-0.5 hover:bg-muted" href={profile.linkedin}>
+                <a className="flex w-full items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:bg-muted" href={profile.linkedin} target="_blank" rel="noreferrer">
                   <Linkedin size={20} />
                   LinkedIn
                 </a>
-                <a className="flex items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:-translate-y-0.5 hover:bg-muted" href={profile.github}>
+                <a className="flex w-full items-center gap-3 rounded-2xl border border-primary/15 bg-background/60 p-4 transition hover:bg-muted" href={profile.github} target="_blank" rel="noreferrer">
                   <Github size={20} />
                   GitHub
                 </a>
