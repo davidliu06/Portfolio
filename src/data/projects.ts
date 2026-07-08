@@ -25,11 +25,11 @@ export const projects: Project[] = [
     accent: "blue",
     chapter: "engineering",
     heroStat: { value: 2, suffix: "m", label: "max monitoring depth" },
-    image: "/images/portfolio/portfolio-image-p2-1.png",
+    image: "/images/auv-dana-point-deployed.jpeg",
     gallery: [
-      "/images/project-docs/auv-report-image-p2-2.png",
-      "/images/project-docs/auv-report-image-p3-3.png",
-      "/images/project-docs/auv-report-image-p5-1.png"
+      "/images/auv-assembly-bench.jpeg",
+      "/images/portfolio/portfolio-image-p2-1.png",
+      "/images/project-docs/auv-report-image-p3-3.png"
     ]
   },
   {
@@ -112,6 +112,7 @@ export const projects: Project[] = [
       "Flew to 11,423 ft — 95.2% of the 12,000 ft target — at the 2026 FAR Unlimited competition",
       "Scored 13,496 total competition points, placing in the top tier among all competing universities",
       "Flew live video and 100G-force experiments as additional payloads alongside the primary altitude mission",
+      "Earned Level 1 high-power rocketry certification with a personally built, flown, and recovered cert rocket",
       "Designed composite airframe with aluminum fin can and fiberglass body tubes, manufactured in-house",
       "Engineered dual-deployment recovery sequence — drogue at apogee, main at 700 ft — targeting sub-25 fps landing",
       "Ran OpenRocket simulations converging on motor selection with predicted apogee within 3% of actual"
@@ -119,7 +120,7 @@ export const projects: Project[] = [
     links: [],
     image: "/images/apollyon-exploded-cad.png",
     video: "/videos/apollyon-launch.mp4",
-    gallery: ["/images/apollyon-competition-results.jpeg"],
+    gallery: ["/images/l1-cert-rocket.jpeg", "/images/apollyon-competition-results.jpeg"],
     featured: true,
     accent: "orange",
     chapter: "engineering",

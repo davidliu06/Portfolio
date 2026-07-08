@@ -22,13 +22,39 @@ export const metadata: Metadata = {
   openGraph: {
     title: "David Liu | Mechanical Engineering Portfolio",
     description: "Robotics, aerospace, autonomous systems, CAD, simulation, manufacturing, and mechatronics.",
-    type: "website",
-    images: ["/images/david-headshot.png"]
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "David Liu | Mechanical Engineering Portfolio",
+    description: "Robotics, aerospace, autonomous systems, CAD, simulation, manufacturing, and mechatronics."
   },
   robots: {
     index: true,
     follow: true
   }
+};
+
+/** Person structured data — lets Google show a rich knowledge panel result for the portfolio. */
+const PERSON_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "David Liu",
+  url: "https://david-liu-portfolio.vercel.app",
+  jobTitle: "Mechanical Engineering Student",
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "Harvey Mudd College"
+  },
+  knowsAbout: [
+    "Mechanical Engineering",
+    "Robotics",
+    "High-Power Rocketry",
+    "Autonomous Underwater Vehicles",
+    "CAD",
+    "Manufacturing"
+  ],
+  sameAs: ["https://www.linkedin.com/in/david-liu-677113283/", "https://github.com/davidliu06"]
 };
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -42,6 +68,10 @@ export default function RootLayout({
   return (
     <html className={`${inter.variable} ${outfit.variable} ${GeistMono.variable}`} lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
         <CustomCursor />
         <CardSpotlight />
         <ScrollProgress />
