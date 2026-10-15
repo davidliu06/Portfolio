@@ -6,6 +6,10 @@ dist
 .env
 .env*.local
 *.tsbuildinfo
+.artifacts/
+.preview*.log
+.hero-*.png
+.galaxy-*.png
 vercel
 .vercel
 

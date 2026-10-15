@@ -3,6 +3,7 @@ import { experience } from "./experience";
 import { profile } from "./profile";
 import { projects } from "./projects";
 import { skills } from "./skills";
+import { electricalProjects } from "./electrical";
 
 export const suggestedQuestions = [
   "Why is David a strong robotics intern?",
@@ -14,6 +15,12 @@ export const suggestedQuestions = [
 ];
 
 export const chatbotKnowledge: ChatKnowledgeEntry[] = [
+  ...electricalProjects.map(project => ({
+    id: project.id,
+    title: project.name,
+    content: `${project.description} ${project.details} ${project.status}. Design choices: ${project.choices.map(choice => `${choice.title}: ${choice.body}`).join(" ")} Skills: ${project.skills} Testing: ${project.testing}`,
+    tags: ["electrical", "pcb", ...project.technologies.map(item => item.toLowerCase())]
+  })),
   {
     id: "profile",
     title: "Profile",

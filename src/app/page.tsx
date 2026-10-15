@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/about-section";
+import { ElectricalSection } from "@/components/electrical-section";
 import { AiSection } from "@/components/ai-section";
 import { Chatbot } from "@/components/chatbot/chatbot";
 import { ContactSection } from "@/components/contact-section";
@@ -22,6 +23,7 @@ export default function Home() {
         <ResearchSection />
         <ExperienceSection />
         <ProjectsSection />
+        <ElectricalSection />
         <AiSection />
         <SystemsThinkingSection />
         <ResumeSection />
@@ -29,7 +31,7 @@ export default function Home() {
       </main>
       <footer className="relative z-10 border-t py-8">
         <div className="section-shell flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
-          <p>David Liu - Mechanical Engineering, Robotics, Aerospace, Autonomous Systems.</p>
+          <p>David Liu - ElectroMechanical Engineer, Robotics, Aerospace, Autonomous Systems.</p>
           <p>Built with Next.js, TypeScript, Tailwind CSS, Framer Motion, and shadcn-style components.</p>
         </div>
       </footer>

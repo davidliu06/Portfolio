@@ -101,11 +101,12 @@ export function Chatbot() {
   if (!mounted) return null;
 
   return (
-    <div id="chatbot" className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+    <div id="chatbot" className="pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col items-end">
       <div
+        inert={!open}
         className={cn(
           "mb-2 w-[min(390px,calc(100vw-32px))] overflow-hidden rounded-[2rem] border bg-card shadow-glow transition",
-          open ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+          open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         )}
       >
         <div className="flex items-center justify-between border-b p-4">
@@ -171,7 +172,7 @@ export function Chatbot() {
       </div>
       <button
         aria-label="Open Ask David chatbot"
-        className="group relative grid justify-items-center border-0 bg-transparent p-0 text-left outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-ring"
+        className="pointer-events-auto group relative grid justify-items-center border-0 bg-transparent p-0 text-left outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-ring"
         onClick={() => setOpen((current) => !current)}
         suppressHydrationWarning
       >

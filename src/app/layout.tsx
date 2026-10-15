@@ -15,18 +15,18 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "David Liu | Mechanical Engineering, Robotics & Autonomous Systems",
+  title: "David Liu | ElectroMechanical Engineer, Robotics & Autonomous Systems",
   description:
-    "Portfolio for David Liu, a Harvey Mudd mechanical engineering student building robotics, autonomous systems, aerospace, and manufacturing automation projects.",
+    "Portfolio for David Liu, a Harvey Mudd engineering student building robotics, autonomous systems, aerospace, and manufacturing automation projects.",
   metadataBase: new URL("https://david-liu-portfolio.vercel.app"),
   openGraph: {
-    title: "David Liu | Mechanical Engineering Portfolio",
+    title: "David Liu | ElectroMechanical Engineer Portfolio",
     description: "Robotics, aerospace, autonomous systems, CAD, simulation, manufacturing, and mechatronics.",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "David Liu | Mechanical Engineering Portfolio",
+    title: "David Liu | ElectroMechanical Engineer Portfolio",
     description: "Robotics, aerospace, autonomous systems, CAD, simulation, manufacturing, and mechatronics."
   },
   robots: {
@@ -41,7 +41,7 @@ const PERSON_JSON_LD = {
   "@type": "Person",
   name: "David Liu",
   url: "https://david-liu-portfolio.vercel.app",
-  jobTitle: "Mechanical Engineering Student",
+  jobTitle: "Engineering Student",
   affiliation: {
     "@type": "CollegeOrUniversity",
     name: "Harvey Mudd College"

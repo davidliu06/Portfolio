@@ -21,7 +21,7 @@ export function AboutSection() {
               Everything I build starts with the same question: how does this actually work, and how would I
               make it better? That question has taken me underwater with autonomous robots, into wind
               tunnels chasing aerodynamic drag, and through a research summer building LLM-based tools to
-              analyze how students learn. I&apos;m a junior mechanical engineering student at Harvey Mudd College —
+              analyze how students learn. I&apos;m a junior engineering student at Harvey Mudd College —
               though most of what I know, I learned by building something that didn&apos;t work yet, and
               fixing it until it did.
             </p>

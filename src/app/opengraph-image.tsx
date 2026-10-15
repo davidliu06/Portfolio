@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "David Liu — Mechanical Engineering, Robotics & Rocketry";
+export const alt = "David Liu — ElectroMechanical Engineer, Robotics & Rocketry";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -107,7 +107,7 @@ export default function OpenGraphImage() {
           }}
         >
           <div style={{ width: 44, height: 3, background: "#5B7FFF", display: "flex" }} />
-          Mechanical Engineering Portfolio
+          ElectroMechanical Engineer
         </div>
 
         <div style={{ display: "flex", fontSize: 108, fontWeight: 700, color: "#FFFFFF", marginTop: 18, letterSpacing: -3 }}>

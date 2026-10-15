@@ -11,6 +11,7 @@ const NAV_LINKS = [
   ["Skills", "#skills"],
   ["Experience", "#experience"],
   ["Projects", "#projects"],
+  ["Electrical", "#electrical"],
   ["AI", "#ai"],
   ["Resume", "#resume"],
   ["Contact", "#contact"],

@@ -21,7 +21,7 @@ export function HeroSection() {
           <motion.div variants={{ hidden: { opacity: 0, y: 16, filter: "blur(8px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)" } }} transition={{ duration: 0.6 }}>
             <Badge className="mb-5 border-primary/30 bg-primary/10 text-primary">
               <Sparkles size={14} className="mr-2" />
-              Mechanical engineering portfolio
+              ElectroMechanical Engineer
             </Badge>
           </motion.div>
           <motion.h1
