@@ -43,6 +43,26 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await page.locator('#electrical details').first().getAttribute('open'), '');
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.deepEqual(errors, []);
+      await page.goto(`${process.env.PREVIEW_URL || 'http://127.0.0.1:3014'}/electrical`, { waitUntil: 'networkidle' });
+      assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'What brought you here?');
+      assert.equal(await page.locator('.pcb-viewer').first().getAttribute('data-board'), 'NFC PCB Business Card');
+      await page.screenshot({ path: `.artifacts/electrical-page-${width}.png` });
+      const card = page.locator('.pcb-viewer').first();
+      await card.evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+      await card.locator('canvas').waitFor();
+      await card.getByRole('status').waitFor({ state: 'hidden' });
+      for (let turn = 0; turn < 3; turn++) {
+        await card.getByRole('button', { name: 'Rotate right' }).click();
+        await page.waitForTimeout(150);
+        await card.screenshot({ path: `.artifacts/nfc-angle-${width}-${turn}.png` });
+      }
+      await card.getByRole('button', { name: 'Flip board' }).click();
+      await card.getByRole('button', { name: 'Rotate left' }).click();
+      await page.waitForTimeout(150);
+      await card.screenshot({ path: `.artifacts/nfc-back-angle-${width}.png` });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+      assert.deepEqual(errors, []);
+      console.log(`PASS ${width}px electrical landing page, NFC-first ordering, angled model views`);
       await page.close();
     }
   } finally { await browser.close(); }

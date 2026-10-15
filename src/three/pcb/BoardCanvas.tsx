@@ -19,6 +19,29 @@ function Board({ url, view, onReady }: { url: string; view: View; onReady: () =>
   const controls = useRef<OrbitControlsImpl>(null);
   const object = useMemo(() => {
     const clone = scene.clone(true);
+    clone.traverse(child => {
+      if (!(child instanceof THREE.Mesh)) return;
+      const prepare = (source: THREE.Material) => {
+        const material = source.clone();
+        // KiCad exports board coatings as BLEND. These physical surfaces must
+        // write opaque depth so rear artwork cannot sort over the front face.
+        material.transparent = false;
+        material.opacity = 1;
+        material.depthWrite = true;
+        let parent: THREE.Object3D | null = child;
+        while (parent) {
+          if (parent.name.toLowerCase().includes("silkscreen")) {
+            material.polygonOffset = true;
+            material.polygonOffsetFactor = -1;
+            material.polygonOffsetUnits = -1;
+            break;
+          }
+          parent = parent.parent;
+        }
+        return material;
+      };
+      child.material = Array.isArray(child.material) ? child.material.map(prepare) : prepare(child.material);
+    });
     // KiCad exports Y as the board normal. Present the PCB face-on.
     clone.rotation.x = Math.PI / 2;
     if (url.includes("can-shield")) clone.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
@@ -63,7 +86,7 @@ export default function BoardCanvas({ model, image, name }: Props) {
     <div className="relative aspect-[4/3] w-full" role="region" aria-label={`${name} interactive 3D model`}>
       {!ready && fallback}
       {active && <ModelErrorBoundary fallback={fallback}>
-        <Canvas frameloop="demand" dpr={[1, 1.5]} camera={{ position: [0, 0, 5.6], fov: 40 }} gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }} fallback={fallback}>
+        <Canvas frameloop="demand" dpr={[1, 1.5]} camera={{ position: [0, 0, 5.6], fov: 40, near: 0.5, far: 30 }} gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }} fallback={fallback}>
           <Suspense fallback={null}><Board url={model} view={view} onReady={onReady} /></Suspense>
         </Canvas>
       </ModelErrorBoundary>}

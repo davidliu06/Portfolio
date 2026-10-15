@@ -1,4 +1,4 @@
-export const electricalProjects = [
+const pcbProjects = [
   {
     id: "can-bus-shield",
     name: "ESP32 CAN Bus Shield",
@@ -38,3 +38,5 @@ export const electricalProjects = [
     testing: "I tested the circuit during development using hands-on functional checks. Specific read-distance, RF tuning, and compatibility measurements are not published here."
   }
 ] as const;
+
+export const electricalProjects = [pcbProjects[1], pcbProjects[0]] as const;

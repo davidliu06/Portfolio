@@ -11,13 +11,13 @@ const NAV_LINKS = [
   ["Skills", "#skills"],
   ["Experience", "#experience"],
   ["Projects", "#projects"],
-  ["Electrical", "#electrical"],
+  ["Electrical", "/electrical"],
   ["AI", "#ai"],
   ["Resume", "#resume"],
   ["Contact", "#contact"],
 ] as const;
 
-const SECTION_IDS = NAV_LINKS.map(([, href]) => href.slice(1));
+const SECTION_IDS = NAV_LINKS.filter(([, href]) => href.startsWith("#")).map(([, href]) => href.slice(1));
 
 function useActiveSection() {
   const [active, setActive] = useState<string | null>(null);
