@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export type RevealPreset =
@@ -61,14 +61,15 @@ type RevealSectionProps = {
 
 /** A single block that reveals once, the first time it scrolls into the viewport, using one of several GPU-only motion presets. */
 export function RevealSection({ children, preset = "fade-up", className, delay = 0, duration = 0.65, glow }: RevealSectionProps) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
       className={cn(className, glow && GLOW_CLASS[glow])}
-      initial="hidden"
+      initial={reduced ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={PRESETS[preset]}
-      transition={{ duration, ease: EASE, delay }}
+      transition={{ duration: reduced ? 0 : duration, ease: EASE, delay: reduced ? 0 : delay }}
     >
       {children}
     </motion.div>
@@ -86,10 +87,11 @@ type RevealGroupProps = {
 
 /** Wraps a list/grid of RevealItem children so they animate in one-by-one as the group scrolls into view. */
 export function RevealGroup({ children, className, stagger = 0.1, delayChildren = 0, margin = "-80px" }: RevealGroupProps) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      initial={reduced ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin }}
       variants={{ hidden: {}, visible: { transition: { staggerChildren: stagger, delayChildren } } }}

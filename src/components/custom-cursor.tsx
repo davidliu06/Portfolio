@@ -17,6 +17,7 @@ export function CustomCursor() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     document.documentElement.setAttribute("data-cursor", "custom");
 
@@ -79,6 +80,7 @@ export function CustomCursor() {
       {/* Exact-position glowing center dot */}
       <div
         ref={dotRef}
+        data-custom-cursor
         aria-hidden
         className="pointer-events-none fixed left-0 top-0 z-[9999] h-[6px] w-[6px] rounded-full will-change-transform"
         style={{
@@ -90,6 +92,7 @@ export function CustomCursor() {
       {/* Lagging rotating reticle */}
       <div
         ref={reticleRef}
+        data-custom-cursor
         aria-hidden
         className="pointer-events-none fixed left-0 top-0 z-[9998] will-change-transform"
       >

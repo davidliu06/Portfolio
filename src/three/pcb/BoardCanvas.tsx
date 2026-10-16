@@ -6,7 +6,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import * as THREE from "three";
-import { Box, FlipVertical2, RotateCcw, RotateCw, ZoomIn, ZoomOut } from "lucide-react";
+import { Box, FlipVertical2, RotateCcw, RotateCw, ZoomIn, ZoomOut, ImageIcon } from "lucide-react";
 import { ModelErrorBoundary } from "@/three/assembly/ModelErrorBoundary";
 
 type Props = { model: string; image: string; name: string };
@@ -71,6 +71,7 @@ export default function BoardCanvas({ model, image, name }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const [ready, setReady] = useState(false);
+  const [showPhoto, setShowPhoto] = useState(false);
   const [view, setView] = useState<View>(initialView);
   const onReady = useCallback(() => setReady(true), []);
   useEffect(() => {
@@ -84,21 +85,24 @@ export default function BoardCanvas({ model, image, name }: Props) {
   const buttonClass = "grid h-10 w-10 place-items-center rounded-md border border-border bg-background/90 text-foreground transition hover:bg-muted disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary";
   return <div ref={container} className="pcb-viewer relative w-full" data-board={name}>
     <div className="relative aspect-[4/3] w-full" role="region" aria-label={`${name} interactive 3D model`}>
-      {!ready && fallback}
-      {active && <ModelErrorBoundary fallback={fallback}>
+      {(!ready || showPhoto) && fallback}
+      {active && !showPhoto && <ModelErrorBoundary fallback={fallback}>
         <Canvas frameloop="demand" dpr={[1, 1.5]} camera={{ position: [0, 0, 5.6], fov: 40, near: 0.5, far: 30 }} gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }} fallback={fallback}>
           <Suspense fallback={null}><Board url={model} view={view} onReady={onReady} /></Suspense>
         </Canvas>
       </ModelErrorBoundary>}
-      {!ready && <span className="absolute bottom-3 left-3 flex items-center gap-2 text-xs text-muted-foreground" role="status"><Box size={14} />{active ? "Loading 3D model" : "PCB preview"}</span>}
+      {!ready && !showPhoto && <span className="absolute bottom-3 left-3 flex items-center gap-2 text-xs text-muted-foreground" role="status"><Box size={14} />{active ? "Loading 3D model" : "PCB preview"}</span>}
     </div>
     <div className="flex flex-wrap justify-center gap-2 py-3" role="group" aria-label={`${name} model controls`}>
+      <button type="button" className={buttonClass} title={showPhoto ? "Show 3D model" : "Show static image"} aria-label={showPhoto ? "Show 3D model" : "Show static image"} aria-pressed={showPhoto} onClick={() => setShowPhoto(value => !value)}>{showPhoto ? <Box size={18} /> : <ImageIcon size={18} />}</button>
+      {!showPhoto && <>
       <button type="button" className={buttonClass} title="Rotate left" aria-label="Rotate left" onClick={() => setView(v => ({ ...v, turn: v.turn - Math.PI / 6 }))}><RotateCcw size={18} /></button>
       <button type="button" className={buttonClass} title="Rotate right" aria-label="Rotate right" onClick={() => setView(v => ({ ...v, turn: v.turn + Math.PI / 6 }))}><RotateCw size={18} /></button>
       <button type="button" className={buttonClass} title="Flip board" aria-label="Flip board" aria-pressed={view.flip} onClick={() => setView(v => ({ ...v, flip: !v.flip }))}><FlipVertical2 size={18} /></button>
       <button type="button" className={buttonClass} title="Zoom in" aria-label="Zoom in" disabled={view.zoom >= 1.8} onClick={() => setView(v => ({ ...v, zoom: Math.min(1.8, v.zoom + 0.2) }))}><ZoomIn size={18} /></button>
       <button type="button" className={buttonClass} title="Zoom out" aria-label="Zoom out" disabled={view.zoom <= 0.6} onClick={() => setView(v => ({ ...v, zoom: Math.max(0.6, v.zoom - 0.2) }))}><ZoomOut size={18} /></button>
       <button type="button" className={buttonClass} title="Reset view" aria-label="Reset view" onClick={() => setView({ ...initialView })}><Box size={18} /></button>
+      </>}
     </div>
   </div>;
 }

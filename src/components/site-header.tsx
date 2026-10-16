@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -48,6 +48,15 @@ function useActiveSection() {
 export function SiteHeader() {
   const active = useActiveSection();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
   // Close mobile menu when route changes (hash navigation)
   useEffect(() => {
@@ -72,7 +81,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map(([label, href]) => {
               const isActive = active === href;
               return (
@@ -97,8 +106,11 @@ export function SiteHeader() {
 
           {/* Hamburger — mobile only */}
           <button
+            ref={menuButton}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-transparent transition hover:border-border hover:bg-muted md:hidden"
+            className="grid h-11 w-11 place-items-center rounded-lg border border-transparent transition hover:border-border hover:bg-muted lg:hidden"
             onClick={() => setMenuOpen((o) => !o)}
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -110,7 +122,8 @@ export function SiteHeader() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-x-0 top-16 z-30 border-b border-white/[0.06] bg-background/97 backdrop-blur-lg md:hidden"
+            id="mobile-navigation"
+            className="fixed inset-x-0 top-16 z-30 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-white/[0.06] bg-background/95 backdrop-blur-lg lg:hidden"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}

@@ -15,8 +15,9 @@ import { ExperienceSection } from "@/components/timeline/experience-section";
 export default function Home() {
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <SiteHeader />
-      <main className="relative z-10">
+      <main id="main-content" tabIndex={-1} className="relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />

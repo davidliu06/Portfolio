@@ -13,6 +13,7 @@ export function ContactSection() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === "loading") return;
     const form = event.currentTarget;
     setStatus("loading");
     setStatusMessage("");
@@ -45,7 +46,7 @@ export function ContactSection() {
           <SectionHeading
             eyebrow="Get in touch"
             title="Let's build something."
-            description="Reach out directly — messages go straight to my inbox through Resend."
+            description="Have an internship, a technical challenge, or an idea worth building? I'd love to hear from you."
           />
         </RevealSection>
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -76,6 +77,7 @@ export function ContactSection() {
                 <input
                   className="contact-field h-11 rounded-2xl border px-4 outline-none focus:ring-2 focus:ring-ring"
                   name="name"
+                  autoComplete="name"
                   required
                   suppressHydrationWarning
                 />
@@ -85,6 +87,7 @@ export function ContactSection() {
                 <input
                   className="contact-field h-11 rounded-2xl border px-4 outline-none focus:ring-2 focus:ring-ring"
                   name="email"
+                  autoComplete="email"
                   required
                   suppressHydrationWarning
                   type="email"
@@ -105,8 +108,10 @@ export function ContactSection() {
                 <Send size={18} />
                 {status === "loading" ? "Sending" : "Send Message"}
               </Button>
-              {status === "sent" && <p className="text-sm font-semibold text-secondary">{statusMessage}</p>}
-              {status === "error" && <p className="max-w-md text-sm font-semibold text-accent">{statusMessage}</p>}
+              <div role="status" aria-live="polite" className="min-h-6 text-sm font-semibold">
+                {status === "sent" && <p className="text-secondary">{statusMessage}</p>}
+                {status === "error" && <p className="max-w-md text-accent">{statusMessage} <a href={`mailto:${profile.email}`} className="underline">Email David</a></p>}
+              </div>
             </div>
           </form>
           </RevealSection>
