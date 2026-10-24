@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { nfcAntennaSegments } from "@/data/nfc-antenna";
 
 /** Normalize the real KiCad export without mutating the shared loader cache. */
 export function prepareBoard(scene: THREE.Object3D, url: string) {
@@ -51,6 +52,13 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
     };
     child.material = Array.isArray(child.material) ? child.material.map(prepare) : prepare(child.material);
   });
+  if (!url.includes("can-shield")) {
+    // Keep the physical back-copper coil visible in both story and inspection views.
+    const points = nfcAntennaSegments.flatMap(segment => segment.map(([x, y]) => new THREE.Vector3(x / 1000, -0.00012, y / 1000)));
+    const coil = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: "#91a7b5" }));
+    coil.name = "persistent-antenna";
+    clone.add(coil);
+  }
   clone.rotation.x = Math.PI / 2;
   if (url.includes("can-shield")) clone.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
   clone.updateMatrixWorld(true);

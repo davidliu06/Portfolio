@@ -64,7 +64,12 @@ function Board({ progress, onReady }: { progress: number; onReady: () => void })
       marker.current.position.copy(points[focusIndex]);
       (marker.current.material as THREE.MeshBasicMaterial).color.set(pcbStory[focusIndex].color);
     }
-    if (antenna.current) antenna.current.visible = Math.abs(step - 3) < 0.65;
+    if (antenna.current) {
+      const emphasis = 1 - THREE.MathUtils.smoothstep(Math.abs(step - 3), 0, 0.9);
+      antenna.current.traverse(child => {
+        if ("material" in child) (child.material as THREE.Material).opacity = emphasis * 0.85;
+      });
+    }
     if (components.current) components.current.visible = Math.abs(step - 4) < 0.65;
     if (light.current) {
       light.current.color.set(a.color).lerp(scratch.color.set(b.color), t);
@@ -82,7 +87,7 @@ function Board({ progress, onReady }: { progress: number; onReady: () => void })
     <group ref={group}>
       <primitive object={object} />
       <mesh ref={marker} visible={false} renderOrder={2}><ringGeometry args={[0.085, 0.092, 48]} /><meshBasicMaterial side={THREE.DoubleSide} depthTest={false} depthWrite={false} /></mesh>
-      <group ref={antenna} visible={false}><Line points={highlights.traces} segments color="#8ebcef" lineWidth={2} depthTest={false} depthWrite={false} transparent opacity={0.85} renderOrder={3} /></group>
+      <group ref={antenna}><Line points={highlights.traces} segments color="#8ebcef" lineWidth={2} depthTest depthWrite={false} transparent opacity={0} renderOrder={3} /></group>
       <group ref={components} visible={false}>{highlights.parts.map(part => <Line key={part.name} points={part.outline} color={part.color} lineWidth={2.5} depthTest={false} depthWrite={false} renderOrder={3} />)}</group>
     </group>
   </>;
