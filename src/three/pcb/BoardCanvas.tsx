@@ -5,69 +5,33 @@ import Image from "next/image";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import * as THREE from "three";
+import { prepareBoard } from "./prepare-board";
 import { Box, FlipVertical2, RotateCcw, RotateCw, ZoomIn, ZoomOut, ImageIcon } from "lucide-react";
 import { ModelErrorBoundary } from "@/three/assembly/ModelErrorBoundary";
 
-type Props = { model: string; image: string; name: string };
+type Props = { model: string; image: string; name: string; large?: boolean };
 type View = { turn: number; flip: boolean; zoom: number };
 const initialView: View = { turn: 0, flip: false, zoom: 1 };
 
-function Board({ url, view, onReady }: { url: string; view: View; onReady: () => void }) {
+function Board({ url, view, onReady, large }: { url: string; view: View; onReady: () => void; large: boolean }) {
   const { scene } = useGLTF(url);
-  const { invalidate } = useThree();
+  const { invalidate, viewport } = useThree();
   const controls = useRef<OrbitControlsImpl>(null);
-  const object = useMemo(() => {
-    const clone = scene.clone(true);
-    clone.traverse(child => {
-      if (!(child instanceof THREE.Mesh)) return;
-      const prepare = (source: THREE.Material) => {
-        const material = source.clone();
-        // KiCad exports board coatings as BLEND. These physical surfaces must
-        // write opaque depth so rear artwork cannot sort over the front face.
-        material.transparent = false;
-        material.opacity = 1;
-        material.depthWrite = true;
-        let parent: THREE.Object3D | null = child;
-        while (parent) {
-          if (parent.name.toLowerCase().includes("silkscreen")) {
-            material.polygonOffset = true;
-            material.polygonOffsetFactor = -1;
-            material.polygonOffsetUnits = -1;
-            break;
-          }
-          parent = parent.parent;
-        }
-        return material;
-      };
-      child.material = Array.isArray(child.material) ? child.material.map(prepare) : prepare(child.material);
-    });
-    // KiCad exports Y as the board normal. Present the PCB face-on.
-    clone.rotation.x = Math.PI / 2;
-    if (url.includes("can-shield")) clone.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
-    clone.updateMatrixWorld(true);
-    const bounds = new THREE.Box3().setFromObject(clone);
-    const center = bounds.getCenter(new THREE.Vector3());
-    const size = bounds.getSize(new THREE.Vector3());
-    const scale = 3 / Math.max(size.x, size.y, size.z);
-    clone.scale.setScalar(scale);
-    clone.position.copy(center.multiplyScalar(-scale));
-    return clone;
-  }, [scene, url]);
+  const object = useMemo(() => prepareBoard(scene, url), [scene, url]);
   useEffect(() => { onReady(); }, [onReady]);
   useEffect(() => { controls.current?.reset(); invalidate(); }, [view, invalidate]);
   return <>
     <ambientLight intensity={2} />
     <directionalLight position={[3, 4, 5]} intensity={3} />
     <directionalLight position={[-3, -2, -4]} intensity={2} />
-    <group rotation={[0, (view.flip ? Math.PI : 0) + view.turn, 0]} scale={view.zoom}>
+    <group rotation={[0, (view.flip ? Math.PI : 0) + view.turn, 0]} scale={view.zoom * (large ? Math.min(viewport.width * 0.82 / 3, viewport.height * 0.75 / 1.8) : 1)}>
       <primitive object={object} />
     </group>
     <OrbitControls ref={controls} makeDefault enablePan={false} enableZoom={false} enableDamping={false} />
   </>;
 }
 
-export default function BoardCanvas({ model, image, name }: Props) {
+export default function BoardCanvas({ model, image, name, large = false }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const [ready, setReady] = useState(false);
@@ -84,11 +48,11 @@ export default function BoardCanvas({ model, image, name }: Props) {
   const fallback = <Image src={image} alt={`${name} PCB render`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-contain p-4" />;
   const buttonClass = "grid h-10 w-10 place-items-center rounded-md border border-border bg-background/90 text-foreground transition hover:bg-muted disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary";
   return <div ref={container} className="pcb-viewer relative w-full" data-board={name}>
-    <div className="relative aspect-[4/3] w-full" role="region" aria-label={`${name} interactive 3D model`}>
+    <div className={`relative w-full ${large ? "pcb-large-surface" : "aspect-[4/3]"}`} role="region" aria-label={`${name} interactive 3D model`}>
       {(!ready || showPhoto) && fallback}
       {active && !showPhoto && <ModelErrorBoundary fallback={fallback}>
         <Canvas frameloop="demand" dpr={[1, 1.5]} camera={{ position: [0, 0, 5.6], fov: 40, near: 0.5, far: 30 }} gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }} fallback={fallback}>
-          <Suspense fallback={null}><Board url={model} view={view} onReady={onReady} /></Suspense>
+          <Suspense fallback={null}><Board url={model} view={view} onReady={onReady} large={large} /></Suspense>
         </Canvas>
       </ModelErrorBoundary>}
       {!ready && !showPhoto && <span className="absolute bottom-3 left-3 flex items-center gap-2 text-xs text-muted-foreground" role="status"><Box size={14} />{active ? "Loading 3D model" : "PCB preview"}</span>}

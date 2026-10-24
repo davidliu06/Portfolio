@@ -1,0 +1,55 @@
+.pcb-story-track { position: relative; height: 650svh; overflow: visible; background: #080c11; }
+.pcb-story-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #080c11; color: #edf0f4; }
+.pcb-story-topline { position: absolute; inset: 24px 4% auto; display: flex; justify-content: space-between; gap: 16px; z-index: 3; font-size: 11px; color: #b5bfc9; }
+.pcb-story-topline a { display: inline-flex; align-items: center; gap: 8px; min-height: 30px; }
+.pcb-story-model { position: absolute; inset: 0; pointer-events: none; }
+@media (min-width: 900px) {
+  .pcb-story-model { clip-path: inset(0 0 0 var(--story-clip, 0%)); }
+}
+.pcb-story-copy { position: absolute; inset: 0; pointer-events: none; }
+.pcb-story-chapter { position: absolute; top: 32%; left: 6%; width: 31%; max-width: 440px; }
+.pcb-story-chapter h1, .pcb-story-chapter h2 { margin-top: 16px; font-size: 42px; line-height: 1.08; font-weight: 650; text-wrap: balance; }
+.pcb-story-chapter.is-intro { top: 12%; left: 0; width: 100%; max-width: none; text-align: center; padding: 0 24px; }
+.pcb-story-chapter.is-intro h1 { font-size: 54px; }
+.pcb-story-eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 11px; text-transform: uppercase; }
+.pcb-story-body { margin-top: 22px; font-size: 16px; line-height: 1.8; color: #bfc7d0; }
+.is-intro .pcb-story-body { max-width: 610px; margin: 14px auto 0; font-size: 15px; }
+.pcb-story-detail { margin-top: 25px; font-size: 10px; font-family: monospace; }
+.is-intro .pcb-story-detail { display: none; }
+.pcb-story-chapters { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; z-index: 4; }
+.pcb-story-chapters button { width: 40px; height: 44px; display: grid; place-items: center; }
+.pcb-story-chapters button span { width: 20px; height: 3px; background: #37424c; transition: background-color 150ms; }
+.pcb-story-counter { font-family: monospace; font-size: 11px; white-space: nowrap; color: #a6b2bf; margin-left: 16px; }
+.pcb-story-progress { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; transform-origin: left; }
+.pcb-story-topline { text-shadow: 0 1px 4px #000; }
+.pcb-inspection { background: #0c1118; overflow: visible; }
+.pcb-inspection .pcb-viewer { max-width: 1600px; margin-inline: auto; }
+.pcb-large-surface { height: 76svh; min-height: 420px; max-height: 960px; }
+@media (max-width: 899px) {
+  .pcb-story-model { inset: 13% 0 auto; height: 43%; }
+  .pcb-story-chapter, .pcb-story-chapter.is-intro { left: 6%; top: 57%; width: 88%; max-width: none; padding: 0; text-align: left; }
+  .pcb-story-chapter h1, .pcb-story-chapter h2, .pcb-story-chapter.is-intro h1 { font-size: 29px; margin-top: 10px; }
+  .pcb-story-body, .is-intro .pcb-story-body { font-size: 14px; line-height: 1.65; margin-top: 12px; }
+  .pcb-story-detail { margin-top: 12px; font-size: 9px; }
+  .pcb-story-topline { inset: 12px 5% auto; font-size: 10px; }
+  .pcb-story-chapters { bottom: 8px; }
+  .pcb-story-chapters button { width: 32px; }
+  .pcb-large-surface { height: 58svh; min-height: 300px; }
+}
+@media (max-height: 680px) {
+  .pcb-story-chapter { top: 27%; }
+  .pcb-story-chapter h1, .pcb-story-chapter h2 { font-size: 30px; }
+  .pcb-story-body { font-size: 13px; line-height: 1.6; }
+  .pcb-story-detail { display: none; }
+}
+@media (max-width: 899px) and (max-height: 680px) {
+  .pcb-story-model { top: 7%; height: 40%; }
+  .pcb-story-chapter, .pcb-story-chapter.is-intro { top: 48%; }
+  .pcb-story-chapter h1, .pcb-story-chapter h2, .pcb-story-chapter.is-intro h1 { font-size: 24px; }
+}
+@media (min-width: 600px) and (max-width: 899px) and (max-height: 500px) {
+  .pcb-story-model { inset: 10% 0 10% 46%; height: auto; }
+  .pcb-story-chapter, .pcb-story-chapter.is-intro { top: 20%; left: 5%; width: 38%; }
+  .pcb-story-chapter h1, .pcb-story-chapter h2, .pcb-story-chapter.is-intro h1 { font-size: 23px; }
+  .pcb-story-body, .is-intro .pcb-story-body { font-size: 12px; line-height: 1.6; }
+}

@@ -5,13 +5,13 @@ import { electricalProjects } from "@/data/electrical";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-export function ElectricalSection({ standalone = false }: { standalone?: boolean }) {
+export function ElectricalSection({ standalone = false, onlyCan = false }: { standalone?: boolean; onlyCan?: boolean }) {
   return (
     <section id="electrical" aria-label="Electrical projects" className={`relative scroll-mt-20 ${standalone ? "pb-20" : "py-20"}`}>
       <div className="section-shell">
         {!standalone && <><SectionHeading eyebrow="Electrical" title="Circuits, copper, and connections" description="PCB design at the intersection of embedded systems, communication, and personal hardware." /><Link href="/electrical" className="mb-6 inline-flex items-center gap-2 text-primary underline underline-offset-4">Behind the NFC card<ArrowUpRight size={16} aria-hidden /></Link></>}
         <div className="divide-y divide-border">
-          {electricalProjects.map(project => (
+          {electricalProjects.filter(project => !onlyCan || project.id === "can-bus-shield").map(project => (
             <article id={project.id} key={project.id} className="grid scroll-mt-24 items-start gap-8 py-10 md:grid-cols-2 lg:gap-14">
               <div className="md:sticky md:top-24 min-w-0"><PcbViewer model={project.model} image={project.image} name={project.name} /></div>
               <div>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Download, Mail } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import { ElectricalSection } from "@/components/electrical-section";
 import { Chatbot } from "@/components/chatbot/chatbot";
 import { profile } from "@/data/profile";
+import { PcbScrollStory } from "@/components/pcb-scroll-story";
+import "@/styles/pcb-story.css";
 
 export const metadata: Metadata = {
   title: "What brought you here? | David Liu's Electrical Projects",
@@ -24,17 +26,10 @@ export default function ElectricalPage() {
         <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 text-sm text-primary"><Mail size={16} aria-hidden />Get in touch</a>
       </nav>
     </header>
-    <main className="relative z-10">
-      <section className="section-shell pb-4 pt-10 sm:pt-14">
-        <p className="text-sm font-semibold text-primary">A tap. A connection. A little engineering.</p>
-        <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">What brought you here?</h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Maybe it was a tap on my NFC card. I&apos;m David, an Engineering student at Harvey Mudd College. This is the circuitry behind that first hello, and a look at what else I build.</p>
-        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
-          <Link href="/" className="inline-flex items-center gap-2 text-primary">Explore my portfolio<ArrowUpRight size={16} aria-hidden /></Link>
-          <a href={profile.resumePath} download className="inline-flex items-center gap-2 text-foreground"><Download size={16} aria-hidden />Resume</a>
-        </div>
-      </section>
-      <ElectricalSection standalone />
+    <main className="relative z-10 bg-[#080c11]">
+      <PcbScrollStory />
+      <ElectricalSection standalone onlyCan />
+      <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link><a href={profile.resumePath} download>Download resume</a></div>
     </main>
     <footer className="relative z-10 border-t border-border py-8"><div className="section-shell text-sm text-muted-foreground">David Liu / ElectroMechanical Engineer</div></footer>
     <Chatbot />
