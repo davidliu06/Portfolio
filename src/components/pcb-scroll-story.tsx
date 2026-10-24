@@ -71,7 +71,7 @@ export function PcbScrollStory() {
               <p className="pcb-story-eyebrow" style={{ color: chapter.color }}>{String(index + 1).padStart(2, "0")} / {chapter.label}</p>
               {index === 0 ? <h1>{chapter.title}</h1> : <h2>{chapter.title}</h2>}
               <p className="pcb-story-body">{chapter.body}</p>
-              <p className="pcb-story-detail" style={{ color: chapter.color }}>{chapter.detail}</p>
+              <p className="pcb-story-detail" style={{ color: chapter.color }}>{index === 4 ? <><span style={{ color: "#ffc879" }}>D1 LED</span>{" / "}<span style={{ color: "#a5ebd5" }}>R1 RESISTOR</span>{" / "}<span style={{ color: "#bcaaff" }}>C1 CAPACITOR</span></> : chapter.detail}</p>
             </div>;
           })}
         </div>

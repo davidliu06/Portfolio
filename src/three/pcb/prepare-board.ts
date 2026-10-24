@@ -11,8 +11,28 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
       material.transparent = false;
       material.opacity = 1;
       material.depthWrite = true;
+      // This KiCad GLB uses numeric node names; its coating materials are stable.
+      if (!url.includes("can-shield")) {
+        if (["mat_11", "mat_12", "mat_13"].includes(source.name) && material instanceof THREE.MeshStandardMaterial) {
+          material.color.set("#090a0c");
+          material.roughness = 0.76;
+          material.metalness = 0.08;
+        }
+        if (["mat_9", "mat_10", "mat_11", "mat_12"].includes(source.name)) {
+          const offset = ["mat_9", "mat_10"].includes(source.name) ? -4 : -2;
+          material.polygonOffset = true;
+          material.polygonOffsetFactor = offset;
+          material.polygonOffsetUnits = offset;
+        }
+      }
       let parent: THREE.Object3D | null = child;
       while (parent) {
+        const name = parent.name.toLowerCase();
+        if (!url.includes("can-shield") && (name.includes("soldermask") || name.endsWith("_pcb")) && material instanceof THREE.MeshStandardMaterial) {
+          material.color.set("#090a0c");
+          material.roughness = 0.76;
+          material.metalness = 0.08;
+        }
         if (parent.name.toLowerCase().includes("silkscreen")) {
           material.polygonOffset = true;
           material.polygonOffsetFactor = -4;
