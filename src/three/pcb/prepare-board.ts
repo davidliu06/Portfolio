@@ -13,7 +13,7 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
       material.opacity = 1;
       material.depthWrite = true;
       // This KiCad GLB uses numeric node names; its coating materials are stable.
-      if (!url.includes("can-shield")) {
+      if (url.includes("business-card")) {
         if (["mat_11", "mat_12", "mat_13"].includes(source.name) && material instanceof THREE.MeshStandardMaterial) {
           material.color.set("#090a0c");
           material.roughness = 0.76;
@@ -29,7 +29,7 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
       let parent: THREE.Object3D | null = child;
       while (parent) {
         const name = parent.name.toLowerCase();
-        if (!url.includes("can-shield") && (name.includes("soldermask") || name.endsWith("_pcb")) && material instanceof THREE.MeshStandardMaterial) {
+        if (url.includes("business-card") && (name.includes("soldermask") || name.endsWith("_pcb")) && material instanceof THREE.MeshStandardMaterial) {
           material.color.set("#090a0c");
           material.roughness = 0.76;
           material.metalness = 0.08;
@@ -52,7 +52,7 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
     };
     child.material = Array.isArray(child.material) ? child.material.map(prepare) : prepare(child.material);
   });
-  if (!url.includes("can-shield")) {
+  if (url.includes("business-card")) {
     // Keep the physical back-copper coil visible in both story and inspection views.
     const points = nfcAntennaSegments.flatMap(segment => segment.map(([x, y]) => new THREE.Vector3(x / 1000, -0.00012, y / 1000)));
     const coil = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: "#91a7b5" }));
@@ -60,7 +60,6 @@ export function prepareBoard(scene: THREE.Object3D, url: string) {
     clone.add(coil);
   }
   clone.rotation.x = Math.PI / 2;
-  if (url.includes("can-shield")) clone.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI);
   clone.updateMatrixWorld(true);
   const bounds = new THREE.Box3().setFromObject(clone);
   const center = bounds.getCenter(new THREE.Vector3());

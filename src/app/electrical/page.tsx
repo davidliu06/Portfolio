@@ -9,7 +9,7 @@ import "@/styles/pcb-story.css";
 
 export const metadata: Metadata = {
   title: "What brought you here? | David Liu's Electrical Projects",
-  description: "Meet the engineering behind David Liu's NFC business card and ESP32 CAN Bus shield. Explore real 3D PCB models, design decisions, and hands-on work.",
+  description: "Explore David Liu's NFC business card and PocketRhythm Lite drum-machine prototype, with real 3D PCB models, design decisions, and validation details.",
   alternates: { canonical: "https://david-s-portfolio-eta.vercel.app/electrical" },
   openGraph: {
     title: "What brought you here? | David Liu",
@@ -28,7 +28,7 @@ export default function ElectricalPage() {
     </header>
     <main className="relative z-10 bg-[#080c11]">
       <PcbScrollStory />
-      <ElectricalSection standalone onlyCan />
+      <ElectricalSection standalone excludeCard />
       <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link><a href={profile.resumePath} download>Download resume</a></div>
     </main>
     <footer className="relative z-10 border-t border-border py-8"><div className="section-shell text-sm text-muted-foreground">David Liu / ElectroMechanical Engineer</div></footer>

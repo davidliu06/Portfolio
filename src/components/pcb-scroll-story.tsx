@@ -85,7 +85,7 @@ export function PcbScrollStory() {
     <section id="inspect-card" className="pcb-inspection">
       <div className="section-shell pt-12"><p className="text-sm font-semibold text-primary">YOUR TURN</p><h2 className="mt-3 text-3xl font-bold sm:text-4xl">Every angle. Every detail.</h2><p className="mt-4 max-w-2xl leading-7 text-muted-foreground">The real KiCad board, from artwork to circuitry.</p></div>
       <PcbViewer model={card.model} image={card.image} name={card.name} large />
-      <div className="section-shell grid gap-8 pb-16 md:grid-cols-2"><div><h3 className="text-xl font-semibold">Skills applied &amp; lessons learned</h3><p className="mt-3 leading-7 text-muted-foreground">{card.skills}</p></div><div><h3 className="text-xl font-semibold">Hands-on testing</h3><p className="mt-3 leading-7 text-muted-foreground">{card.testing}</p><a href="#can-bus-shield" className="mt-5 inline-flex items-center gap-2 text-primary">Next: CAN Bus shield<ArrowUpRight size={16} aria-hidden /></a></div></div>
+      <div className="section-shell grid gap-8 pb-16 md:grid-cols-2"><div><h3 className="text-xl font-semibold">Skills applied &amp; lessons learned</h3><p className="mt-3 leading-7 text-muted-foreground">{card.skills}</p></div><div><h3 className="text-xl font-semibold">Hands-on testing</h3><p className="mt-3 leading-7 text-muted-foreground">{card.testing}</p><a href="#pocket-rhythm" className="mt-5 inline-flex items-center gap-2 text-primary">Next: PocketRhythm drum machine<ArrowUpRight size={16} aria-hidden /></a></div></div>
     </section>
   </>;
 }

@@ -1,22 +1,22 @@
 const pcbProjects = [
   {
-    id: "can-bus-shield",
-    name: "ESP32 CAN Bus Shield",
-    image: "/images/electrical/can-shield.png",
-    model: "/models/can-shield.glb",
-    description: "I designed and tested a compact CAN Bus shield that connects an ESP32 DevKit to a physical CAN network. The board brings communication, power conversion, protection, and accessible connectors into one compact assembly.",
-    details: "My work spans circuit design, component selection, PCB layout, mechanical integration, and hands-on circuit testing.",
-    status: "Designed & tested",
-    technologies: ["KiCad", "ESP32", "CAN Bus", "PCB Layout", "Power Electronics", "Circuit Testing"],
+    id: "pocket-rhythm",
+    name: "PocketRhythm Lite Drum Machine",
+    image: "/images/electrical/pocket-rhythm.png",
+    model: "/models/pocket-rhythm.glb",
+    description: "I designed a compact drum-machine hardware platform around an ESP32-S3: eight tactile buttons, four status LEDs, two knobs, a TFT display socket, and an I2S speaker-amplifier interface on a 100 x 100 mm, two-layer PCB.",
+    details: "The 3D view shows the carrier PCB and available component models, not a fully assembled instrument. Hardware-test firmware is included; drum sequencing and first-article testing are the next development steps.",
+    status: "Prototype design / hardware testing pending",
+    technologies: ["KiCad", "ESP32-S3", "I2S Audio", "Embedded C++", "Two-Layer PCB", "Design for Assembly"],
     choices: [
-      { title: "CAN interface & termination", body: "The SN65HVD233 bridges the ESP32's logic signals to CAN H and CAN L. A selectable 120-ohm termination resistor accommodates the board's position on the bus instead of permanently loading every connection. The NUP2105L provides dedicated protection on the bus lines." },
-      { title: "Switching power supply", body: "The TPS54331 buck stage uses a 6.8 uH inductor, B340A catch diode, and input/output capacitors. Switching conversion addresses the efficiency tradeoff of stepping a higher input voltage down to the logic rail. Placement balances short current loops, capacitor access, and separation from communication circuitry." },
-      { title: "Compact mechanical integration", body: "The approximately 31.8 x 61.77 mm outline fits around the DevKit socket rows and OBD connector. Mounting holes, header pitch, connector orientation, and component height are electrical and mechanical constraints at the same time. Most shield components sit underneath, leaving the DevKit sockets on top." },
-      { title: "Configuration & observability", body: "Jumpers, switches, LEDs, and accessible CAN/I2C connectors make the hardware configurable and easier to inspect. A 1 MOhm / 270 kOhm divider connects battery sensing to the ADC; divider ratio, input limits, and unpowered behavior matter as much as physical routing." },
-      { title: "Layout tradeoffs", body: "The compact revision prioritizes footprint size and does not preserve a dedicated ESP32 antenna keepout, trading RF margin for packaging density. USB/external-power interaction and protection limits remain distinct considerations from basic functional testing; no automotive qualification is claimed." }
+      { title: "Modular processing & audio", body: "An ESP32-S3-DevKitC-1-N8R8 plugs into two 22-position socket rows. A MAX98357 I2S amplifier module provides the speaker interface. Using socketed modules keeps the carrier focused on controls, interconnects, and mechanical integration while making assembly and replacement more accessible." },
+      { title: "Playable control layout", body: "Eight buttons form two columns of four with 25 mm horizontal and 12 mm vertical spacing. Two potentiometers sit above the keys, while four LEDs provide grouped feedback. This arrangement leaves the controls available for step entry, instrument triggers, or shift functions as the sequencer firmware develops." },
+      { title: "Display fit & voltage selection", body: "The ST7735S display socket uses 3.3 V logic, with a jumper selecting its 3.3 V or 5 V supply. A resistor limits the backlight feed. Four oval mounting slots allow roughly +/-1 mm adjustment, but the purchased display's exact pinout and mechanical fit still require confirmation on the physical module." },
+      { title: "Two-layer routing & assembly", body: "The 100 x 100 mm carrier uses two copper layers, a bottom ground pour, traces at least 0.3 mm wide, and wider power routing. Its 33 through-hole components are intended for hand assembly. Connector orientation, module clearance, mounting holes, and separate plated/non-plated drill outputs connect electrical layout to fabrication and practical assembly." },
+      { title: "Bring-up before sequencing", body: "The included firmware exercises buttons, knobs, LEDs, the display, and a quiet audio test tone. It starts with audio muted. Separating hardware bring-up from the future sequencer helps isolate pin-mapping, assembly, display, and audio-interface problems before adding musical behavior." }
     ],
-    skills: "Applied schematic capture, datasheet interpretation, component and footprint selection, routing, connector integration, and fabrication preparation. Strengthened the ability to reason across power, communication, mechanical fit, and practical debugging instead of treating each subsystem in isolation.",
-    testing: "I performed hands-on circuit testing during development, focusing on functional behavior and debugging. Detailed measurements are not published here."
+    skills: "Applied schematic capture, GPIO allocation, module pinout verification, I2S integration, through-hole footprint design, two-layer routing, mechanical packaging, and fabrication preparation. The project connects control ergonomics and assembly constraints with embedded hardware-test firmware and a staged bring-up plan.",
+    testing: "Saved validation reports record zero reported DRC/ERC violations, zero unconnected items, and no connectivity mismatches across 136 physical pad instances. The hardware-test firmware was compiled for ESP32-S3. These are design-time checks, not proof of working hardware: first power-up, display fit, audio performance, and physical control testing remain pending."
   },
   {
     id: "pcb-business-card",
