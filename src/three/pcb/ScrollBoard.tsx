@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { pcbStory } from "@/data/pcb-story";
 import { prepareBoard } from "./prepare-board";
 import { nfcAntennaSegments } from "@/data/nfc-antenna";
+import { NfcDemo } from "./NfcDemo";
 
 function Board({ progress, onReady }: { progress: number; onReady: () => void }) {
   const { scene } = useGLTF("/models/business-card.glb");
@@ -26,7 +27,7 @@ function Board({ progress, onReady }: { progress: number; onReady: () => void })
       bounds.expandByScalar(0.008);
       const { min, max } = bounds;
       const outline = [[min.x,min.y,min.z], [max.x,min.y,min.z], [max.x,max.y,min.z], [min.x,max.y,min.z], [min.x,min.y,min.z]] as [number, number, number][];
-      return { name, outline, center: bounds.getCenter(new THREE.Vector3()), color: ["#ffc879", "#a5ebd5", "#bcaaff"][i] };
+      return { name, outline, surface: new THREE.Vector3((min.x + max.x) / 2, (min.y + max.y) / 2, min.z), center: bounds.getCenter(new THREE.Vector3()), color: ["#ffc879", "#a5ebd5", "#bcaaff"][i] };
     });
     return { traces, parts, antennaCenter: new THREE.Box3().setFromPoints(traces).getCenter(new THREE.Vector3()), circuitCenter: parts.reduce((center, part) => center.add(part.center), new THREE.Vector3()).divideScalar(3) };
   }, [object]);
@@ -52,7 +53,8 @@ function Board({ progress, onReady }: { progress: number; onReady: () => void })
     const compact = size.width < 900;
     const opening = 1 - THREE.MathUtils.smoothstep(step, 0, 0.85);
     const base = Math.min(viewport.width * (compact ? 0.83 : 0.56) / 3, viewport.height * 0.65 / 1.9);
-    const scale = base * zoom;
+    const demoFraming = THREE.MathUtils.smoothstep(step, 4, 5) * (1 - THREE.MathUtils.smoothstep(step, 7, 8));
+    const scale = base * zoom * (1 - demoFraming * 0.23);
     scratch.a.copy(points[index]).lerp(points[index + 1], t);
     scratch.a.applyAxisAngle(scratch.b.set(0, 1, 0), angle).multiplyScalar(scale);
     group.current.rotation.y = angle;
@@ -86,6 +88,7 @@ function Board({ progress, onReady }: { progress: number; onReady: () => void })
     <directionalLight position={[0, 1, -5]} intensity={1.8} />
     <group ref={group}>
       <primitive object={object} />
+      <NfcDemo progress={current} chapters={pcbStory.length} coil={highlights.antennaCenter} led={highlights.parts[0].surface} />
       <mesh ref={marker} visible={false} renderOrder={2}><ringGeometry args={[0.085, 0.092, 48]} /><meshBasicMaterial side={THREE.DoubleSide} depthTest={false} depthWrite={false} /></mesh>
       <group ref={antenna}><Line points={highlights.traces} segments color="#8ebcef" lineWidth={2} depthTest depthWrite={false} transparent opacity={0} renderOrder={3} /></group>
       <group ref={components} visible={false}>{highlights.parts.map(part => <Line key={part.name} points={part.outline} color={part.color} lineWidth={2.5} depthTest={false} depthWrite={false} renderOrder={3} />)}</group>

@@ -13,9 +13,10 @@ const base = process.env.PREVIEW_URL || 'http://127.0.0.1:3016';
       const track = page.locator('.pcb-story-track');
       const canvas = page.locator('.pcb-story-model canvas');
       await canvas.waitFor();
+      await page.locator('.pcb-story-model img').waitFor({ state: 'hidden' });
       const frames = [];
-      for (let chapter = 0; chapter < 6; chapter++) {
-        await track.evaluate((el, i) => window.scrollTo(0, window.scrollY + el.getBoundingClientRect().top + (el.offsetHeight - innerHeight) * i / 5), chapter);
+      for (let chapter = 0; chapter < 9; chapter++) {
+        await track.evaluate((el, i) => window.scrollTo(0, window.scrollY + el.getBoundingClientRect().top + (el.offsetHeight - innerHeight) * i / 8), chapter);
         await page.waitForTimeout(900);
         assert.equal(await page.locator('.pcb-story-stage').getAttribute('data-chapter'), String(chapter));
         const pixels = await canvas.evaluate(c => {
@@ -28,6 +29,14 @@ const base = process.env.PREVIEW_URL || 'http://127.0.0.1:3016';
         });
         assert.ok(pixels > 1000, `Chapter ${chapter}: nonblank ${pixels}`);
         frames.push(await canvas.evaluate(c => c.toDataURL()));
+        if (chapter === 7) {
+          const samples = new Set();
+          for (let sample = 0; sample < 15; sample++) {
+            await page.waitForTimeout(90);
+            samples.add(await canvas.evaluate(c => c.toDataURL()));
+          }
+          assert.ok(samples.size > 1, 'LED has distinct on/off frames while scrolling is paused');
+        }
         const text = page.locator('.pcb-story-chapter').nth(chapter);
         const box = await text.boundingBox();
         const nav = await page.locator('.pcb-story-chapters').boundingBox();
@@ -53,11 +62,12 @@ const base = process.env.PREVIEW_URL || 'http://127.0.0.1:3016';
       assert.notEqual(before, await viewer.locator('canvas').evaluate(c => c.toDataURL()), 'Final viewer drags');
       await page.screenshot({ path: `.artifacts/story-inspect-${width}.png` });
       assert.deepEqual(errors, []);
-      console.log(`PASS ${width}: six chapters, rendered pixels, scroll motion, text framing, final drag, no runtime errors`);
+      console.log(`PASS ${width}: nine chapters, rendered pixels, scroll motion, text framing, final drag, no runtime errors`);
       await page.close();
     }
     const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     await page.goto(`${base}/electrical`, { waitUntil: 'networkidle' });
+    await page.locator('.pcb-story-track').waitFor({ state: 'detached' });
     assert.equal(await page.locator('.pcb-story-track').count(), 0);
     assert.equal(await page.getByRole('heading', { name: 'The connection is in the copper.' }).count(), 1);
     console.log('PASS reduced-motion static story');

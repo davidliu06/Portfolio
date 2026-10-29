@@ -15,6 +15,12 @@
 .pcb-story-body { margin-top: 22px; font-size: 16px; line-height: 1.8; color: #bfc7d0; }
 .is-intro .pcb-story-body { max-width: 610px; margin: 14px auto 0; font-size: 15px; }
 .pcb-story-detail { margin-top: 25px; font-size: 10px; font-family: monospace; }
+.nfc-demo-steps { display: flex; gap: 16px; margin-top: 24px; pointer-events: auto; }
+.nfc-demo-steps button { display: flex; align-items: center; gap: 7px; min-height: 44px; font-size: 12px; color: #9aa9b9; border-bottom: 2px solid #34404b; }
+.nfc-demo-steps button[aria-current] { color: #eaf6f0; border-color: #a5ebd5; }
+.nfc-demo-steps button span { font-family: monospace; font-size: 10px; }
+.nfc-demo-steps button:focus-visible { outline: 2px solid #a5ebd5; outline-offset: 4px; }
+@media (max-height: 680px) { .nfc-demo-steps { margin-top: 8px; } }
 .is-intro .pcb-story-detail { display: none; }
 .pcb-story-chapters { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; z-index: 4; }
 .pcb-story-chapters button { width: 40px; height: 44px; display: grid; place-items: center; }
@@ -33,7 +39,7 @@
   .pcb-story-detail { margin-top: 12px; font-size: 9px; }
   .pcb-story-topline { inset: 12px 5% auto; font-size: 10px; }
   .pcb-story-chapters { bottom: 8px; }
-  .pcb-story-chapters button { width: 32px; }
+  .pcb-story-chapters button { width: 28px; }
   .pcb-large-surface { height: 58svh; min-height: 300px; }
 }
 @media (max-height: 680px) {

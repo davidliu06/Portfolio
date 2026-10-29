@@ -56,7 +56,7 @@ export function PcbScrollStory() {
       <h1 className="mt-3 text-4xl font-bold">What brought you here?</h1>
       <div className="relative my-6 h-[45svh]">{poster}</div>
       <div className="grid gap-8 md:grid-cols-2">{pcbStory.map(chapter => <article key={chapter.label}><h2 className="text-2xl font-semibold">{chapter.title}</h2><p className="mt-3 leading-7 text-muted-foreground">{chapter.body}</p></article>)}</div>
-    </section> : <section ref={track} className="pcb-story-track" aria-label="NFC card scroll story">
+    </section> : <section ref={track} className="pcb-story-track" style={{ height: `${pcbStory.length * 100 + 50}svh` }} aria-label="NFC card scroll story">
       <div className="pcb-story-stage" data-chapter={active} style={{ "--story-clip": `${Math.min(1, step) * 41}%` } as CSSProperties}>
         <div className="pcb-story-topline"><span>DAVID LIU / NFC CARD</span><a href="#inspect-card">Skip to inspection<ArrowDown size={14} aria-hidden /></a></div>
         <div className="pcb-story-model" aria-label="Scroll-controlled 360 degree PCB view">
@@ -71,13 +71,14 @@ export function PcbScrollStory() {
               <p className="pcb-story-eyebrow" style={{ color: chapter.color }}>{String(index + 1).padStart(2, "0")} / {chapter.label}</p>
               {index === 0 ? <h1>{chapter.title}</h1> : <h2>{chapter.title}</h2>}
               <p className="pcb-story-body">{chapter.body}</p>
+              {index >= 5 && index <= 7 && <nav className="nfc-demo-steps" aria-label="NFC demonstration steps">{["Approach", "Red LED", "Receive link"].map((label, i) => <button key={label} type="button" tabIndex={active === index ? 0 : -1} aria-current={active === i + 5 ? "step" : undefined} onClick={() => goToChapter(i + 5)}><span>{i + 1}</span>{label}</button>)}</nav>}
               <p className="pcb-story-detail" style={{ color: chapter.color }}>{index === 4 ? <><span style={{ color: "#ffc879" }}>D1 LED</span>{" / "}<span style={{ color: "#a5ebd5" }}>R1 RESISTOR</span>{" / "}<span style={{ color: "#bcaaff" }}>C1 CAPACITOR</span></> : chapter.detail}</p>
             </div>;
           })}
         </div>
         <nav className="pcb-story-chapters" aria-label="PCB story chapters">
           {pcbStory.map((chapter, index) => <button type="button" key={chapter.label} title={chapter.label} aria-label={`Chapter ${index + 1}: ${chapter.label}`} aria-current={active === index ? "step" : undefined} onClick={() => goToChapter(index)}><span style={{ backgroundColor: active === index ? chapter.color : undefined }} /></button>)}
-          <span className="pcb-story-counter">{String(active + 1).padStart(2, "0")} / 06</span>
+          <span className="pcb-story-counter">{String(active + 1).padStart(2, "0")} / {String(pcbStory.length).padStart(2, "0")}</span>
         </nav>
         <div className="pcb-story-progress" style={{ transform: `scaleX(${progress})`, background: pcbStory[active].color }} />
       </div>
