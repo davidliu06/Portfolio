@@ -3,163 +3,56 @@
 @tailwind utilities;
 
 :root {
-  /* Deep-space dark theme — designed for WebGL bloom and emissive materials to actually register. */
-  --background: 222 47% 6%;
-  --foreground: 213 25% 87%;
-  --card: 221 42% 9%;
-  --card-foreground: 213 25% 87%;
-  --primary: 226 95% 67%;
-  --primary-foreground: 222 47% 6%;
-  --secondary: 16 95% 62%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 221 38% 13%;
-  --muted-foreground: 215 20% 72%;
-  --accent: 38 92% 55%;
-  --accent-foreground: 222 47% 6%;
-  --border: 220 33% 17%;
-  --input: 220 33% 17%;
-  --ring: 226 95% 67%;
-  --violet: 262 83% 64%;
-  --violet-foreground: 0 0% 100%;
+  color-scheme: light;
+  --background: 0 0% 100%; --foreground: 210 12% 12%;
+  --card: 0 0% 100%; --card-foreground: 210 12% 12%;
+  --primary: 160 70% 25%; --primary-foreground: 0 0% 100%;
+  --secondary: 215 60% 35%; --secondary-foreground: 0 0% 100%;
+  --muted: 180 8% 96%; --muted-foreground: 210 8% 38%;
+  --accent: 15 68% 36%; --accent-foreground: 0 0% 100%;
+  --border: 180 6% 85%; --input: 180 6% 85%; --ring: 160 70% 25%;
+  --violet: 245 30% 40%; --violet-foreground: 0 0% 100%;
 }
-
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse 60rem 40rem at 12% -5%, rgba(47, 93, 255, 0.1), transparent 60%),
-    radial-gradient(ellipse 50rem 36rem at 92% 10%, rgba(139, 92, 246, 0.08), transparent 60%),
-    radial-gradient(ellipse 55rem 40rem at 50% 105%, rgba(255, 93, 58, 0.07), transparent 60%),
-    hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-feature-settings: "rlig" 1, "calt" 1;
-  overflow-x: clip;
-}
-
-body::selection {
-  background: hsl(var(--primary) / 0.7);
-  color: hsl(var(--primary-foreground));
-}
-
-.section-shell {
-  margin-inline: auto;
-  width: min(1120px, calc(100% - 32px));
-}
-
-.text-balance {
-  text-wrap: balance;
-}
-
-.font-display {
-  font-family: var(--font-outfit), Outfit, var(--font-inter), Inter, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-outfit), Outfit, var(--font-inter), Inter, sans-serif;
-  letter-spacing: 0;
-}
-
+* { border-color: hsl(var(--border)); }
+body { margin: 0; background: #fff; color: hsl(var(--foreground)); font-family: var(--font-inter), sans-serif; overflow-x: clip; }
+::selection { background: #d2eadf; color: #153e2c; }
+.section-shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+h1,h2,h3,h4,.font-display { font-family: var(--font-inter), sans-serif; letter-spacing: 0; }
+.text-balance { text-wrap: balance; }
 html { scroll-padding-top: 88px; }
 main > section { overflow-x: clip; }
-:where(a, button, summary):focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 4px; }
+:where(a,button,summary):focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 4px; }
 details > summary { min-height: 44px; padding-block: 10px; }
 details[open] > summary { color: hsl(var(--primary)); }
-.skip-link { position: fixed; top: 8px; left: 16px; z-index: 100; transform: translateY(-150%); padding: 12px 18px; background: hsl(var(--foreground)); color: hsl(var(--background)); border-radius: 6px; }
+.skip-link { position: fixed; top: 8px; left: 16px; z-index: 100; transform: translateY(-150%); padding: 12px 18px; background: #173e30; color: white; }
 .skip-link:focus { transform: translateY(0); }
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  [data-custom-cursor] { display: none; }
-  [data-cursor="custom"], [data-cursor="custom"] * { cursor: auto !important; }
+.night-card { position: relative; background: white; border-color: hsl(var(--border)); border-radius: 6px !important; box-shadow: none !important; overflow: hidden; }
+.soft-panel,.game-panel,.legibility-scrim { background: #f5f7f6; border-radius: 6px; box-shadow: none; }
+.shadow-glow,.shadow-orange,.shadow-violet { box-shadow: none !important; }
+.aurora-text { color: hsl(var(--foreground)); background: none; }
+.contact-field { background: #fff; color: hsl(var(--foreground)); border-color: hsl(var(--border)); border-radius: 4px; }
+.contact-field::placeholder { color: #68716e; }
+main > section:not(.portfolio-intro):not(.pcb-story-track):not(.pcb-inspection) { border-top: 1px solid hsl(var(--border)); }
+.portfolio-intro { padding: 112px 0 0; }
+.intro-kicker { display: flex; justify-content: space-between; gap: 16px; color: #59625e; font-size: 12px; }
+.portfolio-intro h1 { font-size: 112px; line-height: 1.1; font-weight: 600; margin: 30px 0; }
+.intro-content { display: grid; grid-template-columns: 1fr 220px; gap: 80px; border-top: 1px solid #d8dedb; padding: 32px 0 42px; }
+.intro-role { font-size: 28px; font-weight: 500; }
+.intro-description { max-width: 620px; font-size: 22px; line-height: 1.65; margin-top: 16px; color: #46524c; }
+.intro-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 28px; }
+.intro-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.intro-links a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.intro-primary { background: #18583e; color: white; padding: 0 18px; border-radius: 4px; }
+.intro-index { display: flex; gap: 36px; padding: 20px 0; color: #59625e; font-size: 12px; }
+@media(max-width: 640px) {
+  .portfolio-intro { padding-top: 94px; }
+  .portfolio-intro h1 { font-size: 60px; margin: 24px 0; }
+  .intro-kicker { font-size: 10px; flex-wrap: wrap; }
+  .intro-content { grid-template-columns: 1fr; gap: 28px; padding: 24px 0; }
+  .intro-content figure { width: 140px; }
+  .intro-role { font-size: 23px; }
+  .intro-description { font-size: 18px; }
+  .intro-links { gap: 16px; }
+  .intro-index { gap: 18px; flex-wrap: wrap; }
 }
-
-/* Dark-glass card — frosted pane over the deep-space canvas. */
-.night-card {
-  position: relative;
-  background: linear-gradient(160deg, rgba(20, 28, 55, 0.88) 0%, rgba(10, 16, 36, 0.93) 100%);
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 20px 50px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-/* Mouse-position spotlight — requires CardSpotlight provider to set --mx/--my. */
-.night-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    320px circle at var(--mx, -200px) var(--my, -200px),
-    rgba(47, 93, 255, 0.08) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-}
-
-.night-card:hover::before {
-  opacity: 1;
-}
-
-.soft-panel {
-  border-radius: 2rem;
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.game-panel {
-  background: linear-gradient(180deg, rgba(47, 93, 255, 0.07), rgba(139, 92, 246, 0.04));
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-/* Semi-transparent dark scrim — makes hero text legible over the 3D canvas. */
-.legibility-scrim {
-  background: hsl(var(--background) / 0.82);
-}
-
-/* Form input fields */
-.contact-field {
-  background: rgba(255, 255, 255, 0.05);
-  color: hsl(var(--foreground));
-  border-color: hsl(var(--border));
-}
-
-.contact-field::placeholder {
-  color: hsl(var(--muted-foreground));
-}
-
-/* Gradient text — cobalt → violet → coral */
-.aurora-text {
-  background: linear-gradient(90deg, hsl(226 92% 68%), hsl(262 83% 64%), hsl(16 95% 62%));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Hide OS cursor when the custom cursor JS is active (pointer-primary devices only). */
-[data-cursor="custom"],
-[data-cursor="custom"] * {
-  cursor: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+@media(prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }

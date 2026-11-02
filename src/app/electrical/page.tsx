@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Mail } from "lucide-react";
 import { ElectricalSection } from "@/components/electrical-section";
-import { Chatbot } from "@/components/chatbot/chatbot";
 import { profile } from "@/data/profile";
 import { PcbScrollStory } from "@/components/pcb-scroll-story";
 import "@/styles/pcb-story.css";
@@ -26,12 +25,11 @@ export default function ElectricalPage() {
         <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 text-sm text-primary"><Mail size={16} aria-hidden />Get in touch</a>
       </nav>
     </header>
-    <main className="relative z-10 bg-[#080c11]">
+    <main className="relative z-10 bg-background">
       <PcbScrollStory />
       <ElectricalSection standalone excludeCard />
       <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link><a href={profile.resumePath} download>Download resume</a></div>
     </main>
     <footer className="relative z-10 border-t border-border py-8"><div className="section-shell text-sm text-muted-foreground">David Liu / ElectroMechanical Engineer</div></footer>
-    <Chatbot />
   </>;
 }

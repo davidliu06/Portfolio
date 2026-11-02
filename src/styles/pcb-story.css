@@ -1,5 +1,5 @@
-.pcb-story-track { position: relative; height: 650svh; overflow: visible; background: #080c11; }
-.pcb-story-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #080c11; color: #edf0f4; }
+.pcb-story-track { position: relative; height: 650svh; overflow: visible; background: #fff; }
+.pcb-story-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #fff; color: #202824; }
 .pcb-story-topline { position: absolute; inset: 24px 4% auto; display: flex; justify-content: space-between; gap: 16px; z-index: 3; font-size: 11px; color: #b5bfc9; }
 .pcb-story-topline a { display: inline-flex; align-items: center; gap: 8px; min-height: 30px; }
 .pcb-story-model { position: absolute; inset: 0; pointer-events: none; }
@@ -27,8 +27,17 @@
 .pcb-story-chapters button span { width: 20px; height: 3px; background: #37424c; transition: background-color 150ms; }
 .pcb-story-counter { font-family: monospace; font-size: 11px; white-space: nowrap; color: #a6b2bf; margin-left: 16px; }
 .pcb-story-progress { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; transform-origin: left; }
-.pcb-story-topline { text-shadow: 0 1px 4px #000; }
-.pcb-inspection { background: #0c1118; overflow: visible; }
+.pcb-story-topline { text-shadow: none; color: #52605a; }
+.pcb-story-body { color: #4b5751; }
+.pcb-story-eyebrow,.pcb-story-detail { color: #256448 !important; }
+.pcb-story-detail span { color: #4b5751 !important; }
+.pcb-story-counter { color: #52605a; }
+.pcb-story-chapters button span { background: #c8d2cc; }
+.pcb-story-chapters button[aria-current] span { background: #18583e !important; }
+.pcb-story-progress { background: #18583e !important; }
+.nfc-demo-steps button { color: #58655e; border-color: #d0d8d3; }
+.nfc-demo-steps button[aria-current] { color: #18583e; border-color: #18583e; }
+.pcb-inspection { background: #f6f8f7; overflow: visible; }
 .pcb-inspection .pcb-viewer { max-width: 1600px; margin-inline: auto; }
 .pcb-large-surface { height: 76svh; min-height: 420px; max-height: 960px; }
 @media (max-width: 899px) {

@@ -8,11 +8,9 @@ import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   ["About", "#about"],
-  ["Skills", "#skills"],
   ["Experience", "#experience"],
   ["Projects", "#projects"],
   ["Electrical", "/electrical"],
-  ["AI", "#ai"],
   ["Resume", "#resume"],
   ["Contact", "#contact"],
 ] as const;
@@ -67,14 +65,13 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.06] bg-background/85 backdrop-blur">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
         <nav className="section-shell flex h-16 items-center justify-between gap-4">
           {/* Logo */}
           <Link className="group flex items-center gap-3" href="#top" aria-label="David Liu home">
-            <span className="grid h-10 w-10 place-items-center rounded-[1rem_0.65rem_1rem_0.65rem] border bg-card font-black tracking-normal shadow-sm">
+            <span className="grid h-10 w-10 place-items-center font-semibold">
               <span className="relative text-primary">
                 DL
-                <span className="absolute -right-2 -top-1 h-2 w-2 rounded-full bg-accent transition group-hover:scale-150" />
               </span>
             </span>
             <span className="hidden text-sm font-semibold sm:block">David Liu</span>

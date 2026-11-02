@@ -1,4 +1,3 @@
-import { Badge } from "./badge";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
@@ -11,9 +10,9 @@ type SectionHeadingProps = {
 
 export function SectionHeading({ eyebrow, title, description, scrim = false }: SectionHeadingProps) {
   return (
-    <div className={cn("mx-auto mb-10 max-w-3xl rounded-[2rem] text-center", scrim && "legibility-scrim p-6")}>
-      <Badge className="mb-4 border-primary/30 text-primary">{eyebrow}</Badge>
-      <h2 className="text-balance text-3xl font-bold tracking-normal sm:text-4xl">{title}</h2>
+    <div className={cn("mb-10 max-w-3xl text-left", scrim && "py-6")}>
+      <p className="mb-3 text-xs font-medium text-primary">{eyebrow}</p>
+      <h2 className="text-balance text-3xl font-semibold">{title}</h2>
       <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">{description}</p>
     </div>
   );

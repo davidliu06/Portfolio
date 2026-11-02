@@ -28,7 +28,7 @@ const GLOW_CLASS: Record<RevealGlow, string> = {
 // compositor can run on the GPU without triggering layout — so stacking several
 // of these across a page of reveals never costs a reflow.
 const PRESETS: Record<RevealPreset, Variants> = {
-  "fade-up": { hidden: { opacity: 0, y: 48 }, visible: { opacity: 1, y: 0 } },
+  "fade-up": { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } },
   "fade-scale": { hidden: { opacity: 0, scale: 0.92 }, visible: { opacity: 1, scale: 1 } },
   "slide-left": { hidden: { opacity: 0, x: 64 }, visible: { opacity: 1, x: 0 } },
   "slide-right": { hidden: { opacity: 0, x: -64 }, visible: { opacity: 1, x: 0 } },
@@ -68,7 +68,7 @@ export function RevealSection({ children, preset = "fade-up", className, delay =
       initial={reduced ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      variants={PRESETS[preset]}
+      variants={PRESETS["fade-up"]}
       transition={{ duration: reduced ? 0 : duration, ease: EASE, delay: reduced ? 0 : delay }}
     >
       {children}
@@ -111,7 +111,7 @@ type RevealItemProps = {
 
 export function RevealItem({ children, className, preset = "fade-up", duration = 0.5, glow }: RevealItemProps) {
   return (
-    <motion.div className={cn(className, glow && GLOW_CLASS[glow])} variants={PRESETS[preset]} transition={{ duration, ease: EASE }}>
+    <motion.div className={cn(className, glow && GLOW_CLASS[glow])} variants={PRESETS["fade-up"]} transition={{ duration, ease: EASE }}>
       {children}
     </motion.div>
   );
