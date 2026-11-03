@@ -1,5 +1,5 @@
-// Temporarily hidden at David's request. Restore only when he asks.
+// Visibility switches for content David may temporarily hide.
 export const visibility = {
-  resume: false,
-  propulsionLead: false,
+  resume: true,
+  rocketryExperience: true,
 };

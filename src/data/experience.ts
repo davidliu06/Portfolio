@@ -19,7 +19,7 @@ const allExperience: Experience[] = [
   },
   {
     organization: "Mudd Amateur Rocketry Club",
-    role: "Propulsion Lead",
+    role: "Propulsion Member",
     dates: "August 2024 - Present",
     location: "Harvey Mudd College",
     type: "Leadership",
@@ -145,5 +145,5 @@ const allExperience: Experience[] = [
 ];
 
 export const experience = allExperience.filter(
-  (item) => visibility.propulsionLead || item.role !== "Propulsion Lead"
+  (item) => visibility.rocketryExperience || item.organization !== "Mudd Amateur Rocketry Club"
 );

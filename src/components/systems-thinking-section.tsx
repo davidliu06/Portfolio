@@ -5,7 +5,7 @@ import { RevealGroup, RevealItem, RevealSection } from "@/components/ui/reveal";
 import { experience } from "@/data/experience";
 
 const SYSTEMS_TAKEAWAYS: Record<string, string> = {
-  "Propulsion Lead":
+  "Propulsion Member":
     "Directed systems integration and launch-readiness reviews across 5 subteams on Apollyon I — coordinating 40+ members to 1st Place at FAR Unlimited 2026.",
   "Engineering Team Member":
     "Supported powertrain, braking, steering, and structural integration on one hybrid vehicle platform, where every subsystem decision affects every other one."
