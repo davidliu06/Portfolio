@@ -8,6 +8,7 @@ import { ResumeSection } from "@/components/resume-section";
 import { SiteHeader } from "@/components/site-header";
 import { SkillsSection } from "@/components/skills-section";
 import { ExperienceSection } from "@/components/timeline/experience-section";
+import { visibility } from "@/data/visibility";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
         <ExperienceSection />
         <ProjectsSection />
         <ElectricalSection />
-        <ResumeSection />
+        {visibility.resume && <ResumeSection />}
         <ContactSection />
       </main>
       <footer className="relative z-10 border-t py-8">

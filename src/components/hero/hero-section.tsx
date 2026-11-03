@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { profile } from "@/data/profile";
+import { visibility } from "@/data/visibility";
 
 export function HeroSection() {
   return <section id="top" className="portfolio-intro">
@@ -14,7 +15,7 @@ export function HeroSection() {
           <p className="mt-5 text-sm text-muted-foreground">B.S. Engineering, Harvey Mudd College. Open to engineering internships.</p>
           <div className="intro-links">
             <a href="#projects" className="intro-primary">Selected work <ArrowDown size={17} /></a>
-            <a href={profile.resumePath} download><Download size={17} />Resume</a>
+            {visibility.resume && <a href={profile.resumePath} download><Download size={17} />Resume</a>}
             <a href="#contact">Get in touch <ArrowUpRight size={17} /></a>
           </div>
         </div>

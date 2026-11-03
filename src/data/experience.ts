@@ -1,6 +1,7 @@
 import type { Experience } from "@/types/portfolio";
+import { visibility } from "@/data/visibility";
 
-export const experience: Experience[] = [
+const allExperience: Experience[] = [
   {
     organization: "MRP Solutions",
     role: "Electro-Mechanical Engineering Intern",
@@ -142,3 +143,7 @@ export const experience: Experience[] = [
     chapter: "research"
   }
 ];
+
+export const experience = allExperience.filter(
+  (item) => visibility.propulsionLead || item.role !== "Propulsion Lead"
+);

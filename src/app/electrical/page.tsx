@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Mail } from "lucide-react";
 import { ElectricalSection } from "@/components/electrical-section";
 import { profile } from "@/data/profile";
+import { visibility } from "@/data/visibility";
 import { PcbScrollStory } from "@/components/pcb-scroll-story";
 import "@/styles/pcb-story.css";
 
@@ -28,7 +29,7 @@ export default function ElectricalPage() {
     <main className="relative z-10 bg-background">
       <PcbScrollStory />
       <ElectricalSection standalone excludeCard />
-      <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link><a href={profile.resumePath} download>Download resume</a></div>
+      <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link>{visibility.resume && <a href={profile.resumePath} download>Download resume</a>}</div>
     </main>
     <footer className="relative z-10 border-t border-border py-8"><div className="section-shell text-sm text-muted-foreground">David Liu / ElectroMechanical Engineer</div></footer>
   </>;

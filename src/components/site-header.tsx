@@ -5,15 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { visibility } from "@/data/visibility";
 
-const NAV_LINKS = [
+const NAV_LINKS = ([
   ["About", "#about"],
   ["Experience", "#experience"],
   ["Projects", "#projects"],
   ["Electrical", "/electrical"],
   ["Resume", "#resume"],
   ["Contact", "#contact"],
-] as const;
+] as const).filter(([label]) => label !== "Resume" || visibility.resume);
 
 const SECTION_IDS = NAV_LINKS.filter(([, href]) => href.startsWith("#")).map(([, href]) => href.slice(1));
 
