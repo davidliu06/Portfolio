@@ -1,3 +1,5 @@
+import { visibility } from "@/data/visibility";
+
 const pcbProjects = [
   {
     id: "pocket-rhythm",
@@ -39,4 +41,29 @@ const pcbProjects = [
   }
 ] as const;
 
-export const electricalProjects = [pcbProjects[1], pcbProjects[0]] as const;
+const mPulse = {
+  id: "m-pulse",
+  demoVideoId: "55zEvNPtlSM",
+  name: "M-Pulse | Bluetooth Audio-Reactive Speaker",
+  image: "/images/electrical/m-pulse.png",
+  model: null,
+  description: "I designed and developed an ESP32-based Bluetooth speaker with a real-time, music-reactive LED spectrum visualizer, inspired by the M-Pulse aesthetic from Valorant. Audio streams wirelessly from a smartphone to a MAX98357A I2S Class-D amplifier while the digital audio stream drives an 8 x 32 RGB LED matrix.",
+  details: "The 256-pixel display visualizes 16 logarithmically spaced frequency bands covering approximately 65 Hz to 5 kHz. An EC11 rotary encoder provides adjustable color control. The image shows the speaker enclosure CAD assembly.",
+  status: "Developed prototype / hardware debugging",
+  technologies: ["ESP32", "Embedded C++", "Bluetooth A2DP", "I2S", "FFT", "WS2812B LEDs", "Digital Signal Processing"],
+  choices: [
+    { title: "One audio stream, sound and light", body: "Bluetooth A2DP supplies decoded PCM audio from a smartphone. I integrated I2S speaker playback with concurrent FFT analysis of that digital stream, connecting wireless audio, sound output, and real-time visualization in one embedded system." },
+    { title: "16 logarithmic frequency bands", body: "FFT-based signal processing converts the decoded audio into 16 logarithmically spaced bands over approximately 65 Hz to 5 kHz. Logarithmic spacing gives the lower frequencies more resolution than equal-width bands, making bass, midrange, and higher-frequency content distinguishable on a compact display." },
+    { title: "Responsive, symmetric animations", body: "I developed frequency-dependent gain compensation, automatic gain control, noise gating, peak smoothing, and temporal smoothing in embedded C++. These stages balance the bands, adapt the display to changing audio levels, suppress low-level noise, and control abrupt visual changes while preserving responsiveness. Symmetric LED animations translate the processed spectrum onto the 8 x 32 matrix." },
+    { title: "Color control and logic interfacing", body: "An EC11 rotary encoder adjusts the visualization colors. An SN74AHCT125N logic-level shifter interfaces the ESP32's 3.3 V GPIO with the 5 V WS2812B matrix, addressing the voltage-domain difference between the controller and display." },
+    { title: "Shared power, audio quality, and startup", body: "Power distribution and supply decoupling are part of the circuit prototype. Operating the amplifier, controller, and LED matrix from a shared external USB-C supply introduced amplifier-distortion and power-on-reliability questions, which I investigated through hardware debugging." }
+  ],
+  skills: "Applied Bluetooth audio integration, embedded C++, I2S digital audio interfacing, FFT-based signal processing, adaptive visualization algorithms, rotary-encoder inputs, logic-level shifting, circuit prototyping, and supply decoupling. The project strengthened my experience debugging interactions between audio quality, LED behavior, and shared power distribution.",
+  testing: "Integrated wireless audio streaming, speaker playback, and concurrent real-time LED visualization. Investigated amplifier distortion and power-on reliability under a shared external USB-C supply. These investigations are part of the development work; quantitative audio-quality measurements and a confirmed resolution of the power issues are not reported here."
+} as const;
+
+export const electricalProjects = [
+  pcbProjects[1],
+  ...(visibility.pocketRhythm ? [pcbProjects[0]] : []),
+  mPulse,
+] as const;

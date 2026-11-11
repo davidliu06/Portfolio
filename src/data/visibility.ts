@@ -2,4 +2,5 @@
 export const visibility = {
   resume: true,
   rocketryExperience: true,
+  pocketRhythm: false,
 };

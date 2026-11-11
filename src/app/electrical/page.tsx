@@ -4,12 +4,13 @@ import { ArrowLeft, Mail } from "lucide-react";
 import { ElectricalSection } from "@/components/electrical-section";
 import { profile } from "@/data/profile";
 import { visibility } from "@/data/visibility";
+import { electricalProjects } from "@/data/electrical";
 import { PcbScrollStory } from "@/components/pcb-scroll-story";
 import "@/styles/pcb-story.css";
 
 export const metadata: Metadata = {
   title: "What brought you here? | David Liu's Electrical Projects",
-  description: "Explore David Liu's NFC business card and PocketRhythm Lite drum-machine prototype, with real 3D PCB models, design decisions, and validation details.",
+  description: `Explore David Liu's electrical projects: ${electricalProjects.map(project => project.name).join(", ")}. Includes design decisions and validation details.`,
   alternates: { canonical: "https://david-s-portfolio-eta.vercel.app/electrical" },
   openGraph: {
     title: "What brought you here? | David Liu",
