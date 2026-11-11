@@ -2,6 +2,7 @@ import { PcbViewer } from "@/components/pcb-viewer";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { electricalProjects } from "@/data/electrical";
+import { visibility } from "@/data/visibility";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
@@ -15,12 +16,12 @@ export function ElectricalSection({ standalone = false, excludeCard = false }: {
           {electricalProjects.filter(project => !excludeCard || project.id !== "pcb-business-card").map(project => (
             <article id={project.id} key={project.id} className="grid scroll-mt-24 items-start gap-8 py-10 md:grid-cols-2 lg:gap-14">
               <div className="md:sticky md:top-24 min-w-0">
-                {project.model ? <PcbViewer model={project.model} image={project.image} name={project.name} /> : (
+                {project.model && (project.id !== "pcb-business-card" || visibility.cardAnimation) ? <PcbViewer model={project.model} image={project.image} name={project.name} /> : (
                   <figure>
                     <div className="relative aspect-[5/4] overflow-hidden rounded-md border border-border bg-white">
-                      <Image src={project.image} alt="M-Pulse speaker enclosure CAD assembly with mesh surfaces and internal components" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-contain" />
+                      <Image src={project.image} alt={project.id === "pcb-business-card" ? "Front of David Liu's NFC PCB business card with wave artwork and contact details" : "M-Pulse speaker enclosure CAD assembly with mesh surfaces and internal components"} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-contain" />
                     </div>
-                    <figcaption className="mt-3 text-xs text-muted-foreground">M-Pulse speaker enclosure / CAD assembly</figcaption>
+                    <figcaption className="mt-3 text-xs text-muted-foreground">{project.id === "pcb-business-card" ? "NFC PCB business card / Front" : "M-Pulse speaker enclosure / CAD assembly"}</figcaption>
                   </figure>
                 )}
               </div>

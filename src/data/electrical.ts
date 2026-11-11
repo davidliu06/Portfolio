@@ -26,7 +26,7 @@ const pcbProjects = [
     image: "/images/electrical/business-card.png",
     model: "/models/business-card.glb",
     description: "I designed and tested a functional PCB business card that combines NFC circuitry with a personalized copper-and-silkscreen design. It is both a contact-sharing device and a compact example of my electrical engineering work.",
-    details: "The board combines an NT3H2111 NFC IC, a printed antenna, an LED circuit, and wave-inspired artwork. The 3D model is exported from my changedsomestuff board revision.",
+    details: "The board combines an NT3H2111 NFC IC, a printed antenna, an LED circuit, and wave-inspired artwork.",
     status: "Designed & tested",
     technologies: ["KiCad", "NFC", "Antenna Layout", "PCB Design", "Circuit Testing", "Design for Manufacture"],
     choices: [

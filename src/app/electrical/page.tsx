@@ -28,8 +28,13 @@ export default function ElectricalPage() {
       </nav>
     </header>
     <main className="relative z-10 bg-background">
-      <PcbScrollStory />
-      <ElectricalSection standalone excludeCard />
+      {visibility.cardAnimation ? <PcbScrollStory /> : (
+        <div className="section-shell pt-12 pb-4">
+          <p className="text-sm font-semibold text-primary">NFC PCB BUSINESS CARD</p>
+          <h1 className="mt-3 text-4xl font-bold">What brought you here?</h1>
+        </div>
+      )}
+      <ElectricalSection standalone excludeCard={visibility.cardAnimation} />
       <div className="section-shell flex flex-wrap gap-6 pb-12 text-primary"><Link href="/">Explore my portfolio</Link>{visibility.resume && <a href={profile.resumePath} download>Download resume</a>}</div>
     </main>
     <footer className="relative z-10 border-t border-border py-8"><div className="section-shell text-sm text-muted-foreground">David Liu / ElectroMechanical Engineer</div></footer>
