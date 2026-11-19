@@ -2,6 +2,33 @@ import type { Project } from "@/types/portfolio";
 
 export const projects: Project[] = [
   {
+    slug: "formula-sae-chassis-jig",
+    name: "Formula SAE Chassis Jig",
+    shortTitle: "Formula SAE Chassis Jig",
+    category: "Engineering Focused",
+    dates: "",
+    summary: "Independently designed and built a chassis assembly jig for Mudd Formula SAE using Onshape and FeatureScript.",
+    description: "I designed and built a chassis jig from scratch for the Mudd Formula SAE team, taking ownership of the jig's CAD design and fabrication. I used Onshape and FeatureScript to support the design process. The fixture positions and supports the team's chassis tubes during assembly; these CAD views show the jig on its own and with the chassis in place.",
+    challenge: "Translate the team's three-dimensional chassis geometry into an assembly fixture with tube-locating cutouts, interlocking supports, and clear part identification.",
+    role: "Independent jig design and fabrication, Onshape CAD, and FeatureScript-assisted design. My contribution is the jig, not sole authorship of the team's vehicle chassis.",
+    technologies: ["Onshape", "FeatureScript", "Fixture Design", "Parametric CAD", "Fabrication", "Formula SAE"],
+    achievements: [
+      "Owned the chassis-jig project independently, from design through fabrication.",
+      "Used Onshape and FeatureScript to develop the fixture around the team's chassis geometry.",
+      "Modeled numbered support plates, interlocking slots, and tube-locating cutouts, as shown in the CAD assembly.",
+      "Created both fixture-only and chassis-in-place CAD views to communicate the assembly layout."
+    ],
+    links: [],
+    featured: true,
+    accent: "blue",
+    chapter: "engineering",
+    image: "/images/fsae-chassis-in-jig.png",
+    imageAlt: "Onshape CAD view of the Mudd Formula SAE chassis positioned in David Liu's numbered assembly jig",
+    imageFit: "contain",
+    gallery: ["/images/fsae-chassis-jig.png"],
+    galleryCaptions: ["Jig-only CAD view: numbered support plates, interlocking slots, and tube-locating cutouts."]
+  },
+  {
     slug: "autonomous-underwater-vehicle",
     name: "Autonomous Underwater Robot",
     shortTitle: "Underwater Robot",

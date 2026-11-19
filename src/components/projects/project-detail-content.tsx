@@ -42,9 +42,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
   const textAccent = ACCENT_TEXT[project.accent];
 
   function goBack() {
-    // scroll: false — otherwise Next.js's own post-navigation "scroll to
-    // top" behavior fights the galaxy's own scroll-position restore on "/".
-    router.push("/", { scroll: false });
+    router.push("/#projects");
   }
 
   useEffect(() => {
@@ -78,23 +76,23 @@ export function ProjectDetailContent({ project }: { project: Project }) {
           transition={{ duration: 0.2, ease: EASE }}
         >
           <ArrowLeft size={16} />
-          Back to galaxy
+          Back to projects
         </motion.button>
       </div>
 
       <div className="section-shell py-10">
         {/* Scene 1 — title + hero image */}
         <RevealSection delay={0.1} duration={0.5} preset="cinematic">
-          <p className="mt-16 text-sm font-bold uppercase tracking-wide sm:mt-12" style={{ color: textAccent }}>
+          <p className="mt-16 text-sm font-bold uppercase tracking-wide text-primary sm:mt-12">
             {project.summary}
           </p>
           <h1 className="mt-2 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">{project.name}</h1>
 
           <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-2">
+            {project.dates && <span className="inline-flex items-center gap-2">
               <Calendar size={16} />
               {project.dates}
-            </span>
+            </span>}
             <Badge className="border-primary/25 bg-primary/10 text-primary">{project.category}</Badge>
           </div>
 
@@ -106,7 +104,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
                 initial={{ clipPath: "inset(0% 0% 0% 100%)" }}
                 transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
               >
-                <Image src={project.image} alt={`${project.name} primary image`} fill sizes="(min-width: 1024px) 960px, 100vw" className="object-cover" priority />
+                <Image src={project.image} alt={project.imageAlt ?? `${project.name} primary image`} fill sizes="(min-width: 1024px) 960px, 100vw" className={project.imageFit === "contain" ? "object-contain bg-white" : "object-cover"} priority />
               </motion.div>
             </div>
           )}
@@ -179,10 +177,13 @@ export function ProjectDetailContent({ project }: { project: Project }) {
             <RevealSection preset="fade-up">
               <h2 className="text-center text-2xl font-bold">More from this project</h2>
             </RevealSection>
-            <RevealGroup className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3" stagger={0.12}>
-              {project.gallery.map((src) => (
-                <RevealItem className="relative aspect-square overflow-hidden rounded-xl bg-muted" key={src} preset="mask-wipe">
-                  <Image src={src} alt={`${project.name} supporting figure`} fill sizes="220px" className="object-cover" />
+            <RevealGroup className={`mt-8 grid gap-3 ${project.gallery.length === 1 ? "grid-cols-1" : "grid-cols-2 sm:grid-cols-3"}`} stagger={0.12}>
+              {project.gallery.map((src, index) => (
+                <RevealItem key={src} preset="mask-wipe">
+                  <a href={src} target="_blank" rel="noreferrer" aria-label={`Open full-size image: ${project.galleryCaptions?.[index] ?? project.name}`} className={`relative block overflow-hidden rounded-xl bg-muted ${project.imageFit === "contain" ? "aspect-[16/10]" : "aspect-square"}`}>
+                    <Image src={src} alt={project.galleryCaptions?.[index] ?? `${project.name} supporting figure`} fill sizes={project.gallery?.length === 1 ? "(min-width: 1024px) 960px, 100vw" : "(min-width: 640px) 320px, 50vw"} className={project.imageFit === "contain" ? "object-contain bg-white" : "object-cover"} />
+                  </a>
+                  {project.galleryCaptions?.[index] && <p className="mt-3 text-sm text-muted-foreground">{project.galleryCaptions[index]}</p>}
                 </RevealItem>
               ))}
             </RevealGroup>
@@ -226,7 +227,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
             onClick={goBack}
           >
             <ArrowLeft size={16} />
-            Back to galaxy
+            Back to projects
           </button>
         </RevealSection>
       </div>

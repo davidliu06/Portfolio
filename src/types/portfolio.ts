@@ -31,7 +31,10 @@ export type Project = {
   chapter: Chapter;
   alsoFeaturedIn?: Chapter[];
   image?: string;
+  imageAlt?: string;
+  imageFit?: "contain" | "cover";
   gallery?: string[];
+  galleryCaptions?: string[];
   document?: string;
   /** Punchy, measurable results — distinct from `challenge`'s narrative framing. */
   achievements: string[];
